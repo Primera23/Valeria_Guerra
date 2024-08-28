@@ -125,11 +125,13 @@
     <div class="modalbox Sesion">
         <a href="#close" title="Close" class="close">X</a>
         <h2>Inicio De Sesión</h2>
-        <div class="login">
-            <div><input type="text" placeholder="Correo" name="correo"></div>
-            <div><input type="password" placeholder="Contraseña" name="contraseña"></div>
-            <button class="boton">Iniciar Sesion</button>
-        </div>
+        <form action="">
+            <div class="login">
+                <div><input type="text" placeholder="Correo" name="correo"></div>
+                <div><input type="password" placeholder="Contraseña" name="contraseña"></div>
+                <button class="boton">Iniciar Sesion</button>
+            </div>
+        </form>
         <p><a href="#">¿Olvidaste la contraseña?</a></p>
         <p>¿No posees una cuenta? <a href="#registrarse">Registrate</a></p>
         
@@ -141,27 +143,31 @@
     <div class="modalbox registrarse">
         <a href="#close" title="Close" class="close">X</a>
         <h2>Registrarse</h2>
-        <div class="registro">
-            <div><input type="text" placeholder="Nombres" ="nombre"></div>
-            <div><input type="text" placeholder="Apellidos" name="apellido"></div>
-            <div><input type="text" placeholder="Correo" name="user"></div>
-            <div><input type="password" placeholder="Contraseña" name="Contraseña"></div>
-            <div><input type="password" placeholder="Repetir Contraseña"></div>
-            <button class="boton">Registrarse</button>
+        <form action="">
+            <div class="registro">
+                <div><input type="text" placeholder="Nombres" ="nombre"></div>
+                <div><input type="text" placeholder="Apellidos" name="apellido"></div>
+                <div><input type="text" placeholder="Correo" name="user"></div>
+                <div><input type="password" placeholder="Contraseña" name="Contraseña"></div>
+                <div><input type="password" placeholder="Repetir Contraseña"></div>
+                <button class="boton">Registrarse</button>
+            </div>
+            <p>¿Ya posees una cuenta? <a href="#inicioSesion">Inicia Sesión</a> o como <a href="#sesionAdministrador">Admin</a></p>
         </div>
-        <p>¿Ya posees una cuenta? <a href="#inicioSesion">Inicia Sesión</a> o como <a href="#sesionAdministrador">Admin</a></p>
-    </div>
+        </form>
 </div>
 
 <div id="sesionAdministrador" class="modalmask">
     <div class="modalbox admin">
         <a href="#close" title="Close" class="close">X</a>
         <h2>Inicio Admin</h2>
-        <div class="login admin">
-            <input type="text" placeholder="Correo" name="user">
-            <input type="password" placeholder="Contraseña" name="password">
-            <button class="boton">Iniciar</button>
-        </div>
+        <form action="../Dashboard/dashboard.html">
+            <div class="login admin">
+                <input type="text" placeholder="Correo" name="user">
+                <input type="password" placeholder="Contraseña" name="password">
+                <button class="boton">Iniciar</button>
+            </div>
+        </form>
     </div>
 </div>
 
