@@ -84,5 +84,10 @@ li::marker{
     height: 100%;
 }
 
+#resultado, .resultado{
+    color: black;
+    font-size: 16px;
+}
+
 
 

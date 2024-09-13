@@ -116,11 +116,17 @@
 <div id="nuestroUsuario" class="modalmask">
     <div class="modalbox nuestroUsuario">
         <a href="#close" title="Close" class="close">X</a>
-        <h2>Nuestro Usuario</h2>
-        <div class="centrarBoton"><a href="#inicioSesion"><button id="sesion">Inicio Sesión</button></a></div>
-        <div class="centrarBoton"><a href="#registrarse"><button id="regis">Registrarse</button></a></div>
-        <div class="OtrosInicios">
-            <p>Iniciar Sesion como <a href="#sesionAdministrador">Admin</a></p>
+        <div class="nuestroCaja">
+            <h2>Nuestro Usuario</h2>
+            <div class="centrarBoton">
+                <a href="#inicioSesion"><button id="sesion">Inicio Sesión</button></a>
+            </div>
+            <div class="centrarBoton">
+                <a href="#registrarse"><button id="regis">Registrarse</button></a>
+            </div>
+            <div class="OtrosInicios">
+                <p>Iniciar Sesion como <a href="#sesionAdministrador">Admin</a></p>
+            </div>
         </div>
     </div>
 </div>
@@ -128,39 +134,45 @@
 <div id="inicioSesion" class="modalmask">
     <div class="modalbox Sesion">
         <a href="#close" title="Close" class="close">X</a>
-        <h2>Inicio De Sesión</h2>
+       
         <form action="">
+
             <div class="login">
+                <h2>Inicio De Sesión</h2>
                 <div><input type="text" placeholder="Correo" name="correo"></div>
                 <div><input type="password" placeholder="Contraseña" name="contraseña"></div>
                 <button class="boton">Iniciar Sesion</button>
+            
+            <div class="OtrosInicios">
+                <p><a href="#">¿Olvidaste la contraseña?</a></p>
+                <p>¿No posees una cuenta? <a href="#registrarse">Registrate</a></p>
+                <p>¿Otro tipo de inicio? <a href="#sesionAdministrador">Admin</a></p>
+            </div>
+
             </div>
         </form>
-        <div class="OtrosInicios">
-            <p><a href="#">¿Olvidaste la contraseña?</a></p>
-            <p>¿No posees una cuenta? <a href="#registrarse">Registrate</a></p>
-            <p>¿Otro tipo de inicio? <a href="#sesionAdministrador">Admin</a></p>
-        </div>
     </div>
 </div>
 
 <div id="registrarse" class="modalmask">
     <div class="modalbox registrarse">
         <a href="#close" title="Close" class="close">X</a>
-        <h2>Registrarse</h2>
+        
         <form action="">
             <div class="registro">
+                <h2>Registrarse</h2>
                 <div><input type="text" placeholder="Nombres" ="nombre"></div>
                 <div><input type="text" placeholder="Apellidos" name="apellido"></div>
                 <div><input type="text" placeholder="Correo" name="user"></div>
                 <div><input type="password" placeholder="Contraseña" name="Contraseña"></div>
                 <div><input type="password" placeholder="Repetir Contraseña"></div>
                 <button class="boton">Registrarse</button>
+                    <div class="OtrosInicios">
+                        <p>¿Ya posees una cuenta? <a href="#inicioSesion">Inicia Sesión</a> o como <a href="#sesionAdministrador">Admin</a></p>
+                    </div>
             </div>
 
-            <div class="OtrosInicios">
-                <p>¿Ya posees una cuenta? <a href="#inicioSesion">Inicia Sesión</a> o como <a href="#sesionAdministrador">Admin</a></p>
-            </div>
+            
         </div>
         </form>
 </div>
@@ -168,9 +180,10 @@
 <div id="sesionAdministrador" class="modalmask">
     <div class="modalbox admin">
         <a href="#close" title="Close" class="close">X</a>
-        <h2>Inicio Admin</h2>
-        <form action="dashboard.html">
+        
+        <form action="/dashboard" method="post">
             <div class="login admin">
+                <h2>Inicio Admin</h2>
                 <input type="text" placeholder="Correo" name="user">
                 <input type="password" placeholder="Contraseña" name="password">
                 <button class="boton" >Iniciar</button>

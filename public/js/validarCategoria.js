@@ -1,19 +1,18 @@
 class Producto {
 
-    constructor (nombre, codigo, precio, categoria) {
+    constructor (nombre, cantidad, precio) {
     this.nombre = nombre;
-    this.codigo = codigo;
+    this.cantidad = cantidad;
     this.precio = precio;
-    this.categoria = categoria;
     }
 
     mostrarProducto() {
         let mensaje=`   <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             <strong>Nombre: </strong>${this.nombre} <br>
-                            <strong>Código: </strong>${this.codigo} <br>
-                            <strong>Precio: </strong>${this.precio} <br>
-                            <strong>Categoria: </strong>${this.categoria}
+                            <strong>Cantidad: </strong>${this.cantidad} <br>
+                            <strong>Precio: </strong>${this.precio}<br>
+                            <strong>Categoria: </strong>"<%= data[0].categoria1 %>"
                         </div>`;
         return mensaje;
     }

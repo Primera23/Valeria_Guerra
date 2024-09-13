@@ -531,7 +531,8 @@ footer{
 
 /*Formato de la ventana*/
 .modalbox{
-    width: fit-content;
+    width: 40%;
+    height: 60%;
     text-align: center;
     position: absolute;
     top: 50%;
@@ -543,7 +544,7 @@ footer{
     -webkit-transition: all 500ms ease-in;
     -moz-transition: all 500ms ease-in;
     transition: all 500ms ease-in;
-    background-image: url(../../ImagenesProyecto/pexels-pixabay-2150.jpg);
+    background-image: url(../ImagenesProyecto/pexels-alex-andrews-271121-816608.jpg);
     background-size: cover;
     background-position: center;
 }
@@ -633,10 +634,20 @@ footer{
     transition: 2s;
 }
 
+.nuestroCaja{
+    position: absolute;
+	top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .login{
 	height: fit-content;
 	width: fit-content;
-	display: inline-block;
+    position: absolute;
+	top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .login input{
@@ -666,7 +677,7 @@ footer{
 	font-size: 20px;
 	font-weight: 400;
 	padding: 6px;
-	margin-top: 3px;
+	margin-top: 20px;
 }
 
 .login .boton:hover{
@@ -696,6 +707,7 @@ footer{
 }
 
 .registrarse{
+    
     background-image: url(../../ImagenesProyecto/pexels-krisof-1252873.jpg);
     background-size: cover;
     border: transparent;
@@ -706,10 +718,15 @@ footer{
     width: fit-content;
     margin-bottom: 20px;
     display: inline-block;
+    position: absolute;
+	top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
 }
 .registro .boton{
     height: fit-content;
-	width: 100%;
+	width: 50%;
 	background: #159f8f;
 	border: 1px solid #fff;
 	cursor: pointer;
@@ -718,7 +735,7 @@ footer{
 	font-size: 20px;
 	font-weight: 400;
 	padding: 6px;
-	margin-top: 3px;
+	margin-top: 20px;
 }
 
 .registro input{
