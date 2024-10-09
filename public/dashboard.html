@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="css/styleDashboard.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <ul class="nav justify-content-center">
+        <li class="nav-item">
+            <a href="#agregarCategoria" class="nav-link">Categorias</a>
+        </li>
+        <li class="nav-item">
+            <a href="#agregarProducto" class="nav-link">Productos</a>
+        </li>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+      </ul>
+      <div id="navbar-example">
+        <ul class="nav nav-tabs" role="tablist">
+          ...
+        </ul>
+        <ul class="nav nav-tabs" role="tablist">
+            ...
+          </ul>
+        
+
+        
+
+      </div>
+      
+    <center><h1>Bienvenid@ <span id="nombre"></span> al dashboard de Valeria Guerra tu tipo de Usuario es: <span id="permiso"></span></h1></center>
+    
+    
+    <h2>Funciones de este dashboard</h2>
+    <ul>
+
+        <li>Agregar  y </li>
+        <li>Eliminar Categorias y Productos</li>
+        <li>Modificar Categorias , Productos e imaganes de los ya mensionados y Precios</li>
+        <li>Ver datos de clientes</li>
+        <li>Ver compras hechas por los clientes</li>
+        <li>Ver facturas de los clientes</li>
+    </ul>
+
+    <div id="agregarCategoria" class="modalmask">
+        <div class="modalbox Categoria">
+            <a href="#close" title="Close" class="close">X</a>
+
+            
+                </div>
+            </div>
+        </div>
+
+        
+    
+
+        <div id="agregarProducto" class="modalmask">
+            <div class="modalbox Producto">
+                <a href="#close" title="Close" class="close">X</a>
+                
+                <div class="container">
+                    
+                    <div class="row justify-content-center">
+                        <div class="carta">
+                            <h2>Registro de Producto</h2>
+                        <form id="formulario" method="post" action="/aggproducto">
+                            <div class="form-floating mb-2">
+                                <select name="categoria" class="form-control" id="categoriaselect">
+                                    
+                                            <option value=""></option>
+                                        
+                                        <option value="">No hay categorías disponibles</option>
+                                    
+                                </select>
+                                <label for="categoria">Categoria</label>
+                            </div>
+            
+                            <div class="form-floating mb-2">
+                                <input type="text" class="form-control"  id="Nombre_Producto" name="Nombre_Producto">
+                                <label for="Nombre_Producto">Nombre</label>
+                            </div>
+
+                            <div class="form-floating mb-2">
+                                <input type="text" class="form-control"  id="cantidad" name="cantidad">
+                                <label for="cantidad">Cantidad</label>
+                            </div>
+
+                            <div class="form-floating mb-2">
+                                <input type="text" class="form-control"  id="precio" name="precio">
+                                <label for="precio">Precio</label>
+                            </div>
+
+                            <div lass="form-floating mb-2">
+                                <input type="file" class="form-control" name="imagen" id="imagen">
+                            </div>
+
+                            
+
+                            <button class="btn btn-primary btn-lg mb-2">Enviar</button>
+                            
+                            <div id="resultad"></div>
+
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Categoria</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Cantidad</th>
+                                        <th scope="col">Precio</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                  </tbody>
+    
+                            </table>
+                            
+                            
+                            
+            
+                                
+                            <div id="resultad"></div>
+                            
+                        </form>
+                            <div id="subido">
+                                
+                            </div>
+                        
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+                            
+<!--     
+        <script>
+            fetch('/categoria')
+            .then(response => response.json())
+            .then(data => mostrarData(data))
+            .catch(error => console.log(error));
+        
+            document.getElementById('formularioCate').addEventListener('submit', function(event) {
+            event.preventDefault();
+          
+              const form = event.target;
+              const formData = new FormData(form);
+              const data = new URLSearchParams(formData);
+          
+              fetch(form.action, { 
+                  method: form.method, 
+                  body: data })
+                  .then(response => response.json())
+                  .then(result => {
+                      const alertContainer = document.getElementById('alertContainer');
+                      alertContainer.innerHTML = '';
+          
+                      const alertType = result.success ? 'alert-success' : 'alert-danger';
+                      const alertMessage = `<div class="alert ${alertType} alert-dismissible fade show" role="alert">${result.message}
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>`;
+                      alertContainer.innerHTML = alertMessage;
+          
+                      // Redirige después de mostrar el mensaje
+        //               if (result.success) {
+        //                   setTimeout(() => {
+        //                       window.location.href = '/dashboard.html#agregarCategoria';  // Redirige a la página de inicio
+        //                   }, 2000);  // Espera 2 segundos para mostrar el mensaje
+        //               }
+        //           })
+        //           .catch(error => {
+        //               console.error('Error:', error);
+        //           });
+        //   });
+          
+          
+        //           fetch('/categoria')
+        //           .then(response => response.json())
+        //           .then(data => mostrarData(data))
+        //           .catch(error=>console.log(error))
+          
+        //           const mostrarData = (data)=>{
+        //               console.log(data)
+        //               let body = ''
+        //               for(let i=0;i<data.length;i++){
+        //                   body+= `<tr>
+        //                         <td>${i+1}</td>
+        //                         <td>${data[i].categoria}</td>
+        //                         <td>${data[i].descripcion}</td></tr>
+        //                   `
+        
+                          //   function loadProducts() {
+            //           fetch('/products')
+            //               .then(response => response.json())
+            //               .then(products => {
+            //                   const tableBody = document.getElementById('productsTable').getElementsByTagName('tbody')[0];
+            //                   tableBody.innerHTML = '';
+          
+            //                   products.forEach(product => {
+            //                       const row = tableBody.insertRow();
+            //                       row.insertCell(0).textContent = product.codigo;
+            //                       row.insertCell(1).textContent = product.nombre;
+            //                       row.insertCell(2).textContent = product.precio;
+            //                       row.insertCell(3).textContent = product.descripcion;
+            //                   });
+            //               })
+            //               .catch(error => {
+            //                   console.error('Error al cargar los productos:', error);
+            //               });
+            //       }
+            
+            if (result.success) {
+                    fetch('/categoria')
+                        .then(response => response.json())
+                        .then(data => mostrarData(data))
+                        .catch(error => console.log(error));
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+        
+        const mostrarData = (data) => {
+            let body = '';
+            for (let i = 0; i < data.length; i++) {
+                body += `<tr>
+                    <td>${i + 1}</td>
+                    <td>${data[i].categoria}</td>
+                    <td>${data[i].descripcion}</td></tr>`;
+                }
+                      document.getElementById('data').innerHTML = body
+                  }
+          
+                  
+          
+          
+                  // Cargar productos al iniciar la página
+                //   window.onload = loadProducts;
+              
+                  </script> -->
+        
+
+                  
+                
+                  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+            <script type="module" src="js/crud.js"></script> 
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</body>
+</html>

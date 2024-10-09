@@ -2,17 +2,9 @@ body{
     background-color: black;
 }
 
-h1,h2{
-    color: #159f8f;
-    font-family: 'Courier New', Courier, monospace;
-    
-}
 
-span,ul{
-    color: #f3932d;
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: normal;
-}
+
+
 
 li{
     margin-bottom: 30px;
