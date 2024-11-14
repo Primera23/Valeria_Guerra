@@ -18,19 +18,20 @@ export function cargarUsuarios() {
 
 export function mostrarData(data){
     let body = '';
-    let actualizar ='';
+    var actualizar ='';
     let lista= '';
-    for (let i = 0; i < data.length; i++) {
+    for (var i = 0; i < data.length; i++) {
         body += `<tr>
             <td>${i + 1}</td>
             <td>${data[i].categoria}</td>
             <td>${data[i].descripcion}</td>
             <td><button class="btn btn-danger" onclick="eliminarCategoria('${data[i].categoria}')">Eliminar</button></td>
-            <td><a href="#actualizarCategoria">Categorias</a></td></tr>
+            <td><a class="btn btn-white" href="#actualizarCategoria">Actualizar</a></td></tr>
 `
         lista +=`
          <option value="${data[i].categoria}">${data[i].categoria}</option>`
-        actualizar +=`
+        
+         actualizar+=`
                                 <div class="form-floating mb-2">
                                     <input type="text" class="form-control" id="categoria" name="categoria" value='${data[i].categoria}' disabled>
                                     <label for="categoria">Categoria Actual</label>
@@ -47,20 +48,15 @@ export function mostrarData(data){
                                 </div>
 
                                 <button class="btn btn-warning" onclick="actualizarCategoria('${data[i].categoria}')">Modificar</button>
-                        
-                                
-                                
-                                
-                        
-                        
                    `
         }
+        
         document.getElementById('data').innerHTML = body
-        document.getElementById('container').innerHTML = actualizar 
+        document.getElementById('container').innerHTML = actualizar
         document.getElementById('categoriaselect').innerHTML = lista
             
-          }
-
+        }
+          
 export function mostrarUsuarios(usuarios){
     let nombre =`${usuarios[0].nombre}`
     let permiso =`${usuarios[0].permiso2}`

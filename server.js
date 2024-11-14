@@ -153,20 +153,6 @@ app.patch('/categoria/:categoria', (req, res) => {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
 app.listen(port,()=>{
     console.log('servidor corriendo en http://localhost:3000');
 });

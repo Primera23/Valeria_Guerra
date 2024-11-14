@@ -5,14 +5,14 @@ import { enviarFormulario } from './subirFormulario.js';
 export function actualizarCategoria(categoria) {
     const form = document.getElementById('container');
 
-    // Asegúrate de que el evento solo se registre una vez
+    
     
         form.addEventListener('submit', (event) => {
-            event.preventDefault();
+            // event.preventDefault();
 
-            // Obtener los valores de los campos de entrada
-            const nuevoNombre = form.querySelector('#nuevoNombre').value; // Asegúrate de que el ID es correcto
-            const descripcion1 = form.querySelector('#descripcion1').value; // Asegúrate de que el ID es correcto
+           
+            const nuevoNombre = form.querySelector('#nuevoNombre').value; 
+            const descripcion1 = form.querySelector('#descripcion1').value; 
 
             fetch(`/categoria/${categoria}`, {
                 method: 'PATCH',
@@ -48,7 +48,6 @@ export function actualizarCategoria(categoria) {
             });
         });
 
-        // Marcar el listener como agregado
         
     }
 

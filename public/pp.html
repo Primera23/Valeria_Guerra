@@ -209,12 +209,7 @@
             <div id="categoria" class="page-content">
                 <h2>Gestión de Categorias</h2>
                 <div class="charts-container">
-                    <div class="chart-card glow">
-                        <h3>Ventas Mensuales</h3>
-                        <div id="monthlySalesChart"></div>
-                    </div>
-                    
-                        
+        
                             <div class="chart-card">
                                 <h3>Registro de Categoria</h3>
                                 <form id="formularioCate" method="post" action="/submit">
@@ -222,7 +217,7 @@
                                     <div class="form-floating mb-2">
                                        <input type="text" class="form-control" id="categoria" name="categoria">
                                        <label for="categoria">Categoria</label>
-                                    </div>
+                            </div>
                 
                                     <div class="form-floating mb-2">
                                        <input type="text" class="form-control"  id="descripcion" name="descripcion">
@@ -233,27 +228,8 @@
                                       </div>
                                     
                                 </form>
-                            </div>
-                                <div class="data-tables">
-                                    <div class="table-card glow">
-                                        <h3>Desempeño de Representantes de Ventas</h3>
-                                        <table>
-                                            <thead>
-                                                <tr>
-                                                    <th>Nombre</th>
-                                                    <th>Total de Ventas</th>
-                                                    <th>Negocios Cerrados</th>
-                                                    <th>Puntuación de Desempeño</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="salesRepBody"></tbody>
-                                        </table>
-                                    </div>
-                                </div>     
-                    <div class="chart-card glow">
-                        <h3>Ventas por Categoría</h3>
-                        <div id="salesByCategoryChart"></div>
-                    </div>
+                            </div>   
+                    
                 </div>
                 <div class="data-tables">
                     <div class="table-card glow">
@@ -275,10 +251,13 @@
                         </table>
                     </div>
                 </div>
-                <div class="container">
-                    <div id="aja"></div>
-                    <form id="container">  
-                    </form>    
+                <div id="actualizarCategoria" class="modalmask">
+                    <a href="#close" title="Close" class="close">X</a>
+                    <div class="container">
+                        <div id="aja"></div>
+                        <form id="container">  
+                        </form>    
+                    </div>
                 </div>
                 
             </div>
