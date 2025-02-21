@@ -10,22 +10,28 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    
     <div id="notificationContainer"></div>
     <div class="dashboard">
-        <nav class="sidebar">
+        <div class="hamburger" onclick="toggleSidebar()">
+            <div class="_layer -top"></div>
+            <div class="_layer -mid"></div>
+            <div class="_layer -bottom"></div>
+        </div>
+        <nav class="sidebar menuppal">
             <div class="sidebar-header">
                 <img src="ImagenesProyecto/image00003.jpeg" alt="Logo" class="logo">
                 <h2>Valeria Guerra</h2>
             </div>
             <ul class="nav-links">
-                <li class="active" data-page="dashboard"><a href="#dashboard"><i class="fas fa-home"></i>Tablero</a></li>
-                <li data-page="analytics"><a href="#analytics"><i class="fas fa-chart-line"></i>Analíticas</a></li>
+                <li class="active" data-page="dashboard"><a href="#dashboard"><i class="fas fa-home"></i>Inicio</a></li>
+                <!--<li data-page="analytics"><a href="#analytics"><i class="fas fa-chart-line"></i>Analíticas</a></li>
                 <li data-page="sales"><a href="#sales"><i class="fas fa-shopping-cart"></i>Ventas</a></li>
-                <li data-page="customers"><a href="#customers"><i class="fas fa-users"></i>Clientes</a></li>
+                <li data-page="customers"><a href="#customers"><i class="fas fa-users"></i>Clientes</a></li> -->
                 <li data-page="categoria"><a href="#categoria"><i class="fa fa-tags"></i>Categorias</a></li>
                 <li data-page="productos"><a href="#productos"><i class="fa fa-cart-plus"></i>Productos</a></li>
-                <li data-page="inventory"><a href="#inventory"><i class="fas fa-box"></i>Inventario</a></li>
-                <li data-page="settings"><a href="#settings"><i class="fas fa-cog"></i>Ajustes</a></li>
+                <!-- <li data-page="inventory"><a href="#inventory"><i class="fas fa-box"></i>Inventario</a></li>
+                <li data-page="settings"><a href="#settings"><i class="fas fa-cog"></i>Ajustes</a></li> -->
             </ul>
         </nav>
         <main class="main-content">
@@ -46,7 +52,8 @@
                 </div>
             </header>
             <div id="dashboard" class="page-content active">
-                <h1>Resumen del Tablero</h1>
+                <h1>Bienvenid@ a el dashboard de Valeria Guerra</h1>
+                <!-- <h1>Resumen del Tablero</h1>
                 <div class="stats-grid">
                     <div class="stat-card glow">
                         <i class="fas fa-users"></i>
@@ -117,7 +124,7 @@
                             <tbody id="topProductsBody"></tbody>
                         </table>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div id="analytics" class="page-content">
                 <h1>Analíticas</h1>
@@ -177,42 +184,14 @@
                     </div>
                 </div>
             </div>
-            <div id="productos" class="page-content">
-                <h2>Gestión de Productos</h2>
-                <div class="charts-container">
-                    <div class="chart-card glow">
-                        <h3>Adquisición de Clientes</h3>
-                        <div id="customerAcquisitionChart"></div>
-                    </div>
-                    <div class="chart-card glow">
-                        <h3>Satisfacción del Cliente</h3>
-                        <div id="customerSatisfactionChart"></div>
-                    </div>
-                </div>
-                <div class="data-tables">
-                    <div class="table-card glow">
-                        <h3>Mejores Clientes</h3>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Cliente</th>
-                                    <th>Total Gastado</th>
-                                    <th>Órdenes</th>
-                                    <th>Última Fecha de Orden</th>
-                                </tr>
-                            </thead>
-                            <tbody id="topCustomersBody"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+            
             <div id="categoria" class="page-content">
                 <h2>Gestión de Categorias</h2>
                 <div class="charts-container">
         
                             <div class="chart-card">
                                 <h3>Registro de Categoria</h3>
-                                <form id="formularioCate" method="post" action="/submit">
+                                <form id="formularioCate" method="post" action="/categoria">
                                     <div id="alertContainer"></div>
                                     <div class="form-floating mb-2">
                                        <input type="text" class="form-control" id="categoria" name="categoria">
@@ -251,17 +230,100 @@
                         </table>
                     </div>
                 </div>
-                <div id="actualizarCategoria" class="modalmask">
-                    <a href="#close" title="Close" class="close">X</a>
-                    <div class="container">
-                        <div id="aja"></div>
-                        <form id="container">  
-                        </form>    
-                    </div>
-                </div>
+                
+<div id="actualizarCategoria" class="modalmask" style="display: none;">
+    <a href="#close" title="Close" class="close">X</a>
+    <div class="container">
+        <div id="aja"></div>
+        <form id="container">
+            <div class="form-floating mb-2">
+                <input type="text" class="form-control" id="categoria1" name="categoria1" disabled>
+                <label for="categoria">Categoria Actual</label>
+            </div>
+        
+            <div class="form-floating mb-2">
+                <input type="text" class="form-control" id="descripcion1" name="descripcion1">
+                <label for="descripcion1">Descripcion</label>
+            </div>
+        
+            <div class="form-floating mb-2">
+                <input type="text" class="form-control" id="nuevoNombre" name="nuevoNombre">
+                <label for="nuevoNombre">Nuevo Nombre</label>
+            </div>
+        
+            <div id="boton"></div>  
+        </form>
+    </div>
+</div>
+
                 
             </div>
+            <div id="productos" class="page-content">
+                <h2>Gestión de Productos</h2>
+                <div class="charts-container">
+        
+                    <div class="chart-card">
+                        <h3>Registro de Productos</h3>
+                        <form id="formularioPro" method="post" action="/producto">
+                            <div id="alertContainer"></div>
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" for="categoria2">Categoria</label>
+                                <select class="form-select" name="categoria2" id="categoria2">
+                                  <option selected>Selecciona</option>
+                                  
+                                </select>
+                              </div>
+        
+                            <div class="form-floating mb-2">
+                                <input type="text" class="form-control" id="categoria" name="categoria">
+                                <label for="categoria">Producto</label>
+                             </div>
+
+                             <div class="input-group mb-3">
+                                <span class="input-group-text">$</span>
+                                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+                              </div>
+
+                            <div class="form-floating mb-2">
+                               <input type="text" class="form-control"  id="descripcion" name="descripcion">
+                               <label for="descripcion">Descripcion</label>
+                            </div>
+                            <div class="form-floating mb-2">
+                                <input type="file" class="form-control"  id="descripcion" name="descripcion">
+                                <label for="descripcion">Imagen del Producto</label>
+                             </div>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                                <button class="btn btn-primary me-md-2">Enviar</button>
+                              </div>
+                            
+                        </form>
+                    </div>   
             
+        </div>
+        <div class="data-tables">
+            <div class="table-card glow">
+                <h3>Productos registradas hasta el momento</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Categoria</th>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Descripcion</th>
+                            <th scope="col">Imagen</th>
+                            <th scope="col"><i class="fa fa-usd" ></i></th>
+                            <th scope="col"><i class="fa fa-trash"></i></th>
+                            <th scope="col"><i class="fa fa-pencil"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody id="data">
+                        
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+            </div>
             <div id="customers" class="page-content">
                 <h2>Gestión de Clientes</h2>
                 <div class="charts-container">
@@ -373,6 +435,6 @@
     <script src="js/movimiento.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-            <script type="module" src="js/crud.js"></script>
+    <script type="module" src="js/crud.categoria.js"></script>
 </body>
 </html>

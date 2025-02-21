@@ -1,65 +1,71 @@
-import{eliminarCategoria} from './eliminarCategoria.js'
-import{enviarFormulario}from './subirFormulario.js'
-import {actualizarCategoria} from './actualizarCategoria.js'
 
-export function cargarCategoria() {
-    fetch('/categoria')
+
+
+
+export function cargarCategorias() {
+    fetch('/categorias')
     .then(response => response.json())
     .then(data => mostrarData(data))
     .catch(error => console.log(error));
 }
-
-export function cargarUsuarios() {
-    fetch('/usuarios')
+export function cargarCategoria(categoria) {
+   
+    
+    fetch(`/categoria/${categoria}`)
     .then(response => response.json())
-    .then(usuarios => mostrarUsuarios(usuarios))
-    .catch(error => console.log(error));
+    .then(unique => mostrarCategoria(unique))
+       
+    .catch(error => {
+        console.error('Error al obtener la categoría:', error);
+    })
 }
+
 
 export function mostrarData(data){
     let body = '';
-    var actualizar ='';
-    let lista= '';
+    let lista = '<option selected>Selecciona</option>';
     for (var i = 0; i < data.length; i++) {
         body += `<tr>
             <td>${i + 1}</td>
             <td>${data[i].categoria}</td>
             <td>${data[i].descripcion}</td>
             <td><button class="btn btn-danger" onclick="eliminarCategoria('${data[i].categoria}')">Eliminar</button></td>
-            <td><a class="btn btn-white" href="#actualizarCategoria">Actualizar</a></td></tr>
+            <td><button class="btn btn-warning" onclick="actualizarCategoria('${data[i].categoria}')">Modificar</button></td>
+
+            
 `
-        lista +=`
-         <option value="${data[i].categoria}">${data[i].categoria}</option>`
-        
-         actualizar+=`
-                                <div class="form-floating mb-2">
-                                    <input type="text" class="form-control" id="categoria" name="categoria" value='${data[i].categoria}' disabled>
-                                    <label for="categoria">Categoria Actual</label>
-                                </div>
-
-                                <div class="form-floating mb-2">
-                                    <input type="text" class="form-control"  id="descripcion1" name="descripcion1" value='${data[i].descripcion}'>
-                                    <label for="descripcion1">Descripcion</label>
-                                </div>
-
-                                <div class="form-floating mb-2">
-                                <input type="text" class="form-control" id="nuevoNombre" name="nuevoNombre" value='${data[i].categoria}'>
-                                <label for="nuevoNombre">Nuevo Nombre</label>
-                                </div>
-
-                                <button class="btn btn-warning" onclick="actualizarCategoria('${data[i].categoria}')">Modificar</button>
-                   `
-        }
-        
-        document.getElementById('data').innerHTML = body
-        document.getElementById('container').innerHTML = actualizar
-        document.getElementById('categoriaselect').innerHTML = lista
+       
+        lista +=`<option value="${data[i].categoria}">${data[i].categoria}</option>`       
+    }
+    document.getElementById('data').innerHTML = body
+    document.getElementById('categoria2').innerHTML = lista
+       
+       
             
         }
           
-export function mostrarUsuarios(usuarios){
-    let nombre =`${usuarios[0].nombre}`
-    let permiso =`${usuarios[0].permiso2}`
-    document.getElementById('nombre').innerHTML = nombre
-    document.getElementById('permiso').innerHTML = permiso
-}          
+  
+
+        export function mostrarCategoria(unique) {
+            
+            let boton=''
+            boton='<button class="btn btn-warning" onclick="actualizarCategoria(${categoria.categoria})">Modificar</button>'
+            if (unique && unique.length > 0) {
+                const categoria = unique[0];  // Usamos el primer elemento del arreglo
+        
+                // Llena el formulario con los datos
+                document.getElementById('categoria1').value = categoria.categoria;
+                document.getElementById('descripcion1').value = categoria.descripcion;
+                document.getElementById('nuevoNombre').value = categoria.categoria;  // Esto está asignando el nombre actual de la categoría a 'nuevoNombre'
+                
+                // Muestra el modal
+                
+            } else {
+                console.error('No se encontraron datos para la categoría:', unique);
+            }
+        
+            document.getElementById('boton').innerHTML = boton;
+            document
+        }
+        
+        

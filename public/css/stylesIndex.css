@@ -113,6 +113,7 @@ section{
     cursor: pointer;
     font-size: 2.5rem;
     margin-left: 2rem;
+    
 }
 
 .header .icons div:hover{
@@ -206,16 +207,22 @@ section{
 
 
 
-
-
-
-
-
-
-
 .prductos .heading{
     color: #f3932d;
 }
+
+/*carrucel1*/
+.carousel-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+#carouselExample1 {
+    margin-right: 20px;
+}
+
+
 
 .centrarCarrusel{
     display: flex;
@@ -223,20 +230,13 @@ section{
 }
 
 
-
 .mini-content{
     background-color: white;
     margin: auto;
     border-radius: 5px;
-    width: 400px;
+    width: 300px;
     box-shadow: 0 0 10px rgb(255, 255, 255);
 }
-
-
-
-
-
-
 
 
 .centrarCarrousel{
@@ -245,8 +245,8 @@ section{
 }
 
 #carouselExample{
-    height: 474px;
-    width: 300px;
+    height: 350px;
+    width: 250px;
     text-align: center;
     box-shadow: 0 0 0 0.2px black;
     border-radius: 5px;
@@ -282,7 +282,7 @@ section{
     color: white;
     margin-top: -0.2em;
     line-height: 1.5em;
-    font-size: 13px;
+    font-size: 20px;
 }
 
 .tarjeta{
@@ -297,6 +297,89 @@ section{
 
 
 
+/*carrucel2*/
+.prductos .heading{
+    color: #f3932d;
+}
+
+
+
+#carouselExample2 {
+    /* ... otros estilos ... */
+    margin-left: 20px;
+}
+
+
+.centrarCarrusel{
+    display: flex;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+
+.mini-content{
+    background-color: white;
+    margin: auto;
+    border-radius: 5px;
+    width: 300px;
+    box-shadow: 0 0 10px rgb(255, 255, 255);
+}
+
+
+.centrarCarrousel{
+    display: flex;
+    justify-content: center;
+}
+
+#carouselExample{
+    height: 350px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 0 0 0 0.2px black;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#carouselExample:hover{
+    
+    box-shadow: 0 0 10px black;
+    border-radius: 5px;
+}
+
+.carousel-inner{
+    height: 100%;
+    border-radius: 5px;
+}
+
+
+.carousel-item {
+    height: 100%;
+    width: 100%;
+    background-color: #f3932d;
+}
+
+.carousel-item h3{
+    color: white;
+    padding-top: 5px;
+    margin-bottom: -0.5em;
+    line-height: 1.8em;
+}
+
+.carousel-item p{
+    color: white;
+    margin-top: -0.2em;
+    line-height: 1.5em;
+    font-size: 20px;
+}
+
+.tarjeta{
+    height: 89%;
+}
+
+.tarjeta img{
+    height: 100%;
+    width: 100%;
+}
 
 @media (max-width:991px){
     html{
@@ -415,14 +498,14 @@ section{
     padding: .9rem 3rem;
     font-size: 25px;
     color: #ffffff;
-    background: #f3932d;
+    background: #0f6b60;
     cursor: pointer;
     text-align: center;
 }
 
 .content a:hover{
     letter-spacing: .2rem;
-    background-color: #e9a65e;
+    background-color: #0f6b60;
     color: white;
 
 }
@@ -431,11 +514,7 @@ section{
 
 footer{
     width: 100%;
-    padding: 50px 0px;
-    background-image: url(../../ImagenesProyecto/olas.png);
-    background-size: cover;
-    color: white;
-    
+    background-color:#065b51 
 }
 
 .container__footer{
@@ -488,7 +567,7 @@ footer{
 
 .box__footer a{
     margin-top: 10px;
-    color: rgb(255, 255, 255);
+    color: #ffffff;
     font-weight: 300;
 }
 
@@ -520,7 +599,7 @@ footer{
 
 .modalmask {
     position: fixed;
-    font-family: Arial, sans-serif;
+    font-family:sans-serif;
     top: 0;
     right: 0;
     bottom: 0;
@@ -540,7 +619,7 @@ footer{
 
 /*Formato de la ventana*/
 .modalbox{
-    width: 40%;
+    width: 60%;
     height: 60%;
     text-align: center;
     position: absolute;
@@ -553,17 +632,18 @@ footer{
     -webkit-transition: all 500ms ease-in;
     -moz-transition: all 500ms ease-in;
     transition: all 500ms ease-in;
-    background-image: url(../ImagenesProyecto/pexels-alex-andrews-271121-816608.jpg);
+    background-image: url(../ImagenesProyecto/home.jpeg);
     background-size: cover;
     background-position: center;
 }
 
+/*nuestro usuario*/
 
 
 /*Boton de cerrar*/
 .close {
-    font-size: 12px;
-    color: #f3932d;
+    font-size: 20px;
+    color: #0f6b60;
     line-height: 25px;
     position: absolute;
     right: 5px;
@@ -576,7 +656,7 @@ footer{
 }
  
 .close:hover {
-    color:#ffba71;
+    color:#0f6b60;
 }
 
 
@@ -585,50 +665,70 @@ footer{
 }
 
 .Sesion{
-    background-image: url(../../ImagenesProyecto/pexels-frank-cone-140140-3607542.jpg);
+    background-image: url(../../ImagenesProyecto/home.jpeg);
     
     background-size: cover;
     border: transparent;
 }
 
-.modalbox h2{
-    font-size: 40px;
-    margin-bottom: 20px;
+.modalbox strong{
+    color: #0f6b60;
+    font-size: 25px;
+    margin-bottom: 40px;
 }
 
 .modalbox p{
     line-height: 4px;
 }
-.modalbox h2, p{
-    color:#fff
+.modalbox h4, p{
+    color:#0f6b60;
 }
 
 .modalbox a{
-    color: #f3932d;
+    color: #0f6b60;
 }
 
 .modalbox a:hover{
-    color: #faab57;
+    color: #0f6b60;
 }
 .centrarBoton{
     text-align: center;
 }
+
+/*boton registrar nuestro usuario*/
 .centrarBoton #regis{
-    background-color: #1fcbb7;
-    color: #fff;
+    background-color: transparent;
+    color: #0f6b60;
     padding: 7px;
+    border:1px solid #0f6b60;
     border-radius: 3px;
-    font-size: 25px;
+    box-shadow: 0px 0px 10px 5px #0f6b60;;
+    font-size: 20px;
 }
+/*boton inicio nuestro usuario*/
 
 .centrarBoton #sesion{
     background-color: transparent;
-    color: #ffffff;
+    color: #0f6b60;
     padding: 7px;
-    border:1px solid #ffffff;
+    border:1px solid #0f6b60;
     border-radius: 3px;
-    box-shadow: 0px 0px 10px 5px #ffffff;
-    font-size: 25px;
+    box-shadow: 0px 0px 10px 5px #0f6b60;
+    font-size: 20px;
+}
+.fondo1 {
+    width: 290px;
+    height: 340px;
+    background: #ffffff;
+    top: 70%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 50px 30px;
+    align-items: center;
+    border-radius: 3%;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 .centrarBoton #sesion:hover{
@@ -663,11 +763,11 @@ footer{
 	height: fit-content;
 	width: fit-content;
 	background: transparent;
-	border: 1px solid #f3932d;
+	border: 1px solid #0f6b60;
 	border-radius: 2px;
-	color: #fff;
+	color: #0f6b60;
 	margin: 1px;
-	font-size: 25px;
+	font-size: 20px;
 	font-weight: 400;
 	padding: 4px;
     text-align: center;
@@ -677,28 +777,28 @@ footer{
 
 .login .boton{
 	height: fit-content;
-	width: 100%;
-	background: #f3932d;
-	border: 1px solid #fff;
+	width: fit-content;
+	background:transparent;
+	border: 1px solid #0f6b60;
 	cursor: pointer;
 	border-radius: 2px;
-	color: #fff;
+	color: #0f6b60;
 	font-size: 20px;
 	font-weight: 400;
-	padding: 6px;
+	padding: 4px;
 	margin-top: 20px;
 }
 
 .login .boton:hover{
     margin-top: 8px;
-    box-shadow: 1px 5px 30px white;
+    box-shadow: 1px 5px 30px #0f6b60;
     letter-spacing: 1px;
     transition: 2s;
 }
 
 .login input:focus{
 	outline: none;
-	border: 1px solid #fff;
+	border: 1px solid #0f6b60;
 }
 
 
@@ -708,16 +808,31 @@ footer{
 }
 
 ::-webkit-input-placeholder{
-   color: #ffffff;
+   color: #0f6b60;
 }
 
 ::-moz-input-placeholder{
-   color: rgb(255, 255, 255);
+   color: #0f6b60;
+}
+
+.fondo {
+    width: 350px;
+    height: 350px;
+    background: #ffffff;
+    top: 70%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 50px 30px;
+    align-items: center;
+    border-radius: 3%;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 .registrarse{
     
-    background-image: url(../../ImagenesProyecto/pexels-krisof-1252873.jpg);
+    background-image: url(../../ImagenesProyecto/home.jpeg);
     background-size: cover;
     border: transparent;
 }
@@ -733,27 +848,26 @@ footer{
     transform: translate(-50%, -50%);
     width: 100%;
 }
-.registro .boton{
-    height: fit-content;
-	width: 50%;
-	background: #159f8f;
-	border: 1px solid #fff;
-	cursor: pointer;
-	border-radius: 2px;
-	color: #fff;
-	font-size: 20px;
-	font-weight: 400;
-	padding: 6px;
-	margin-top: 20px;
-}
+.registro .boton {
+        display: inline-block; /* Hace que el botón se ajuste al tamaño del texto */
+        padding: 10px 20px; /* Espaciado dentro del botón para que el texto no quede pegado al borde */
+        background: transparent;
+        border: 2px solid #0f6b60; /* Borde blanco */
+        cursor: pointer;
+        border-radius: 2px;
+        color: #0f6b60;
+        font-size: 20px;
+        font-weight: 400;
+        text-align: center;
+    }
 
 .registro input{
 	height: fit-content;
 	width: fit-content;
 	background: transparent;
-	border: 1px solid#159f8f;
+	border: 1px solid #0f6b60;
 	border-radius: 2px;
-	color: #fff;
+	color: #0f6b60;
 	margin: 1px;
 	font-size: 20px;
 	font-weight: 400;
@@ -763,14 +877,14 @@ footer{
 
 .registro .boton:hover{
     margin-top: 8px;
-    box-shadow: 1px 5px 30px white;
+    box-shadow: 1px 5px 30px #0f6b60;
     letter-spacing: 1px;
     transition: 2s;
 }
 
 .registro input:focus{
 	outline: none;
-	border: 1px solid #fff;
+	border: 1px solid #0f6b60;
 }
 
 
@@ -779,12 +893,39 @@ footer{
 	outline: none;
 }
 
-
+.fondo2 {
+    width: 320px;
+    height: 380px;
+    background: #ffffff;
+    top: 55%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 45px 30px;
+    align-items: center;
+    border-radius: 3%;
+    font-family: 'Ubuntu', sans-serif;
+}
 .admin{
-    background-image: url(../../ImagenesProyecto/pexels-pixabay-2150.jpg);
     background-size: cover;
     border: transparent;
     background-position: center;
+
+}
+.fondo3 {
+    width: 250px;
+    height: 250px;
+    background: #ffffff;
+    top: 55%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 45px 30px;
+    align-items: center;
+    border-radius: 3%;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 .OtrosInicios{
@@ -793,7 +934,7 @@ footer{
 }
 
 .OtrosInicios p{
-    margin-top: 30px;
+    margin-top: 50px;
     margin-bottom: 2px;
 }
 

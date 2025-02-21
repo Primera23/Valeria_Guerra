@@ -1,0 +1,570 @@
+html {
+  scroll-behavior: smooth;
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 50px;
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #d39e2d;
+}
+
+.nav .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav .logo h4 {
+  font-style: italic;
+  color: #333;
+}
+
+.nav .logo img {
+  width: 60px; /* Ajusta el tamaño aquí */
+  height: auto;
+}
+
+.nav .search-bar {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  max-width: 600px;
+  margin: 0 20px;
+}
+
+.nav .search-bar input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+  outline: none;
+}
+
+.nav .search-bar button {
+  background-color: #d39e2d;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+}
+
+.nav .search-bar button i {
+  font-size: 16px;
+}
+
+.nav .menu {
+  display: flex;
+  gap: 20px;
+}
+
+.nav .menu a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav .menu a:hover {
+  color: #d39e2d;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.logo-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f8f8;
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
+  width: 100%;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  font-weight: 600;
+  position: relative;
+  padding: 5px 0;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #d39e2d;
+}
+
+.nav-links a span.home {
+  font-weight: bold;
+  font-size: 18px;
+  color: #333;
+}
+
+.nav-links a i {
+  margin-left: 5px;
+  font-size: 12px;
+}
+
+.nav-links .magni {
+  font-size: 18px;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background-color: #d39e2d;
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+
+.category-carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
+.carousel-track-container {
+  overflow: hidden;
+  width: 80%; /* Ajusta el ancho según tus necesidades */
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  gap: 15px;
+}
+
+.carousel-item {
+  min-width: 150px;
+  height: 200px;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #f4f4f4;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.carousel-item:hover img {
+  transform: scale(1.1);
+}
+
+.category-name {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.carousel-button {
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 10px;
+  margin: 0 10px;
+  transition: background 0.3s;
+}
+
+.carousel-button:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-button.prev {
+  position: absolute;
+  left: 5px;
+}
+
+.carousel-button.next {
+  position: absolute;
+  right: 5px;
+}
+
+
+.carousel-description {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.carousel-description h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.carousel-description p {
+  font-size: 18px;
+  color: #555;
+}
+
+.button-link {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 30px;
+  background-color: #159f8f;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.button-link:hover {
+  background-color: #128c76;
+}
+
+
+.home {
+  background-color: #159f8f;
+  color: white;
+  padding: 6px 19px 5px;
+  border-bottom: 3px solid #04040459;
+}
+
+.nav-links a i {
+  margin-left: 5px;
+  color: #159f8f;
+}
+
+.magni {
+  color: #0000009a;
+}
+.article {
+  width: 100%; /* Ancho del contenedor padre */
+  padding: 50px 0; /* Espaciado opcional */
+  display: flex;
+  justify-content: center; /* Centra la caja horizontalmente */
+  align-items: center; /* Centra la caja verticalmente */
+  background-color: #f8f9fa; /* Fondo opcional para el artículo */
+}
+
+.article .box {
+  width: 80%; /* Ajusta el tamaño de la caja */
+  max-width: 600px; /* Tamaño máximo */
+  height: auto; /* Ajusta la altura al contenido */
+  background-image: url("../ImagenesProyecto/image00002.jpeg"); /* Imagen de fondo */
+  background-size: cover; /* La imagen cubre el fondo del div */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  padding: 20px; /* Espaciado interno */
+  text-align: center; /* Centra el texto */
+  border-radius: 10px; /* Bordes redondeados opcionales */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra opcional */
+}
+
+
+
+.article .box h1 {
+  color: white;
+  padding: 42px 40px;
+}
+
+.article .box p {
+  color: white;
+  font-size: 15px;
+  line-height: 2;
+  padding-left: 42px;
+}
+
+
+.two-box {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.two-box .box-img1 {
+  width: 520px;
+  height: 238px;
+  background-image: linear-gradient(to left, transparent, black),
+    url("../ImagenesProyecto/image00002.jpeg");
+  background-size: cover;
+}
+
+.two-box .box-img1 h1 {
+  color: white;
+  padding-left: 44px;
+  padding-top: 50px;
+}
+
+.two-box .box-img1 p {
+  color: white;
+  padding-left: 44px;
+}
+
+.two-box .box-img1 a {
+  background-color: #d39e2d;
+  color: white;
+  display: inline-block;
+  margin-left: 44px;
+  margin-top: 20px;
+  padding: 14px 24px;
+  border-left: 3px solid #04040459;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.two-box .box-img2 {
+  width: 520px;
+  height: 238px;
+  background-image: linear-gradient(to left, transparent, black),
+    url("../ImagenesProyecto/home.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.two-box .box-img2 h1 {
+  color: white;
+  padding-left: 44px;
+  padding-top: 50px;
+}
+
+.two-box .box-img2 p {
+  color: white;
+  padding-left: 44px;
+}
+
+.two-box .box-img2 a {
+  background-color: #d39e2d;
+  color: white;
+  display: inline-block;
+  margin-left: 44px;
+  margin-top: 20px;
+  padding: 14px 24px;
+  border-left: 3px solid #04040459;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* General Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+.center {
+  text-align: center;
+  margin-top: 70px;
+  margin-bottom: 70px;
+  font-size: 28px;
+  color: #333;
+}
+
+.food {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+.product-container {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los productos pasen a la siguiente línea */
+  justify-content: space-between; /* Espacio entre productos en una fila */
+  gap: 20px; /* Espacio entre productos */
+  margin: 20px;
+}
+
+.recipe {
+  width: calc(33.333% - 20px); /* Cada producto ocupa 1/3 del contenedor, menos el espacio */
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s;
+}
+
+.recipe:hover {
+  transform: scale(1.05);
+}
+
+.recipe .img img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-bottom: 3px solid #159f8f;
+}
+
+.recipe .img p {
+  text-align: center;
+  font-size: 18px;
+  margin: 10px 0;
+  color: #333;
+}
+
+.recipe .buttons {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 10px;
+}
+
+.buy-btn, .details-btn {
+  padding: 10px 20px;
+  border: none;
+  background-color: #159f8f;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.buy-btn:hover, .details-btn:hover {
+  background-color: #128c76;
+}
+
+/* Asegura que los productos estén centrados cuando haya menos de 3 en la fila */
+.product-container {
+  justify-content: flex-start; /* Alineación predeterminada */
+}
+
+.product-container .recipe:nth-child(3n+1) {
+  margin-left: 0; /* Para asegurar que el primer producto de cada fila no tenga margen extra */
+}
+
+.product-container .recipe:nth-child(3n+2),
+.product-container .recipe:nth-child(3n+3) {
+  margin-left: 10px;
+}
+
+/* Centrar cuando haya solo 1 o 2 productos en la fila */
+.product-container:has(.recipe:nth-child(3n+1):nth-last-child(1),
+    .recipe:nth-child(3n+2):nth-last-child(2),
+    .recipe:nth-child(3n+3):nth-last-child(3)) {
+    justify-content: center;
+}
+
+/* Ajuste para pantallas más pequeñas */
+@media (max-width: 1024px) {
+  .recipe {
+    width: calc(50% - 20px); /* Dos productos por fila */
+  }
+}
+
+@media (max-width: 768px) {
+  .recipe {
+    width: 100%; /* Un producto por fila */
+  }
+  .product-container {
+    justify-content: center; /* Centra los productos cuando hay solo uno en una fila */
+  }
+}
+
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  padding: 15px;
+  background-color: #f8f8f8;
+}
+
+.buy-btn, .details-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.buy-btn {
+  background-color: #159f8f;
+}
+
+.buy-btn:hover {
+  background-color: #159f8f;
+}
+
+.details-btn {
+  background-color: #555;
+}
+
+.details-btn:hover {
+  background-color: #333;
+}
+
+
+/* Contenedor principal del footer */
+.footer {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Estilo para la primera sección: Follow Us on Instagram */
+.footer-1 {
+  background-color: #159f8f;/* Fondo verde para la primera parte */
+  color: #fff; /* Texto blanco */
+  padding: 20px;
+  margin: 100; /* Elimina el margen */
+}
+
+/* Estilo para la segunda sección: Copyright */
+.footer-bottom {
+  background-color: #f3932d; /* Fondo oscuro para la segunda parte */
+  color: #fff; /* Texto blanco */
+  text-align: center;
+  padding: 20px;
+  margin: 0; /* Elimina el margen */
+}
+
+.footer-1 h3, .footer-bottom p {
+  margin: 0; /* Elimina los márgenes por defecto de los textos */
+}
+
+.footer-bottom p {
+  margin: 0;
+  font-size: 20px; /* Tamaño de la fuente más grande */
+}
+
+
+
+
+

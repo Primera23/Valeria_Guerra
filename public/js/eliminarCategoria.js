@@ -1,5 +1,5 @@
 
-import { cargarCategoria,mostrarData } from "./cargarCategorias.js";
+import { cargarCategorias,mostrarData } from "./cargarCategorias.js";
 
 export function eliminarCategoria(categoria){
     const confirmacion = confirm(`¿Estás seguro de que deseas eliminar la categoría "${categoria}"?`);
@@ -22,7 +22,7 @@ export function eliminarCategoria(categoria){
                       alertContainer.innerHTML = alertMessage;
              
             if (result.success) {
-                    fetch('/categoria')
+                    fetch('/categorias')
                         .then(response => response.json())
                         .then(data => mostrarData(data))
                         .catch(error => console.log(error));
@@ -35,7 +35,7 @@ export function eliminarCategoria(categoria){
     }
     
 
-cargarCategoria()
+cargarCategorias()
 
 
 

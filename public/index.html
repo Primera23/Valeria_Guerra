@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VALERIA GUERRA</title>
-    <link rel="stylesheet" href="css/stylesIndex.css" >
+    <link rel="stylesheet" href="css/stylesindex.css" >
     <link rel="shortcut icon" href="ImagenesProyecto/image00003.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -24,10 +24,8 @@
         <a href="#contacto">Contacto</a>
     </nav>
     <div class="icons">
-        <div class="fas fa-search" id="search-btn"></div>
-        <div></div>
+        <div class="fas fa-search" id="search-btn">
         <div class="fas fa-bars" id="menu-btn" ></div>
-        <div class="fas fa-heart" id="heart"></div>
         <a href="#nuestroUsuario"><div class="fas fa-user" id="fa-user" class="btn btn-primary" ></div></a>
     </div>
 
@@ -57,11 +55,49 @@
     
 
     <div class="centrarCarrousel">
-        <div id="carouselExample" class="carousel slide">
+        <div class="carousel-container">
+
+        <div id="carouselExample1" class="carousel slide">
             <div class="carousel-inner">
               <div class="carousel-item active">
                 <div class="tarjeta">
-                    <img src="ImagenesProyecto/1.jpeg" alt="...">
+                    <img src="ImagenesProyecto/3.jpeg" alt="...">
+                </div>
+                <h3 class="h3">Producto 1</h3>
+                <p class="Precio">$10.00</p>
+              </div>
+              <div class="carousel-item">
+                <div class="tarjeta">
+                    <img src="ImagenesProyecto/2.jpeg" alt="...">
+                </div>
+                <h3 class="h3">Producto 2</h3>
+                <p class="Precio">$20.00</p>
+              </div>
+              <div class="carousel-item">
+                <div class="tarjeta">
+                    <img src="ImagenesProyecto/3.jpeg" alt="...">
+                </div>
+                <h3 class="h3">Producto 3</h3>
+                <p class="Precio">$30.00</p>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+      </div>
+
+      <div class="centrarCarrousel">
+        <div id="carouselExample2" class="carousel slide">
+            <div class="carousel-inner1">
+              <div class="carousel-item active">
+                <div class="tarjeta">
+                    <img src="ImagenesProyecto/7.jpeg" alt="...">
                 </div>
                 <h3 class="h3">Producto 1</h3>
                 <p class="Precio">$10.00</p>
@@ -117,7 +153,8 @@
     <div class="modalbox nuestroUsuario">
         <a href="#close" title="Close" class="close">X</a>
         <div class="nuestroCaja">
-            <h2>Nuestro Usuario</h2>
+            <article class="fondo1">
+                <strong>Nuestro Usuario</strong>
             <div class="centrarBoton">
                 <a href="#inicioSesion"><button id="sesion">Inicio Sesión</button></a>
             </div>
@@ -125,27 +162,27 @@
                 <a href="#registrarse"><button id="regis">Registrarse</button></a>
             </div>
             <div class="OtrosInicios">
-                <p>Iniciar Sesion como <a href="#sesionAdministrador">Admin</a></p>
+                <p>Inicia como <a href="#sesionAdministrador">Administrador</a></p>
             </div>
         </div>
     </div>
 </div>
 
 <div id="inicioSesion" class="modalmask">
+
     <div class="modalbox Sesion">
         <a href="#close" title="Close" class="close">X</a>
-       
-        <form action="">
-
+        <form id="loginForm">
             <div class="login">
-                <h2>Inicio De Sesión</h2>
+                <article class="fondo">
                 <div><input type="text" placeholder="Correo" name="correo"></div>
                 <div><input type="password" placeholder="Contraseña" name="contraseña"></div>
-                <button class="boton">Iniciar Sesion</button>
+                <button class="boton">Iniciar sesión</button>
             
             <div class="OtrosInicios">
                 <p><a href="#">¿Olvidaste la contraseña?</a></p>
-                <p>¿No posees una cuenta? <a href="#registrarse">Registrate</a></p>
+                <p>¿No tienes una cuenta?
+                     <a href="#registrarse">Registrate</a></p>
                 <p>¿Otro tipo de inicio? <a href="#sesionAdministrador">Admin</a></p>
             </div>
 
@@ -155,32 +192,40 @@
 </div>
 
 <div id="registrarse" class="modalmask">
+    <form id="registroForm">
     <div class="modalbox registrarse">
         <a href="#close" title="Close" class="close">X</a>
-        
-        <form action="">
-            <div class="registro">
-                <h2>Registrarse</h2>
-                <div><input type="text" placeholder="Nombres" ="nombre"></div>
-                <div><input type="text" placeholder="Apellidos" name="apellido"></div>
-                <div><input type="text" placeholder="Correo" name="user"></div>
-                <div><input type="password" placeholder="Contraseña" name="Contraseña"></div>
-                <div><input type="password" placeholder="Repetir Contraseña"></div>
-                <button class="boton">Registrarse</button>
-                    <div class="OtrosInicios">
-                        <p>¿Ya posees una cuenta? <a href="#inicioSesion">Inicia Sesión</a> o como <a href="#sesionAdministrador">Admin</a></p>
-                    </div>
-            </div>
+        <article class="fondo2">
+        <div class="registro">
+            <form id="">
+                <div><input type="text" placeholder="Nombres" name="nombres"></div>
+                <div><input type="text" placeholder="Apellidos" name="apellidos"></div>
+                <div><input type="email" placeholder="Correo" name="correo"></div>
+                <div><input type="password" placeholder="Contraseña" name="contraseña"></div>
+                <div><input type="password" placeholder="Repetir Contraseña" name="confirmar_contraseña"></div>
+                <br></br>
 
-            
+                <button class="boton">Registrarse</button>
+                <div class="OtrosInicios">
+                    <p>¿Ya tienes una cuenta? 
+                        <a href="#inicioSesion">Inicia Sesión</a> 
+                        <br></br>
+                        <br></br>
+
+                    incia como 
+                    <a href="#sesionAdministrador">Administrador</a></p>
+                </div>
+            </form>
         </div>
-        </form>
+    </div>
+</div>
 </div>
 
 <div id="sesionAdministrador" class="modalmask">
     <div class="modalbox admin">
+
         <a href="#close" title="Close" class="close">X</a>
-        
+        <article class="fondo3">
         <form action="pp.html" >
             <div class="login admin">
                 <h2>Inicio Admin</h2>
