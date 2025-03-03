@@ -1,14 +1,14 @@
 :root {
-    --primary-color: #ffffff;
-    --secondary-color: #f18409;
-    --accent-color: #ffffff;
-    --background-color: #ffffff;  
-    --surface-color: #f18409;
-    --text-primary: #000000;  
-    --text-secondary: #ffffff;
-    --success-color: #3af1ab;
-    --warning-color: #e9cc2b;
-    --danger-color: #ffffff;
+    --primary-color: #f3932d; /* Blanco */
+    --secondary-color: #cf1b1b; /* Gris oscuro para textos principales */
+    --accent-color: #159f8f; /* Verde suave */
+    --background-color: #e7e7e7; /* Gris suave para el fondo */
+    --surface-color: #ffffff; /* Naranja suave, menos saturado */
+    --text-primary: #159f8f; /* Gris oscuro para los textos */
+    --text-secondary: #f3932d;; /* Gris claro para los textos secundarios */
+    --success-color: #ffffff; /* Verde para el éxito */
+    --warning-color: #ffffff; /* Naranja para advertencias */
+    --danger-color: #e4cdcb; /* Rojo para errores */
 }
 * {
     margin: 0;

@@ -74,9 +74,9 @@ export const postCategorias = async (req,res) =>{
 
     if (!categoria || !descripcion) {
         return res.status(400).json({ success: false, message: 'Todos los campos son obligatorios' });
-    } else if (/^\s/.test(categoria || descripcion)) {
-        return res.status(400).json({ success: false, message: 'No se admiten espacios al principio' });
-    } else if (!/^[a-zA-Z\s]+$/.test(categoria)) {
+    } else if (/^\s/.test(categoria) || /^\s/.test(descripcion)) {
+        return res.status(400).json({ success: false, message: 'No se admiten espacios al principio en categoría o descripción' });
+    } else if (!/^[a-zA-Z\s]+$/.test(categoria || descripcion)) {
         return res.status(400).json({ success: false, message: 'Digita solo letras en el nombre' });
     } else if (categoria.length > 20) {
         return res.status(400).json({ success: false, message: 'El campo nombre no debe exceder mas de 20 caracteres' });

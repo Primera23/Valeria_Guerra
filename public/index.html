@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,7 +20,7 @@
     <nav class="navbar">
 
         <a href="#about">Nosotros</a>
-        <a href="#product">productos</a>
+        <a href="Productos.html">productos</a>
         <a href="#contacto">Contacto</a>
     </nav>
     <div class="icons">
@@ -53,8 +53,80 @@
         <h1 class="heading">nuestros <span>Productos</span></h1>
     </article>
     
-
     <div class="centrarCarrousel">
+        <div class="carousel-container">
+            <div id="carouselExample1" class="carousel slide">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="tarjeta">
+                            <img src="ImagenesProyecto/3.jpeg" alt="...">
+                        </div>
+                        <h3 class="h3">Producto 1</h3>
+                        <p class="Precio">$10.00</p>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="tarjeta">
+                            <img src="ImagenesProyecto/2.jpeg" alt="...">
+                        </div>
+                        <h3 class="h3">Producto 2</h3>
+                        <p class="Precio">$20.00</p>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="tarjeta">
+                            <img src="ImagenesProyecto/3.jpeg" alt="...">
+                        </div>
+                        <h3 class="h3">Producto 3</h3>
+                        <p class="Precio">$30.00</p>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample1" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample1" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    
+        <div class="carousel-container">
+            <div id="carouselExample2" class="carousel slide">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="tarjeta">
+                            <img src="ImagenesProyecto/7.jpeg" alt="...">
+                        </div>
+                        <h3 class="h3">Producto 1</h3>
+                        <p class="Precio">$10.00</p>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="tarjeta">
+                            <img src="ImagenesProyecto/2.jpeg" alt="...">
+                        </div>
+                        <h3 class="h3">Producto 2</h3>
+                        <p class="Precio">$20.00</p>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="tarjeta">
+                            <img src="ImagenesProyecto/3.jpeg" alt="...">
+                        </div>
+                        <h3 class="h3">Producto 3</h3>
+                        <p class="Precio">$30.00</p>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample2" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample2" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="centrarCarrousel">
         <div class="carousel-container">
 
         <div id="carouselExample1" class="carousel slide">
@@ -129,6 +201,7 @@
       </div>
 
 </section>
+-->
 
 <section class="about" id="about">
     <h1 class="heading"><span>sobre</span> <span class="n1">nosotros</span></h1>
@@ -146,7 +219,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> 
 
 
 <div id="nuestroUsuario" class="modalmask">
@@ -178,12 +251,10 @@
                 <div><input type="text" placeholder="Correo" name="correo"></div>
                 <div><input type="password" placeholder="Contraseña" name="contraseña"></div>
                 <button class="boton">Iniciar sesión</button>
-            
             <div class="OtrosInicios">
                 <p><a href="#">¿Olvidaste la contraseña?</a></p>
-                <p>¿No tienes una cuenta?
-                     <a href="#registrarse">Registrate</a></p>
-                <p>¿Otro tipo de inicio? <a href="#sesionAdministrador">Admin</a></p>
+                <p>Crear Cuenta  <a href="#registrarse">Registrate</a></p>
+                <p>Iniciar sesión  <a href="#sesionAdministrador">Admin</a></p>
             </div>
 
             </div>
@@ -192,28 +263,24 @@
 </div>
 
 <div id="registrarse" class="modalmask">
-    <form id="registroForm">
+
     <div class="modalbox registrarse">
         <a href="#close" title="Close" class="close">X</a>
-        <article class="fondo2">
+        <form id="registerForm" action="/register" method="post">
+           
         <div class="registro">
-            <form id="">
-                <div><input type="text" placeholder="Nombres" name="nombres"></div>
-                <div><input type="text" placeholder="Apellidos" name="apellidos"></div>
-                <div><input type="email" placeholder="Correo" name="correo"></div>
-                <div><input type="password" placeholder="Contraseña" name="contraseña"></div>
-                <div><input type="password" placeholder="Repetir Contraseña" name="confirmar_contraseña"></div>
-                <br></br>
-
+            <article class="fondo2">
+                <div id="alertContainer"></div>
+                <div><input type="text" placeholder="Nombres" name="nombres" id="nombres"></div>
+                <div><input type="text" placeholder="Apellidos" name="apellidos" id="apellidos"></div>
+                <div><input type="text" placeholder="Usuario" name="user" id="user"></div>
+                <div><input type="password" placeholder="Contraseña" name="password" id="password"></div>
+                <br>
                 <button class="boton">Registrarse</button>
-                <div class="OtrosInicios">
-                    <p>¿Ya tienes una cuenta? 
-                        <a href="#inicioSesion">Inicia Sesión</a> 
-                        <br></br>
-                        <br></br>
-
-                    incia como 
-                    <a href="#sesionAdministrador">Administrador</a></p>
+            <div class="OtrosInicios">
+                
+                    Tienes una cuenta <a href="#inicioSesion">Inicia Sesión</a>
+                     inciar sesión <a href="#sesionAdministrador">Admin</a>
                 </div>
             </form>
         </div>
@@ -271,10 +338,10 @@
     </div>
 
     <div class="box__copyright">
-        <hr>
+    
         <p>Todos los derechos reservados © 2024 <b>valeria guerra</b></p>
     </div>
-    <script src="/server.js"></script>
+    <script src="js/auth/authCrud.js" type="module"></script>
 </footer>
 </body>
 </html>

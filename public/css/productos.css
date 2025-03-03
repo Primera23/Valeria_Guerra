@@ -1,3 +1,20 @@
+body {
+  font-family: Arial, sans-serif;
+}
+/* Asegura que el footer se quede abajo */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* El contenido ocupa todo el espacio disponible */
+.main-content {
+  flex-grow: 1;
+} 
+
 html {
   scroll-behavior: smooth;
 }
@@ -6,7 +23,7 @@ html {
   justify-content: space-between;
   align-items: center;
   padding: 15px 50px;
-  background-color: #f8f9fa;
+  background-color: #0f6b60;
   border-bottom: 2px solid #d39e2d;
 }
 
@@ -22,7 +39,7 @@ html {
 }
 
 .nav .logo img {
-  width: 60px; /* Ajusta el tamaño aquí */
+  width: 60px; /* Ajusta el tamaño aquí */
   height: auto;
 }
 
@@ -62,7 +79,7 @@ html {
 
 .nav .menu a {
   text-decoration: none;
-  color: #333;
+  color: #ffffff;
   font-weight: 500;
   transition: color 0.3s;
 }
@@ -78,10 +95,78 @@ html {
   box-sizing: border-box;
 }
 
-body {
-  font-family: Arial, sans-serif;
+
+/* Navbar */
+/* Estilos generales */
+.header {
+  background: #0f6b60;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 7%;
+  border-bottom: 2px solid #0f6b60;
+  position: relative; /* Cambié 'fixed' por 'relative' para que NO siga al usuario */
+  width: 100%;
+  z-index: 1000;
 }
 
+
+/* Logo con círculo blanco */
+.header .logo img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+  background-color: transparent;
+}
+
+/* Navbar */
+.navbar {
+  font-family: 'Arial', sans-serif; /* Asegura la misma fuente */
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  background-color: #0f6b60;
+  padding: 15px 0;
+  border-bottom: 2px solid #0f6b60;
+}
+
+.navbar a {
+  color: #ffffff;
+  font-size: 1.4rem;
+  font-weight: 500;
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+
+
+/* Íconos */
+.header .icons {
+  display: flex;
+  align-items: center;
+}
+
+.header .icons div {
+  color: #f3932d;
+  cursor: pointer;
+  font-size: 1.4rem;
+  margin-left: 2rem;
+  transition: color 0.3s ease;
+}
+
+.header .icons div:hover {
+  color: #ffffff;
+}
+
+/* Hover efecto */
+.navbar a:hover {
+  background-color: #ffffff;
+  color: #0f6b60;
+}
+ 
 .logo-nav {
   display: flex;
   justify-content: center;
@@ -155,7 +240,7 @@ body {
 
 .carousel-track-container {
   overflow: hidden;
-  width: 80%; /* Ajusta el ancho según tus necesidades */
+  width: 80%; /* Ajusta el ancho según tus necesidades */
 }
 
 .carousel-track {
@@ -237,7 +322,7 @@ body {
 
 .carousel-description p {
   font-size: 18px;
-  color: #555;
+  color: #ffffff;
 }
 
 .button-link {
@@ -276,12 +361,12 @@ body {
   display: flex;
   justify-content: center; /* Centra la caja horizontalmente */
   align-items: center; /* Centra la caja verticalmente */
-  background-color: #f8f9fa; /* Fondo opcional para el artículo */
+  background-color: #f8f9fa; /* Fondo opcional para el artículo */
 }
 
 .article .box {
-  width: 80%; /* Ajusta el tamaño de la caja */
-  max-width: 600px; /* Tamaño máximo */
+  width: 80%; /* Ajusta el tamaño de la caja */
+  max-width: 600px; /* Tamaño máximo */
   height: auto; /* Ajusta la altura al contenido */
   background-image: url("../ImagenesProyecto/image00002.jpeg"); /* Imagen de fondo */
   background-size: cover; /* La imagen cubre el fondo del div */
@@ -404,7 +489,7 @@ body {
 
 .product-container {
   display: flex;
-  flex-wrap: wrap; /* Permite que los productos pasen a la siguiente línea */
+  flex-wrap: wrap; /* Permite que los productos pasen a la siguiente línea */
   justify-content: space-between; /* Espacio entre productos en una fila */
   gap: 20px; /* Espacio entre productos */
   margin: 20px;
@@ -458,9 +543,9 @@ body {
   background-color: #128c76;
 }
 
-/* Asegura que los productos estén centrados cuando haya menos de 3 en la fila */
+/* Asegura que los productos estén centrados cuando haya menos de 3 en la fila */
 .product-container {
-  justify-content: flex-start; /* Alineación predeterminada */
+  justify-content: flex-start; /* Alineación predeterminada */
 }
 
 .product-container .recipe:nth-child(3n+1) {
@@ -479,7 +564,7 @@ body {
     justify-content: center;
 }
 
-/* Ajuste para pantallas más pequeñas */
+/* Ajuste para pantallas más pequeñas */
 @media (max-width: 1024px) {
   .recipe {
     width: calc(50% - 20px); /* Dos productos por fila */
@@ -530,41 +615,150 @@ body {
   background-color: #333;
 }
 
+/* Asegura que el footer siempre esté abajo */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
 
-/* Contenedor principal del footer */
-.footer {
-  width: 100%;
+/* Contenido principal debe ocupar todo el espacio posible */
+.main-content {
+  flex: 1;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Contenedor principal del contenido */
+.main-content {
+  flex: 1;
+}
+
+/* Asegura que el footer se quede abajo */
+html, body {
+  height: 100%;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Estilo para la primera sección: Follow Us on Instagram */
-.footer-1 {
-  background-color: #159f8f;/* Fondo verde para la primera parte */
-  color: #fff; /* Texto blanco */
-  padding: 20px;
-  margin: 100; /* Elimina el margen */
+/* El contenido ocupa todo el espacio disponible */
+.main-content {
+  flex-grow: 1;
 }
 
-/* Estilo para la segunda sección: Copyright */
-.footer-bottom {
-  background-color: #f3932d; /* Fondo oscuro para la segunda parte */
-  color: #fff; /* Texto blanco */
+/* Footer */
+footer {
+  background-color: #065b51;
+  color: white;
   text-align: center;
+  padding: 20px 0;
+  font-size: 14px;
+  width: 100%;
+  margin-top: auto; /* Empuja el footer hacia abajo */
+}
+
+/* Contenedor del footer */
+.container__footer {
+  display: flex;
+  justify-content: center; /* Centra el contenido */
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: auto;
   padding: 20px;
-  margin: 0; /* Elimina el margen */
+  text-align: center; /* Asegura que el texto esté centrado */
 }
 
-.footer-1 h3, .footer-bottom p {
-  margin: 0; /* Elimina los márgenes por defecto de los textos */
+/* Secciones del footer */
+.box__footer {
+  flex: 1;
+  min-width: 250px;
+  padding: 20px;
+  text-align: center; /* Centra el contenido */
 }
 
-.footer-bottom p {
-  margin: 0;
-  font-size: 20px; /* Tamaño de la fuente más grande */
+/* Logo dentro del footer */
+.box__footer .logo img {
+  border-radius: 10px;
+  width: 200px;
+  height: auto;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+/* Títulos */
+.box__footer h2 {
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Descripción y enlaces */
+.box__footer p,
+.box__footer a {
+  color: white;
+  font-weight: 300;
+  font-size: 14px;
+  text-decoration: none;
+  display: block;
+  margin: 5px 0;
+  text-align: center;
+}
+
+/* Hover en enlaces */
+.box__footer a:hover {
+  opacity: 0.8;
+}
+
+/* Iconos */
+.box__footer a .fab {
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+/* Copyright */
+.box__copyright {
+  text-align: center;
+  padding: 10px 0;
+  font-size: 14px;
+}
+
+.box__copyright hr {
+  border: none;
+  height: 1px;
+  background-color: white;
+  width: 80%;
+  margin: 10px auto;
 }
 
 
+.box__copyright{
+    max-width: 1200px;
+    margin: auto;
+    text-align: center;
+    padding: 0px 0px;
+}
 
+.box__copyright {
+    padding: 5px;
+    font-size: 16px; /* Reduce aún más el texto */
+}
 
+.box__copyright p{
+    margin-top: 20px;
+    color: rgb(255, 255, 255);
+}
 
+.box__copyright hr{
+    border: none;
+    height: 1px;
+    background-color: rgb(255, 255, 255);
+}

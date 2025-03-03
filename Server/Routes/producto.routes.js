@@ -1,21 +1,21 @@
 import {Router} from 'express';
 import {
-    postCategorias,
-    getCategoria,
-    deleteCategorias,
-    getCategorias,
-    patchCategorias
-} from '../Controllers/categoria.controller.js'
+    postProducto,
+    getProducto,
+    deleteProducto,
+    getProductos,
+    patchProducto
+} from '../Controllers/producto.controller.js'
 
 const router = Router();
 
-router.post('/producto',postCategorias);
+router.post('/producto',postProducto);
   
-router.get("/productos", getCategorias);
-router.get("/producto/:categoria", getCategoria);
+router.get("/productos", getProductos);
+router.get("/producto/:producto", getProducto);
   
-router.delete('/producto/:categoria',deleteCategorias)
+router.delete('/producto/:producto',deleteProducto)
   
-router.patch('/producto/:categoria', patchCategorias);
+router.patch('/producto/:producto', patchProducto);
 
 export default router;
