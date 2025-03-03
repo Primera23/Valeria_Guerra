@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-10-2024 a las 19:25:13
+-- Tiempo de generación: 01-03-2025 a las 01:45:05
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -50,15 +50,16 @@ INSERT INTO `administrador` (`id_admin`, `correo_electronico`, `contreseña`, `p
 
 CREATE TABLE `categoria` (
   `categoria` varchar(30) NOT NULL,
-  `descripcion` varchar(200) NOT NULL
+  `descripcion` varchar(200) NOT NULL,
+  `Createt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `categoria`
 --
 
-INSERT INTO `categoria` (`categoria`, `descripcion`) VALUES
-('hola', 'juan');
+INSERT INTO `categoria` (`categoria`, `descripcion`, `Createt`) VALUES
+('Busos', '3', '2025-02-24 12:55:08');
 
 -- --------------------------------------------------------
 
@@ -147,9 +148,27 @@ INSERT INTO `tallas` (`talla`, `descripcion`) VALUES
 ('M', 'Medium'),
 ('S', 'Small'),
 ('XL', 'Extra Large'),
-('XS', 'Extra Small'),
-('XXL', 'Double Extra Large'),
-('XXXL', 'Triple Extra Large');
+('XS', 'Extra Small');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(10) NOT NULL,
+  `username` text NOT NULL,
+  `password` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `user`
+--
+
+INSERT INTO `user` (`id`, `username`, `password`) VALUES
+(1, 'Primera', '$2b$10$o6ecVLHdI9GjMhUP90runOSTbEu9gmNmcScuLff22J9nqZcyC2YkS'),
+(2, 'juna', '$2b$10$U5cOqCicAOS96FQ39G9sWOrTioawgtj4g6i6NCgai/cAUOoV/pn.e');
 
 -- --------------------------------------------------------
 
@@ -166,15 +185,16 @@ CREATE TABLE `usuario` (
   `direccion` varchar(50) NOT NULL,
   `correo_electronico` varchar(64) NOT NULL,
   `contraseña` varchar(65) NOT NULL,
-  `permiso1` enum('Admin','Asistente','Usuario','Cliente') NOT NULL
+  `permiso1` enum('Admin','Asistente','Usuario','Cliente') NOT NULL,
+  `user_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id_usuario`, `nombre`, `apellido`, `telefono`, `ciudad`, `direccion`, `correo_electronico`, `contraseña`, `permiso1`) VALUES
-(1, 'Juan', 'Ramirez', '3017', 'Medellin', 'aaaaaaaaa', 'orlamjddjkdkd@', 'qeeeeee', 'Admin');
+INSERT INTO `usuario` (`id_usuario`, `nombre`, `apellido`, `telefono`, `ciudad`, `direccion`, `correo_electronico`, `contraseña`, `permiso1`, `user_id`) VALUES
+(0, 'Orlando', 'Primera', '', '', '', '', '', 'Usuario', 1);
 
 --
 -- Índices para tablas volcadas
@@ -227,11 +247,19 @@ ALTER TABLE `tallas`
   ADD PRIMARY KEY (`talla`);
 
 --
+-- Indices de la tabla `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`) USING HASH;
+
+--
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id_usuario`),
-  ADD KEY `permiso1` (`permiso1`) USING BTREE;
+  ADD KEY `permiso1` (`permiso1`) USING BTREE,
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -250,10 +278,10 @@ ALTER TABLE `producto`
   MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `usuario`
+-- AUTO_INCREMENT de la tabla `user`
 --
-ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `user`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
@@ -283,7 +311,8 @@ ALTER TABLE `producto_color_talla`
 -- Filtros para la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`permiso1`) REFERENCES `permisos` (`permiso`) ON DELETE CASCADE;
+  ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`permiso1`) REFERENCES `permisos` (`permiso`) ON DELETE CASCADE,
+  ADD CONSTRAINT `usuario_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
