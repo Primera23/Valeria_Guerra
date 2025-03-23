@@ -1,17 +1,15 @@
-import {Router} from 'express';
-import { registro } from '../Controllers/auth.controller.js'; // si el archivo está en el directorio models
-
-
+const { Router } = require('express');  // Reemplazar 'import' por 'require'
+const { login, registro, verifyEmail, logout,perfil,checkSession,sesionesActivas } = require('../Controllers/auth.controller.js');  // Ajusta la importación del controlador
 
 const router = Router();
+
+// Definir las rutas
 router.post('/register', registro);
-router.post('/login',);
+router.post('/login', login);
+router.get('/verify', verifyEmail);
+router.get('/check-session', checkSession)
+router.get('/logout',  logout);
+router.get('/sesiones-activas',sesionesActivas)
+router.get('/protected',perfil);
 
-
-
-router.post('/logout',(req,res)=>{});
-
-router.post('/protected',(req,res)=>{});
-
-
-export default router;
+module.exports = router;  // Exportar el router usando 'module.exports'

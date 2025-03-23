@@ -1,26 +1,25 @@
-const track = document.querySelector('.carousel-track');
-const prevButton = document.querySelector('.carousel-button.prev');
-const nextButton = document.querySelector('.carousel-button.next');
 
-let currentIndex = 0;
+var modal = document.getElementById("modal");
 
-function updateCarousel() {
-  const itemWidth = track.children[0].clientWidth + 15; // Add gap width
-  track.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+// Obtener el botón que abre el modal
+var btn = document.getElementById("openModal");
+
+// Cuando el usuario hace clic en el botón, abre o cierra el modal
+btn.onclick = function() {
+    if (modal.style.display === "block") {
+        modal.style.display = "none"; // Cierra el modal si ya está abierto
+        btn.classList.remove("active"); // Restaura la imagen
+    } else {
+        modal.style.display = "block"; // Abre el modal
+        btn.classList.add("active"); // Oscurece la imagen
+    }
 }
 
-nextButton.addEventListener('click', () => {
-  if (currentIndex < track.children.length - Math.floor(track.parentElement.clientWidth / track.children[0].clientWidth)) {
-    currentIndex++;
-    updateCarousel();
-  }
-});
+// Cuando el usuario hace clic fuera del modal, cierra el modal
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+        btn.classList.remove("active"); // Restaura la imagen
+    }
+}
 
-prevButton.addEventListener('click', () => {
-  if (currentIndex > 0) {
-    currentIndex--;
-    updateCarousel();
-  }
-});
-
-window.addEventListener('resize', updateCarousel);
