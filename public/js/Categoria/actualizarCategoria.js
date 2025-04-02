@@ -1,4 +1,4 @@
-import { cargarCategorias, mostrarCategoria, mostrarData } from "../cargarCategorias.js";
+import { cargarCategorias, mostrarCategoria, mostrarData } from "../Categoria/cargarCategorias.js";
 
 
 

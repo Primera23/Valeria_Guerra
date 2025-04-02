@@ -1,0 +1,141 @@
+class AuthManager {
+    static async checkAuth() {
+        try {
+            const sessionResponse = await fetch('/check-session', {
+                credentials: 'include'
+            });
+            
+            if (!sessionResponse.ok) throw new Error('Error en sesión');
+            
+            const sessionData = await sessionResponse.json();
+
+            if (!sessionData.loggedIn) {
+                this.redirectToLogin();
+                return;
+            }
+
+            const userResponse = await fetch('/protected', {
+                credentials: 'include'
+            });
+            
+            if (!userResponse.ok) throw new Error('Error en perfil');
+            
+            const userData = await userResponse.json();
+
+            if (userData.success) {
+                this.updateUI(userData.user);
+                return userData.user;
+            } else {
+                throw new Error(userData.message || 'Error en datos de usuario');
+            }
+        } catch (error) {
+            console.error('Error en autenticación:', error);
+            this.redirectToLogin();
+            return null;
+        }
+    }
+
+    static updateUI(user) {
+        const unauthenticatedView = document.getElementById('unauthenticated-view');
+        const authenticatedView = document.getElementById('authenticated-view');
+        
+        console.log('Elementos:', { unauthenticatedView, authenticatedView });
+        
+        if (!unauthenticatedView || !authenticatedView) {
+            console.error('No se encontraron las vistas del modal');
+            return;
+        }
+        
+        if (user) {
+            unauthenticatedView.style.display = 'none';
+            authenticatedView.style.display = 'block';
+            
+            if (document.getElementById('modal-username')) {
+                document.getElementById('modal-username').textContent = user.nombre || 'Usuario';
+            }
+            if (document.getElementById('modal-email')) {
+                document.getElementById('modal-email').textContent = user.correo_electronico || '';
+            }
+
+            const sidebarName = document.querySelector('.sidebar h3 span');
+            if (sidebarName) sidebarName.textContent = user.nombre || 'Usuario';
+            
+            const profileElements = {
+                'nombre': user.nombre,
+                'apellido': user.apellido,
+                'email': user.correo_electronico,
+                'documento': user.documento || '-',
+                'genero': user.genero || '-',
+                'fecha': user.fecha_nacimiento || '-',
+                'telefono': user.telefono || '-'
+            };
+    
+            for (const [id, value] of Object.entries(profileElements)) {
+                const element = document.getElementById(id);
+                if (element) element.textContent = value;
+            }
+        } else {
+            unauthenticatedView.style.display = 'block';
+            authenticatedView.style.display = 'none';
+        }
+    }
+
+    static redirectToLogin() {
+        sessionStorage.setItem('redirectUrl', window.location.pathname);
+        window.location.href = 'index.html';
+    }
+
+    static async handleLogout() {
+        try {
+            const response = await fetch('/logout', {
+                method: 'POST',
+                credentials: 'include'
+            });
+
+            if (response.ok) {
+                sessionStorage.clear();
+                this.updateUI(null);
+                window.location.href = 'index.html';
+            } else {
+                throw new Error('Error al cerrar sesión');
+            }
+        } catch (error) {
+            console.error('Error en logout:', error);
+            window.location.href = 'index.html';
+        }
+    }
+   
+    static init() {
+        // Verificar autenticación al cargar
+        document.addEventListener('DOMContentLoaded', () => {
+            this.checkAuth();
+            
+            // Manejar clic en el botón de usuario (para abrir modal)
+            document.getElementById('openModal')?.addEventListener('click', async (e) => {
+                e.preventDefault();
+                const user = await this.checkAuth();
+                this.updateUI(user);
+                document.getElementById('modal').style.display = 'flex';
+            });
+            
+            // Manejar logout
+            const logoutBtn = document.querySelector('[data-page="cerrar"] a') || 
+                             document.getElementById('logout-link');
+            
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.handleLogout();
+                });
+            }
+        });
+
+        // Verificar rutas protegidas
+        const protectedPaths = ['dashboard-cli.html', 'categoria.html', 'productos.html'];
+        if (protectedPaths.some(path => window.location.pathname.includes(path))) {
+            this.checkAuth();
+        }
+    }
+}
+
+AuthManager.init();

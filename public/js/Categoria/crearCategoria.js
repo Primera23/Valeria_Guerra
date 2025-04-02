@@ -1,4 +1,4 @@
-import{cargarCategorias,mostrarData} from './cargarCategorias.js';
+import{mostrarData} from './cargarCategorias.js';
 
 export function crearCategoria(event) {
     event.preventDefault();

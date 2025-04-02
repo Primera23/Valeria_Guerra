@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/styles.css" >
     <link rel="shortcut icon" href="ImagenesProyecto/image00003.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
 
@@ -148,43 +148,42 @@
     </div>
 </section>
 
-    <!-- <div id="modal" class="modal">
-         <div class="centrarBoton">
-            <a href="#inicioSesion"><button id="sesion">Inicio Sesión</button></a>
-        </div>
-        <div class="centrarBoton">
-            <a href="#registrarse"><button id="regis">Registrarse</button></a>
-        </div>
-        <div class="OtrosInicios">
-            <p>Inicia como <a href="#sesionAdministrador">Administrador</a></p>
-        </div> -->
-        <!-- <div class="modal-content">
-        <div class="user-info">
-            <p>Nombre del Usuario</p>
-            <p>usuario@example.com</p>
-        </div>
-        <ul class="modal-options">
-            <li><a href="#">Cambiar de cuenta</a></li>
-            <li><a href="#">Salir</a></li>
-            <li><a href="#">Configuración</a></li>
-            <li><a href="#">Ayuda</a></li>
-        </ul>
-        </div> 
-    </div>
-    </div> -->
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <div class="centrarBoton">
-                <a href="#inicioSesion"><button id="sesion">Inicio Sesión</button></a>
+<!-- Modal de Autenticación -->
+<div id="auth-modal" class="modal">
+    <div class="modal-content">
+        <span id="closeModal" class="close">&times;</span>
+        
+        <!-- Vista para usuarios NO autenticados -->
+        <div id="unauthenticated-view">
+            <div class="tab-container">
+                <button class="tab-btn active" data-tab="login">Iniciar Sesión</button>
+                <button class="tab-btn" data-tab="register">Registrarse</button>
             </div>
-            <div class="centrarBoton">
-                <a href="#registrarse"><button id="regis">Registrarse</button></a>
+            
+            <form id="loginForm" class="tab-content active">
+                <input type="email" name="correo_electronico" placeholder="Correo" required>
+                <input type="password" name="password1" placeholder="Contraseña" required>
+                <button type="submit">Ingresar</button>
+            </form>
+            
+            <form id="registerForm" class="tab-content">
+                <!-- Campos de registro -->
+                <button type="submit">Crear cuenta</button>
+            </form>
+        </div>
+        
+        <!-- Vista para usuarios autenticados -->
+        <div id="authenticated-view" style="display: none;">
+            <div class="user-info">
+                <p id="modal-username">Usuario</p>
+                <p id="modal-email">email@ejemplo.com</p>
             </div>
-            <div class="OtrosInicios">
-                <p>Inicia como <a href="#sesionAdministrador">Administrador</a></p>
-            </div>
+            <button id="logout-btn">Cerrar Sesión</button>
         </div>
     </div>
+</div>
+
+<script type="module" src="js/auth/authIndex.js"></script>
 
 
 <div id="inicioSesion" class="modalmask">
@@ -193,9 +192,11 @@
         <a href="#close" title="Close" class="close">X</a>
         <form id="loginForm">
             <div class="login">
+                
                 <article class="fondo">
-                <div><input type="text" placeholder="Correo" name="correo"></div>
-                <div><input type="password" placeholder="Contraseña" name="contraseña"></div>
+                <div id="aja"></div>
+                <div><input type="text" placeholder="Correo" name="correo_electronico"></div>
+                <div><input type="password" placeholder="Contraseña" name="password1"></div>
                 <button class="boton">Iniciar sesión</button>
             
             <div class="OtrosInicios">
@@ -211,12 +212,12 @@
 </div>
 
 <div id="registrarse" class="modalmask">
-    <form id="registroForm">
+    <form id="registerForm">
     <div class="modalbox registrarse">
         <a href="#close" title="Close" class="close">X</a>
         <article class="fondo2">
         <div class="registro">
-            <form id="">
+            
                 <div><input type="text" placeholder="Nombres" name="nombres"></div>
                 <div><input type="text" placeholder="Apellidos" name="apellidos"></div>
                 <div><input type="email" placeholder="Correo" name="correo"></div>
@@ -293,7 +294,9 @@
         <hr>
         <p>Todos los derechos reservados © 2024 <b>valeria guerra</b></p>
     </div>
+    <script type="module" src="js/auth/cambioModal.js"></script>
     <script src="js/modal.js"></script>
+    <script src="js/auth/authCrud.js" type="module"></script>
 </footer>
 </body>
 </html>

@@ -118,52 +118,57 @@ const verifyEmail = async (req, res) => {
 };
 
 const login = async (req, res) => {
-    const { correo_electronico, password1 } = req.body;
-
     try {
-        // Buscar el usuario en la tabla `valeria_guerra user`
-        const [users] = await pool.query('SELECT * FROM `user` WHERE correo_electronico = ?', [correo_electronico]);
+        const { correo_electronico, password1 } = req.body;
+        
+        const [users] = await pool.query(
+            'SELECT id, password FROM user WHERE correo_electronico = ?', 
+            [correo_electronico]
+        );
 
-        if (users.length > 0) {
-            const user = users[0];
-            // Comparar la contraseña hasheada
-            if (await bcrypt.compare(password1, user.password)) {
-                // Guardar el ID del usuario en la sesión
-                req.session.userId = user.id;
-
-                const sessionData = JSON.stringify(req.session);
-                const expires = Math.floor(Date.now() / 1000) + 3600; // 1 hora de expiración
-
-                // Verificar si ya existe una sesión con el mismo user_id
-                const [existingSessions] = await pool.query(
-                    'SELECT * FROM sessions WHERE user_id = ?',
-                    [user.id]
-                );
-
-                if (existingSessions.length > 0) {
-                    // Actualizar la sesión existente
-                    await pool.execute(
-                        'UPDATE sessions SET expires = ?, data = ? WHERE user_id = ?',
-                        [expires, sessionData, user.id]
-                    );
-                } else {
-                    // Insertar una nueva sesión
-                    await pool.execute(
-                        'INSERT INTO sessions (session_id, expires, data, user_id) VALUES (?, ?, ?, ?)',
-                        [req.sessionID, expires, sessionData, user.id]
-                    );
-                }
-
-                res.json({ message: 'Inicio de sesión exitoso', user });
-            } else {
-                res.status(401).json({ message: 'Contraseña incorrecta' });
-            }
-        } else {
-            res.status(404).json({ message: 'Usuario no encontrado' });
+        if (users.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: 'Usuario no encontrado'
+            });
         }
+
+        const user = users[0];
+        const match = await bcrypt.compare(password1, user.password);
+
+        if (!match) {
+            return res.status(401).json({
+                success: false,
+                message: 'Contraseña incorrecta'
+            });
+        }
+
+        req.session.userId = user.id;
+        
+        // Datos para el frontend
+        const [userData] = await pool.query(`
+            SELECT u.nombre, u.apellido 
+            FROM usuario u 
+            WHERE u.user_id = ?
+        `, [user.id]);
+
+        res.json({
+            success: true,
+            message: 'Inicio de sesión exitoso',
+            user: {
+                id: user.id,
+                nombre: userData[0].nombre,
+                apellido: userData[0].apellido,
+                email: correo_electronico
+            }
+        });
+
     } catch (error) {
-        console.error('Error en el inicio de sesión:', error);
-        res.status(500).json({ message: 'Error interno del servidor' });
+        console.error('Error en login:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error en el servidor'
+        });
     }
 };
 
@@ -171,53 +176,83 @@ const login = async (req, res) => {
   // Ruta de cierre de sesión
 const logout = (req, res) => {
     req.session.destroy(err => {
-      if (err) {
-        return res.status(500).json({ message: 'Error al cerrar sesión' });
-      }
-      res.clearCookie('session_cookie_name');
-      res.json({ message: 'Sesión cerrada' });
+        if (err) {
+            console.error('Error al cerrar sesión:', err);
+            return res.status(500).json({
+                success: false,
+                message: 'Error al cerrar sesión'
+            });
+        }
+        res.clearCookie('session_cookie_name');
+        res.json({ 
+            success: true,
+            message: 'Sesión cerrada correctamente' 
+        });
     });
   };
   
   // Ruta de perfil de usuario
 const perfil = async (req, res) => {
-    if (!req.session.userId) {
-      return res.status(401).json({ message: 'No autorizado' });
-    }
-  
     try {
-      // Realiza una consulta JOIN para obtener los datos de ambas tablas
-      const [users] = await pool.query(`
-        SELECT u.nombre, u.apellido, us.correo_electronico 
-        FROM \`usuario\` u
-        INNER JOIN \`user\` us
-        ON u.id_usuario = us.id
-        WHERE u.id_usuario = ?
-      `, [req.session.userId]);
-  
-      if (users.length > 0) {
-        const user = users[0];
-        res.json({
-          nombre: user.nombre,
-          apellido: user.apellido,
-          correo_electronico: user.correo_electronico
-        });
-      } else {
-        res.status(404).json({ message: 'Usuario no encontrado' });
-      }
-    } catch (error) {
-      console.error('Error al obtener el perfil:', error);
-      res.status(500).json({ message: 'Error interno del servidor' });
-    }
-  };
+        const [user] = await pool.query(`
+            SELECT u.nombre, u.apellido, us.correo_electronico 
+            FROM usuario u
+            JOIN user us ON u.user_id = us.id
+            WHERE u.user_id = ?
+        `, [req.session.userId]);
 
-  const checkSession = (req, res) => {
-    if (req.session.userId) {
-        res.json({ loggedIn: true });
-    } else {
-        res.json({ loggedIn: false });
+        if (user.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: 'Usuario no encontrado'
+            });
+        }
+
+        res.json({
+            success: true,
+            user: user[0]
+        });
+
+    } catch (error) {
+        console.error('Error al obtener perfil:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error al obtener datos del usuario'
+        });
+
+        }    
     }
-};
+
+  const  checkSession = (req, res) => {
+        try {
+            if (!req.session.userId) {
+                return res.json({ 
+                    success: true, 
+                    loggedIn: false 
+                });
+            }
+    
+            // Opcional: Devuelve datos básicos del usuario
+            res.json({
+                success: true,
+                loggedIn: true,
+                user: {
+                    id: req.session.userId,
+                    // Agrega más datos si es necesario
+                }
+            });
+    
+        } catch (error) {
+            console.error('Error en checkSession:', error);
+            res.status(500).json({
+                success: false,
+                message: 'Error al verificar sesión'
+            });
+        }
+    }
+
+
+
 const sesionesActivas = async (req, res) => {
     try {
       const query = 'SELECT COUNT(*) as total FROM sessions WHERE expires > ?';
@@ -235,6 +270,6 @@ module.exports = {
     login,
     perfil,
     logout,
-    checkSession,
-    sesionesActivas
+    sesionesActivas,
+    checkSession
 };
