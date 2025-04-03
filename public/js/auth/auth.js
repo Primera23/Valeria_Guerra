@@ -1,3 +1,4 @@
+
 export function crearUsuario(event) {
     event.preventDefault();  // Previene el comportamiento predeterminado del formulario
 
@@ -5,6 +6,7 @@ export function crearUsuario(event) {
     const formData = new FormData(form);  // Crea un objeto FormData con los datos del formulario
     const data = new URLSearchParams(formData);  // Convierte los datos a un formato de URL codificada (clave=valor)
 
+    const email = form.email.value; // Alternativa: formData.get('email')
     // Realiza la solicitud fetch para enviar los datos al servidor
     fetch(form.action, { 
         method: form.method,  // Utiliza el método del formulario (POST, GET, etc.)
@@ -27,19 +29,26 @@ export function crearUsuario(event) {
 
         // Si la operación fue exitosa, realizar una acción adicional (ej. obtener categorías)
         if (result.success) {
-            setTimeout(() => {
-                // Selecciona el formulario correctamente
-                const form = document.querySelector('#registerForm');  // Ajusta el selector
-        
-                // Verifica si el formulario existe antes de intentar resetearlo
-                if (form) {
-                    form.reset();  // Limpia todos los campos del formulario
-                } else {
-                    console.error("Formulario no encontrado.");
+            Swal.fire({
+                title: '¡Correo enviado!',
+                text: 'Verifique su correo electrónico',
+                icon: 'success',
+                // Añade estas configuraciones:
+                backdrop: true,
+                allowOutsideClick: false,
+                customClass: {
+                    container: 'swal2-zindex' // Clase personalizada
                 }
-        
-                // Redirigir después de 3 segundos
-                window.location.href = 'Productos.html';  // Redirige a la página deseada
+            });
+            setTimeout(() => {
+                const form = document.querySelector('#registerForm');
+                if (form) {
+                    form.reset();
+                }
+                
+                
+                
+                window.location.href = 'index.html';
             }, 3000);
         }
     })

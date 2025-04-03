@@ -26,7 +26,11 @@ export const login = (event) => {
             </div>`;
         alertContainer.innerHTML = alertMessage;
         if (data.success) {  // Asumiendo que tu API devuelve un campo "success"
-            window.location.href = 'dashboard-cli.html';
+            Swal.fire({
+                title: "Haz iniciado sesion con exito!",
+                icon: "success",
+                draggable: true
+              });
         }
     })
     .catch(error => {

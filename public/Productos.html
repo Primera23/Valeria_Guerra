@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="shortcut icon" href="ImagenesProyecto/image00003.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
   <header class="header">
@@ -21,7 +22,9 @@
     </nav>
     <div class="icons">
       <div class="fas fa-search" id="search-btn"></div>
-      <a id="openModal"><div class="fas fa-user" id="fa-user" class="btn btn-primary" ></div></a>
+      <a href="#" id="openModal">
+        <div class="fas fa-user" id="fa-user"></div>
+    </a>
       
     </div>
 
@@ -35,12 +38,86 @@
       </div>
       <ul class="modal-options">
         <li><a href="#">Cambiar de cuenta</a></li>
-        <li><a href="#">Salir</a></li>
-        <li><a href="#">Configuración</a></li>
+        <li><a href="#" class="logout-btn">Salir</a></li>
+        <li><a href="#" class="config-btn">Configuración</a></li>
         <li><a href="#">Ayuda</a></li>
       </ul>
     </div>
   </div>
+
+
+
+
+<div id="inicioSesion" class="modalmask">
+    <div class="modalbox Sesion">
+        <a href="#close" title="Close" class="close">X</a>
+        <form id="loginForm">
+            <div class="login">
+                
+                <article class="fondo">
+                <div id="aja"></div>
+                <div><input type="text" placeholder="Correo" name="correo_electronico"></div>
+                <div><input type="password" placeholder="Contraseña" name="password1"></div>
+                <button class="boton">Iniciar sesión</button>
+            
+            <div class="OtrosInicios">
+                <p><a href="#">¿Olvidaste la contraseña?</a></p>
+                <p>¿No tienes una cuenta?
+                     <a href="#registrarse">Registrate</a></p>
+                <p>¿Otro tipo de inicio? <a href="#sesionAdministrador">Admin</a></p>
+            </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="registrarse" class="modalmask">
+  <form id="registerForm" method="post" action="/register">
+    <div class="modalbox registrarse">
+        <a href="#close" title="Close" class="close">X</a>
+        <article class="fondo2">
+        <div class="registro">
+            
+                <div><input type="text" placeholder="Nombres" name="nombres"></div>
+                <div><input type="text" placeholder="Apellidos" name="apellidos"></div>
+                <div><input type="email" placeholder="Correo" name="correo"></div>
+                <div><input type="password" placeholder="Contraseña" name="contraseña"></div>
+                <div><input type="password" placeholder="Repetir Contraseña" name="confirmar_contraseña"></div>
+                <br></br>
+
+                <button class="boton">Registrarse</button>
+                <div class="OtrosInicios">
+                    <p>¿Ya tienes una cuenta? 
+                        <a href="#inicioSesion">Inicia Sesión</a> 
+                        <br></br>
+                        <br></br>
+
+                    incia como 
+                    <a href="#sesionAdministrador">Administrador</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="sesionAdministrador" class="modalmask">
+    <div class="modalbox admin">
+
+        <a href="#close" title="Close" class="close">X</a>
+        <article class="fondo3">
+        <form action="pp.html" >
+            <div class="login admin">
+                <h2>Inicio Admin</h2>
+                <input type="text" placeholder="Correo" name="user">
+                <input type="password" placeholder="Contraseña" name="password">
+                <button class="boton" >Iniciar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
   <section class="home" id="home">
     
     <div class="content">
@@ -175,6 +252,7 @@
 </footer>
             
 
-    <script src="js/productos.js"></script>
+    <script src="js/auth/cambioModal.js"></script>
+    <script src="js/auth/authCrud.js" type="module"></script>
 </body>
 </html>

@@ -4,13 +4,13 @@ const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const session = require('express-session');  // Necesitas esta librería para sesiones
 const { app } = require('express');
-const correo = 'valeriaguerra2341@gmail.com';
+const correo = 'orlandorojas2312@gmail.com';
 // Configura el transporte de nodemailer
 const transporter = nodemailer.createTransport({
     service: 'gmail', // o cualquier otro servicio de correo
     auth: {
         user: correo,
-        pass: 'yo z t s c m q d m n y i p y u u'
+        pass: 'pwxk gijl xppy liqp'
     }
 });
 
