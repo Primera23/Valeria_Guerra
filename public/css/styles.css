@@ -545,9 +545,9 @@
       justify-content: center;
   }
   
-  #carouselExample{
-      height: 350px;
-      width: 250px;
+  .carouselExample{
+      height: 500px;
+      width: 350px;
       text-align: center;
       box-shadow: 0 0 0 0.2px black;
       border-radius: 5px;
@@ -632,14 +632,7 @@
       justify-content: center;
   }
   
-  #carouselExample1{
-      height: 350px;
-      width: 250px;
-      text-align: center;
-      box-shadow: 0 0 0 0.2px black;
-      border-radius: 5px;
-      overflow: hidden;
-  }
+  
   
   #carouselExample1:hover{
       
@@ -828,22 +821,19 @@ section{
   
   /*Formato de la ventana*/
 .modalbox{
-      width: 60%;
-      height: 60%;
+      
       text-align: center;
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       padding: 5px 20px 13px 20px;
-      background: #fff;
+      
       border-radius:3px;
       -webkit-transition: all 500ms ease-in;
       -moz-transition: all 500ms ease-in;
       transition: all 500ms ease-in;
-      background-image: url(../ImagenesProyecto/home.jpeg);
-      background-size: cover;
-      background-position: center;
+     
 }
   
   /*nuestro usuario*/
@@ -873,12 +863,7 @@ section{
       margin: 20px;
   }
   
-  .Sesion{
-      background-image: url(../../ImagenesProyecto/home.jpeg);
-      
-      background-size: cover;
-      border: transparent;
-  }
+
   
   .modalbox strong{
       color: #0f6b60;
@@ -904,55 +889,15 @@ section{
       text-align: center;
   }
   
-  /*boton registrar nuestro usuario*/
-  .centrarBoton #regis{
-      background-color: transparent;
-      color: #0f6b60;
-      padding: 7px;
-      border:1px solid #0f6b60;
-      border-radius: 3px;
-      box-shadow: 0px 0px 10px 5px #0f6b60;;
-      font-size: 20px;
-  }
-  /*boton inicio nuestro usuario*/
   
-  .centrarBoton #sesion{
-      background-color: transparent;
-      color: #0f6b60;
-      padding: 7px;
-      border:1px solid #0f6b60;
-      border-radius: 3px;
-      box-shadow: 0px 0px 10px 5px #0f6b60;
-      font-size: 20px;
-  }
-  .fondo1 {
-      width: 290px;
-      height: 340px;
-      background: #ffffff;
-      top: 70%;
-      left: 50%;
-      position: absolute;
-      transform: translate(-50%, -50%);
-      box-sizing: border-box;
-      padding: 50px 30px;
-      align-items: center;
-      border-radius: 3%;
-      font-family: 'Ubuntu', sans-serif;
-  }
   
-  .centrarBoton #sesion:hover{
-      box-shadow: 5px 3px 30px 5px #ffffff;
-      letter-spacing: 1px;
-      transition: 3s;
-  }
   
-  .centrarBoton #regis:hover{
-      box-shadow: 5px 3px 30px #ffffff;
-      letter-spacing: 1px;
-      transition: 2s;
-  }
   
-
+  
+  .login h2, .registro h2{
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
   
   .login{
       height: fit-content;
@@ -965,10 +910,10 @@ section{
   
   .login input{
       height: fit-content;
-      width: fit-content;
+      width: 100%;
       background: transparent;
       border: 1px solid #0f6b60;
-      border-radius: 2px;
+      border-radius: 5px;
       color: #0f6b60;
       margin: 1px;
       font-size: 20px;
@@ -979,7 +924,7 @@ section{
   
   
   
-  .login .boton{
+  .login .boton,.registro .boton {
       height: fit-content;
       width: fit-content;
       background:transparent;
@@ -993,11 +938,13 @@ section{
       margin-top: 15px;
   }
   
-  .login .boton:hover{
-      margin-top: 8px;
-      box-shadow: 1px 5px 30px #0f6b60;
-      letter-spacing: 1px;
-      transition: 2s;}
+  .login .boton:hover {
+      background-color: #128c76;
+      color: #fff;
+      box-shadow: 1px 5px 30px #05f6da;
+      transition: 0.5s;
+      border: transparent;
+    }
   
 .login input:focus{
       outline: none;
@@ -1024,18 +971,27 @@ section{
       position: absolute;
       transform: translate(-50%, -50%);
       box-sizing: border-box;
-      padding: 50px 30px;
+      padding: 25px 20px;
       align-items: center;
       border-radius: 3%;
       font-family: 'Ubuntu', sans-serif;
 }
-  
-.registrarse{
-      
-      background-image: url(../../ImagenesProyecto/home.jpeg);
-      background-size: cover;
-      border: transparent;
+
+.fondo2{
+  width: 350px;
+  height: 450px;
+  background: #ffffff;
+  top: 70%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  padding: 25px 20px;
+  align-items: center;
+  border-radius: 3%;
+  font-family: 'Ubuntu', sans-serif;
 }
+
   
 .registro{
       height: fit-content;
@@ -1048,22 +1004,11 @@ section{
       transform: translate(-50%, -50%);
       width: 100%;
 }
-.registro .boton {
-          display: inline-block; /* Hace que el botón se ajuste al tamaño del texto */
-          padding: 10px 20px; /* Espaciado dentro del botón para que el texto no quede pegado al borde */
-          background: transparent;
-          border: 2px solid #0f6b60; /* Borde blanco */
-          cursor: pointer;
-          border-radius: 2px;
-          color: #0f6b60;
-          font-size: 18px;
-          font-weight: 400;
-          text-align: center;
-}
+
   
 .registro input{
       height: fit-content;
-      width: fit-content;
+      width: 100%;
       background: transparent;
       border: 1px solid #0f6b60;
       border-radius: 2px;
@@ -1075,12 +1020,7 @@ section{
       text-align: center;
 }
   
-.registro .boton:hover{
-      margin-top: 8px;
-      box-shadow: 1px 5px 30px #0f6b60;
-      letter-spacing: 1px;
-      transition: 2s;
-}
+
 
 .registro input:focus{
       outline: none;
@@ -1091,48 +1031,21 @@ section{
       outline: none;
 }
   
-.fondo2 {
-      width: 350px;
-      height: 380px;
-      background: #ffffff;
-      top: 40%;
-      left: 50%;
-      position: absolute;
-      transform: translate(-50%, -50%);
-      box-sizing: border-box;
-      padding: 30px 30px;
-      align-items: center;
-      border-radius: 3%;
-      font-family: 'Ubuntu', sans-serif;
-      
-}
+
 .admin{
       background-size: cover;
       border: transparent;
       background-position: center;
   
 }
-.fondo3 {
-      width: 250px;
-      height: 250px;
-      background: #ffffff;
-      top: 55%;
-      left: 50%;
-      position: absolute;
-      transform: translate(-50%, -50%);
-      box-sizing: border-box;
-      padding: 45px 30px;
-      align-items: center;
-      border-radius: 3%;
-      font-family: 'Ubuntu', sans-serif;
-}
+
 .OtrosInicios{
       height: 100%;
       font-size: 20px;
 }
   
 .OtrosInicios p{
-      margin-top: 50px;
+      margin-top: 25px;
       margin-bottom: 2px;
 }
 
@@ -1145,7 +1058,7 @@ footer {
   padding: 20px 0;
   font-size: 14px;
   width: 100%;
-  margin-top: auto; /* Empuja el footer hacia abajo */
+  margin-top: 20px; /* Empuja el footer hacia abajo */
 }
 
 /* Contenedor del footer */
@@ -1154,7 +1067,7 @@ footer {
   justify-content: center; /* Centra el contenido */
   align-items: center;
   flex-wrap: wrap;
-  max-width: 1200px;
+  max-width: 800px;
   margin: auto;
   padding: 20px;
   text-align: center; /* Asegura que el texto esté centrado */
@@ -1171,7 +1084,7 @@ footer {
 /* Logo dentro del footer */
 .box__footer .logo img {
   border-radius: 10px;
-  width: 100%;
+  width: 80%;
   height: 30%;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
 }
@@ -1306,4 +1219,102 @@ footer {
 
 .swal2-container.swal2-zindex {
   z-index: 99999 !important;
+}
+
+/* MODAL DEL CARRITO */
+.cart-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  justify-content: flex-end;
+  animation: fadeIn 0.3s;
+}
+
+.cart-content {
+  width: 350px;
+  height: 100vh;
+  background: white;
+  padding: 20px;
+  overflow-y: auto;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+  transform: translateX(100%);
+  animation: slideIn 0.3s forwards;
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.cart-item {
+  border-bottom: 1px solid #eee;
+  padding: 15px 0;
+}
+
+.item-name {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.item-name span {
+  font-weight: normal;
+  display: block;
+}
+
+.item-size, .item-price {
+  color: #555;
+  font-size: 14px;
+}
+
+.item-quantity {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.quantity-btn {
+  width: 25px;
+  height: 25px;
+  border: 1px solid #ddd;
+  background: none;
+  cursor: pointer;
+}
+
+.quantity {
+  margin: 0 10px;
+}
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.checkout-btn {
+  width: 100%;
+  padding: 12px;
+  background: #159f8f;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+@keyframes slideIn {
+  to { transform: translateX(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to {opacity:1;}
 }

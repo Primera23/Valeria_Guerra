@@ -1,0 +1,8 @@
+/* styles/tailwind.css */
+
+/* Directiva base */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'flowbite';

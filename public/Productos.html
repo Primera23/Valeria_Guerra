@@ -24,11 +24,35 @@
       <div class="fas fa-search" id="search-btn"></div>
       <a href="#" id="openModal">
         <div class="fas fa-user" id="fa-user"></div>
+        <div class="cart-icon-container">
+          <div class="fas fa-shopping-cart" id="cart-btn"></div>
+          <span class="cart-counter">0</span> <!-- Contador de productos -->
+        </div>  
     </a>
       
     </div>
 
   </header>
+
+  <!-- Modal del Carrito -->
+<div id="cartModal" class="cart-modal">
+  <div class="cart-content">
+      <span class="close-modal">&times;</span>
+      <h2>BOLSA DE COMPRAS</h2>
+      
+      <!-- Productos añadidos -->
+       
+
+      <!-- Total -->
+      <div class="cart-total">
+          <p>TOTAL</p>
+          <p>$ <span id="total-price"></span></p>
+      </div>
+
+      <!-- Botón de pago -->
+      <button class="checkout-btn">IR A PAGAR</button>
+  </div>
+</div>
   
   <div id="modal" class="modal">
     <div class="modal-content">
@@ -254,5 +278,6 @@
 
     <script src="js/auth/cambioModal.js"></script>
     <script src="js/auth/authCrud.js" type="module"></script>
+    <script src="js/productos.js"></script>
 </body>
 </html>

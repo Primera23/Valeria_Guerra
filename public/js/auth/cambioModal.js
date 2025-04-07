@@ -1,5 +1,5 @@
 class AuthModalManager {
-    static async checkAuth() {
+    static async checkAuth(showLogin = false) {
         try {
             // 1. Verificar sesión
             const sessionResponse = await fetch('/check-session', {
@@ -11,7 +11,9 @@ class AuthModalManager {
             const sessionData = await sessionResponse.json();
 
             if (!sessionData.loggedIn) {
-                this.showLoginModal();
+                if (showLogin) {
+                    this.showLoginModal();
+                }
                 return false;
             }
 
@@ -33,7 +35,9 @@ class AuthModalManager {
 
         } catch (error) {
             console.error('Error en autenticación:', error);
-            this.showLoginModal();
+            if (showLogin) {
+                this.showLoginModal();
+            }
             return false;
         }
     }
@@ -55,36 +59,56 @@ class AuthModalManager {
     }
 
     static showLoginModal() {
-        const userModal = document.getElementById('modal');
+        this.hideAllModals();
         const loginModal = document.getElementById('inicioSesion');
         const btn = document.getElementById("openModal");
         
-        if (userModal) {
-            userModal.style.display = 'none';
-            userModal.classList.remove('active');
-        }
         if (loginModal) {
-            loginModal.style.pointerEvents = 'auto';
-            loginModal.style.opacity = '1';
             loginModal.style.display = 'block';
             
-            const inputs = loginModal.querySelectorAll('input');
-            inputs.forEach(input => {
-                input.disabled = false;
-            });
+                loginModal.style.opacity = '1';
+                loginModal.style.pointerEvents = 'auto';
+            
         }
         if (btn) btn.classList.remove("active");
     }
 
-    static hideLoginModal() {
-        const loginModal = document.getElementById('inicioSesion');
-        if (loginModal) {
-            loginModal.style.opacity = '0';
-            setTimeout(() => {
-                loginModal.style.display = 'none';
-                loginModal.style.pointerEvents = 'none';
-            }, 400);
+    static showRegisterModal() {
+        this.hideAllModals();
+        const registerModal = document.getElementById('registrarse');
+        if (registerModal) {
+            registerModal.style.display = 'block';
+            
+                registerModal.style.opacity = '1';
+                registerModal.style.pointerEvents = 'auto';
+            
         }
+    }
+    
+    static showAdminModal() {
+        this.hideAllModals();
+        const adminModal = document.getElementById('sesionAdministrador');
+        if (adminModal) {
+            adminModal.style.display = 'block';
+            
+                adminModal.style.opacity = '1';
+                adminModal.style.pointerEvents = 'auto';
+            
+        }
+    }
+    
+    static hideAllModals() {
+        const modals = ['inicioSesion', 'registrarse', 'sesionAdministrador', 'modal'];
+        modals.forEach(modalId => {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.opacity = '0'; // Inicia fade-out
+                
+                    modal.style.display = 'none'; // Oculta después de 4 segundos (demasiado largo)
+                    modal.style.pointerEvents = 'none';
+                 // ← Este era el problema principal
+            }
+        });
     }
 
     static async handleLogout() {
@@ -98,10 +122,7 @@ class AuthModalManager {
                 sessionStorage.clear();
                 localStorage.clear();
                 window.location.href = 'index.html';
-                this.showLoginModal();
-               
-                }
-             else {
+            } else {
                 throw new Error('Error al cerrar sesión');
             }
         } catch (error) {
@@ -114,10 +135,11 @@ class AuthModalManager {
         const btn = document.getElementById("openModal");
         const userModal = document.getElementById("modal");
         const loginModal = document.getElementById("inicioSesion");
-        const closeLoginBtn = loginModal?.querySelector('.close');
         const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
         const configBtn = document.querySelector('.config-btn');
 
+        // Botón principal que alterna modales
         if (btn) {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -126,7 +148,7 @@ class AuthModalManager {
                     userModal.style.display = 'none';
                     btn.classList.remove("active");
                 } else {
-                    if (userModal && loginModal) {
+                    if (userModal) {
                         const userInfo = userModal.querySelector('.user-info p');
                         if (userInfo && userInfo.textContent !== 'Nombre del Usuario') {
                             userModal.style.display = 'block';
@@ -139,30 +161,52 @@ class AuthModalManager {
             });
         }
 
+        // Cerrar modales al hacer click fuera
         window.addEventListener('click', (e) => {
-            const loginModal = document.getElementById('inicioSesion');
-            
-            if (userModal && e.target === userModal) {
-                userModal.style.display = 'none';
-                btn?.classList.remove("active");
-            }
-            
-            if (loginModal && e.target === loginModal) {
-                this.hideLoginModal();
-            }
+            ['inicioSesion', 'registrarse', 'sesionAdministrador', 'modal'].forEach(modalId => {
+                const modal = document.getElementById(modalId);
+                if (modal && e.target === modal) {
+                    this.hideAllModals();
+                }
+            });
         });
 
-        if (closeLoginBtn) {
-            closeLoginBtn.addEventListener('click', (e) => {
+        // Cerrar modales con botón X
+        document.querySelectorAll('.modalmask .close').forEach(closeBtn => {
+            closeBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                this.hideLoginModal();
+                this.hideAllModals();
             });
-        }
+        });
 
+        // Manejar enlaces entre modales
+        document.querySelectorAll('a[href="#inicioSesion"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.showLoginModal();
+            });
+        });
+
+        document.querySelectorAll('a[href="#registrarse"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.showRegisterModal();
+            });
+        });
+
+        document.querySelectorAll('a[href="#sesionAdministrador"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.showAdminModal();
+            });
+        });
+
+        // Formulario de login
         if (loginForm) {
             loginForm.addEventListener('click', (e) => {
                 e.stopPropagation();
             });
+            
             loginForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 
@@ -172,7 +216,6 @@ class AuthModalManager {
                     password1: formData.get('password1')
                 };
             
-                // 1. Primero hacemos el login
                 fetch('/login', {
                     method: 'POST',
                     headers: {
@@ -181,33 +224,27 @@ class AuthModalManager {
                     body: JSON.stringify(credentials),
                     credentials: 'include'
                 })
-                .then(loginResponse => {
-                    if (!loginResponse.ok) {
-                        throw new Error('Error en la respuesta del login');
-                    }
-                    return loginResponse.json();
+                .then(response => {
+                    if (!response.ok) throw new Error('Error en la respuesta del login');
+                    return response.json();
                 })
-                .then(loginData => {
+                .then(data => {
                     const alertContainer = document.getElementById('aja');
-                    alertContainer.innerHTML = '';
-            
-                    // Mostrar alerta de éxito/error básica
-                    const alertType = loginData.success ? 'alert-success' : 'alert-danger';
-                    const alertMessage = `<div class="alert ${alertType} alert-dismissible fade show" role="alert">${loginData.message}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>`;
-                    alertContainer.innerHTML = alertMessage;
-            
-                    if (loginData.success) {
-                        // 2. Si el login fue exitoso, obtenemos los datos del usuario
+                    if (alertContainer) {
+                        alertContainer.innerHTML = `
+                            <div class="alert ${data.success ? 'alert-success' : 'alert-danger'} alert-dismissible fade show" role="alert">
+                                ${data.message}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>`;
+                    }
+
+                    if (data.success) {
                         return fetch('/protected', {
                             credentials: 'include'
                         })
-                        .then(userResponse => {
-                            if (!userResponse.ok) {
-                                throw new Error('Error al obtener perfil');
-                            }
-                            return userResponse.json();
+                        .then(response => {
+                            if (!response.ok) throw new Error('Error al obtener perfil');
+                            return response.json();
                         })
                         .then(userData => {
                             if (userData.success) {
@@ -216,7 +253,7 @@ class AuthModalManager {
                                     icon: "success",
                                     draggable: true
                                 });
-                                this.hideLoginModal();
+                                this.hideAllModals();
                                 this.checkAuth();
                             }
                         });
@@ -224,13 +261,62 @@ class AuthModalManager {
                 })
                 .catch(error => {
                     console.error('Error:', error);
+                    Swal.fire({
+                        title: 'Error',
+                        text: error.message,
+                        icon: 'error'
+                    });
                 });
             });
-        }        
-            
-        
+        }
 
-        // Configurar botón de logout
+        // Formulario de registro
+        if (registerForm) {
+            registerForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const formData = new FormData(registerForm);
+                fetch('/register', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (!response.ok) throw new Error('Error en el registro');
+                    return response.json();
+                })
+                .then(data => {
+                    const alertContainer = document.getElementById('alertContainer');
+                    if (alertContainer) {
+                        alertContainer.innerHTML = `
+                            <div class="alert ${data.success ? 'alert-success' : 'alert-danger'} alert-dismissible fade show" role="alert">
+                                ${data.message}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>`;
+                    }
+
+                    if (data.success) {
+                        Swal.fire({
+                            title: '¡Registro exitoso!',
+                            html: `Se ha enviado un correo a <strong>${registerForm.email.value}</strong>`,
+                            icon: 'success'
+                        }).then(() => {
+                            registerForm.reset();
+                            this.showLoginModal();
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire({
+                        title: 'Error',
+                        text: error.message,
+                        icon: 'error'
+                    });
+                });
+            });
+        }
+
+        // Botón de logout
         const logoutBtn = document.querySelector('.logout-btn');
         if (logoutBtn) {
             logoutBtn.addEventListener('click', (e) => {
@@ -239,31 +325,32 @@ class AuthModalManager {
             });
         }
 
-        // Configurar botón de configuración (nuevo)
+        // Botón de configuración
         if (configBtn) {
             configBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                window.location.href = 'dashboard-cli.html'; // Redirige al dashboard
+                window.location.href = 'dashboard-cli.html';
             });
         }
     }
 
     static async protectPage() {
-        const isAuthenticated = await this.checkAuth();
-        if (!isAuthenticated && window.location.pathname.includes('dashboard-cli.html')) {
+        const isAuthenticated = await this.checkAuth(false);
+        if (!isAuthenticated) {
             sessionStorage.setItem('redirectUrl', window.location.href);
-            window.location.href = 'index.html';
+            this.showLoginModal();
         }
     }
 
     static init() {
         document.addEventListener('DOMContentLoaded', () => {
+            this.initModalEvents();
+            
             if (window.location.pathname.includes('dashboard-cli.html')) {
                 this.protectPage();
             } else {
-                this.checkAuth();
+                this.checkAuth(false);
             }
-            this.initModalEvents();
         });
     }
 }
