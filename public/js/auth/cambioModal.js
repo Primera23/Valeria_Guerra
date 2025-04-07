@@ -224,10 +224,7 @@ class AuthModalManager {
                     body: JSON.stringify(credentials),
                     credentials: 'include'
                 })
-                .then(response => {
-                    if (!response.ok) throw new Error('Error en la respuesta del login');
-                    return response.json();
-                })
+                .then(response => response.json())
                 .then(data => {
                     const alertContainer = document.getElementById('aja');
                     if (alertContainer) {
@@ -280,15 +277,12 @@ class AuthModalManager {
                     method: 'POST',
                     body: formData
                 })
-                .then(response => {
-                    if (!response.ok) throw new Error('Error en el registro');
-                    return response.json();
-                })
+                .then(response => response.json())
                 .then(data => {
                     const alertContainer = document.getElementById('alertContainer');
                     if (alertContainer) {
                         alertContainer.innerHTML = `
-                            <div class="alert ${data.success ? 'alert-success' : 'alert-danger'} alert-dismissible fade show" role="alert">
+                            <div class="alert ${data.result ? 'alert-success' : 'alert-danger'} alert-dismissible fade show" role="alert">
                                 ${data.message}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>`;
