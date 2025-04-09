@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Obtener todos los elementos del menú
     const navLinks = document.querySelectorAll('.nav-links li');
-    
+    const userInfo = document.querySelector('#dropdownInformation ul li');
     // Función para cambiar de página
     function changePage(pageId) {
         // Ocultar todas las páginas
@@ -19,21 +19,34 @@ document.addEventListener('DOMContentLoaded', function() {
                 link.classList.add('active');
             }
         });
+
+        userInfo.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('data-page') === pageId) {
+                link.classList.add('active');
+            }
+        });
     }
     
+   
+        
     // Agregar event listeners a los elementos del menú
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             const pageId = this.getAttribute('data-page');
             changePage(pageId);
-            
+
+   
+                       
             // Cerrar el menú hamburguesa en móviles si está abierto
             if (document.querySelector('.sidebar').classList.contains('active')) {
                 toggleSidebar();
             }
-        });
+            });
     });
+
+
     
     // Mostrar la página dashboard por defecto
     changePage('dashboard');
@@ -42,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.toggleSidebar = function() {
         document.querySelector('.sidebar').classList.toggle('active');
         document.querySelector('.hamburger').classList.toggle('active');
+        
     }
 });
 

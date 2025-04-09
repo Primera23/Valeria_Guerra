@@ -4,13 +4,13 @@ const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const session = require('express-session');  // Necesitas esta librería para sesiones
 const { app } = require('express');
-const correo = 'orlandorojas2312@gmail.com';
+const correo = 'valeriaguerra2341@gmail.com';
 // Configura el transporte de nodemailer
 const transporter = nodemailer.createTransport({
     service: 'gmail', // o cualquier otro servicio de correo
     auth: {
         user: correo,
-        pass: 'pwxk gijl xppy liqp'
+        pass: 'ovgk feyq alqg lizp'
     }
 });
 
@@ -264,6 +264,175 @@ const sesionesActivas = async (req, res) => {
       res.status(500).json({ error: 'Error al contar las sesiones' });
     }
   };
+
+
+const adminLogin = async (req, res) => {
+    try {
+        const { correo_electronico, contraseña } = req.body;
+        
+        // 1. Verificar si el correo existe en la tabla administrador
+        const [admins] = await pool.query(
+            'SELECT id_admin, contraseña, permiso2, nombre FROM administrador WHERE correo_electronico = ?', 
+            [correo_electronico]
+        );
+
+        if (admins.length === 0) {
+            return res.status(404).json({
+                result: false,
+                message: 'Credenciales de administrador no válidas'
+            });
+        }
+
+        const admin = admins[0];
+        
+        // 2. Verificar que el permiso sea 'Admin'
+        if (admin.permiso2 !== 'Admin') {
+            return res.status(403).json({
+                result: false,
+                message: 'No tienes permisos de administrador'
+            });
+        }
+
+        // 3. Comparar contraseñas
+        const match = await bcrypt.compare(contraseña, admin.contraseña);
+
+        if (!match) {
+            return res.status(401).json({
+                result: false,
+                message: 'Contraseña incorrecta'
+            });
+        }
+
+        // 4. Crear sesión específica para administrador
+        req.session.adminId = admin.id_admin;
+        req.session.isAdmin = true;
+        
+        res.json({
+            result: true,
+            message: 'Inicio de sesión de administrador exitoso',
+            admin: {
+                id: admin.id_admin,
+                nombre: admin.nombre,
+                email: correo_electronico,
+                rol: admin.permiso2
+            }
+        });
+
+    } catch (error) {
+        console.error('Error en adminLogin:', error);
+        res.status(500).json({
+            result: false,
+            message: 'Error en el servidor durante el inicio de sesión de administrador'
+        });
+    }
+};
+
+const checkAdminSession = (req, res) => {
+    try {
+        if (!req.session.adminId || !req.session.isAdmin) {
+            return res.json({ 
+                success: true, 
+                isAdmin: false,
+                message: 'No hay sesión de administrador activa'
+            });
+        }
+
+        res.json({
+            success: true,
+            isAdmin: true,
+            admin: {
+                id: req.session.adminId,
+                // Puedes agregar más datos si es necesario
+            }
+        });
+
+    } catch (error) {
+        console.error('Error en checkAdminSession:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error al verificar sesión de administrador'
+        });
+    }
+};
+
+const adminLogout = (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            console.error('Error al cerrar sesión de administrador:', err);
+            return res.status(500).json({
+                success: false,
+                message: 'Error al cerrar sesión de administrador'
+            });
+        }
+        res.clearCookie('session_cookie_name');
+        res.json({ 
+            success: true,
+            message: 'Sesión de administrador cerrada correctamente' 
+        });
+    });
+};
+
+const adminPerfil = async (req, res) => {
+    try {
+        // Verificar primero que la sesión es de administrador
+        if (!req.session.adminId || !req.session.isAdmin) {
+            return res.status(403).json({
+                success: false,
+                message: 'Acceso denegado: se requieren privilegios de administrador'
+            });
+        }
+
+        // Obtener los datos completos del administrador
+        const [adminData] = await pool.query(`
+            SELECT 
+                id_admin, 
+                correo_electronico, 
+                nombre, 
+                permiso2 as rol
+            FROM administrador 
+            WHERE id_admin = ?
+        `, [req.session.adminId]);
+
+        if (adminData.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: 'Administrador no encontrado'
+            });
+        }
+
+        const admin = adminData[0];
+        
+        res.json({
+            success: true,
+            admin: {
+                id: admin.id_admin,
+                email: admin.correo_electronico,
+                nombre: admin.nombre,
+                rol: admin.rol
+                // Puedes agregar más campos si es necesario
+            }
+        });
+
+    } catch (error) {
+        console.error('Error al obtener perfil de administrador:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error al obtener datos del administrador'
+        });
+    }
+};
+// Middleware para verificar administrador
+const isAdmin = (req, res, next) => {
+    if (req.session.isAdmin) {
+        return next();
+    }
+    res.status(403).json({
+        success: false,
+        message: 'Acceso denegado: se requieren privilegios de administrador'
+    });
+};
+
+// Modifica tu exportación para incluir las nuevas funciones
 module.exports = {
     registro,
     verifyEmail,
@@ -271,5 +440,10 @@ module.exports = {
     perfil,
     logout,
     sesionesActivas,
-    checkSession
+    checkSession,
+    adminLogin,
+    adminLogout,
+    checkAdminSession,
+    isAdmin,
+    adminPerfil
 };

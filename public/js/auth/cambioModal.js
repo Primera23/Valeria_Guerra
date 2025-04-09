@@ -137,6 +137,7 @@ class AuthModalManager {
         const loginModal = document.getElementById("inicioSesion");
         const loginForm = document.getElementById('loginForm');
         const registerForm = document.getElementById('registerForm');
+        const adminForm = document.getElementById('adminForm')
         const configBtn = document.querySelector('.config-btn');
 
         // Botón principal que alterna modales
@@ -309,6 +310,60 @@ class AuthModalManager {
                 });
             });
         }
+
+        if (adminForm) {
+            adminForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+            
+            const formData = new FormData(adminForm);
+            const credentials = {
+                correo_electronico: formData.get('correo'),
+                contraseña: formData.get('password2')
+            };
+        
+            fetch('/admin/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(credentials),
+                credentials: 'include'
+            })
+            .then(response => response.json())
+            .then(data => {
+                const alertContainer = document.getElementById('alertContainer');
+                if (alertContainer) {
+                    alertContainer.innerHTML = `
+                        <div class="alert ${data.result ? 'alert-success' : 'alert-danger'} alert-dismissible fade show" role="alert">
+                            ${data.message}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>`;
+                }
+
+                if (data.result) {  // Cambiado a data.result para ser consistente
+                    Swal.fire({
+                        title: '¡Inicio de Sesión Como Admin Exitoso!',
+                        html: 'La sesión caducará en 5 minutos',
+                        icon: 'success',
+                        customClass: {
+                          popup: 'custom-swal-popup'  // Clase CSS personalizada
+                        }
+                      }).then(() => {
+                        adminForm.reset();
+                        window.location.href = 'pp.html';  // Redirección asegurada
+                      });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire({
+                    title: 'Error',
+                    text: error.message,
+                    icon: 'error'
+                });
+            });
+        });
+    }
 
         // Botón de logout
         const logoutBtn = document.querySelector('.logout-btn');

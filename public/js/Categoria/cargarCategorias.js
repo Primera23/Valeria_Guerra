@@ -25,13 +25,25 @@ export function mostrarData(data){
     let body = '';
     let lista = '<option selected>Selecciona</option>';
     for (var i = 0; i < data.length; i++) {
-        body += `<tr>
-            <td>${i + 1}</td>
-            <td>${data[i].categoria}</td>
-            <td>${data[i].descripcion}</td>
-            <td><button class="btn btn-danger" onclick="eliminarCategoria('${data[i].categoria}')">Eliminar</button></td>
-            <td><button class="btn btn-warning" onclick="actualizarCategoria('${data[i].categoria}')">Modificar</button></td>
-
+        body += `
+            
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                ${i + 1}
+                                </th>
+                                <td class="px-6 py-4">
+                                ${data[i].categoria}
+                                </td>
+                                <td class="px-6 py-4">
+                                ${data[i].descripcion}
+                                </td>
+                                <td class="px-6 py-4">
+                                <button class="btn btn-danger" onclick="eliminarCategoria('${data[i].categoria}')">Eliminar</button>
+                                </td>
+                                <td class="px-6 py-4">
+                                <button class="btn btn-warning" onclick="actualizarCategoria('${data[i].categoria}')">Modificar</button>
+                                </td>
+            </tr>
             
 `
        
