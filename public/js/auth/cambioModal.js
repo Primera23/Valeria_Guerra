@@ -48,6 +48,11 @@ class AuthModalManager {
         
         if (loginModal) loginModal.style.display = 'none';
         if (userModal) {
+            
+
+                
+                
+            
             const userInfo = userModal.querySelector('.user-info');
             if (userInfo) {
                 userInfo.innerHTML = `
@@ -149,10 +154,14 @@ class AuthModalManager {
                     userModal.style.display = 'none';
                     btn.classList.remove("active");
                 } else {
-                    if (userModal) {
+                    if (userModal && loginModal) {
                         const userInfo = userModal.querySelector('.user-info p');
                         if (userInfo && userInfo.textContent !== 'Nombre del Usuario') {
                             userModal.style.display = 'block';
+                            
+                
+                        userModal.style.opacity = '1';
+                        userModal.style.pointerEvents = 'auto';
                             btn.classList.add("active");
                         } else {
                             this.showLoginModal();

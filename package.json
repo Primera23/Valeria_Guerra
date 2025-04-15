@@ -4,13 +4,11 @@
   "main": "server/index.js",
   "type": "commonjs",
   "scripts": {
-  "test": "echo \"Error: no test specified\" && exit 1",
-  "start": "node index.js",
-  "dev": "nodemon server/index.js",
-  "build:css": "tailwindcss -i ./public/styles/tailwind.css -o ./public/css/tailwind.css --minify"
-
-},
-
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon server/index.js",
+    "build:css": "tailwindcss -i ./public/styles/tailwind.css -o ./public/css/tailwind.css --minify"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
