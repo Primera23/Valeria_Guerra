@@ -13,6 +13,7 @@ const MySQLStore = require('express-mysql-session')(session);
 // Rutas de tu aplicación
 const indexRoutes = require('./Routes/index.routes.js');
 const categoriaRoutes = require('./Routes/categoria.routes.js');
+const productoRoutes = require('./Routes/producto.routes.js');
 const authRoutes = require('./Routes/auth.routes.js');
 
 // Crear la aplicación
@@ -50,6 +51,7 @@ app.use(bodyParser.json());
 // Rutas de tu aplicación
 app.use(indexRoutes);
 app.use(categoriaRoutes);
+app.use(productoRoutes);
 app.use(authRoutes);
 
 // Ruta estática para archivos públicos

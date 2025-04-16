@@ -1,4 +1,9 @@
-
+export function cargarTallas(){
+    fetch('/tallas')
+    .then(response => response.json())
+    .then(talla => mostrarTallas(talla))
+    .catch(error => console.log(error));
+}
 
 
 
@@ -10,7 +15,6 @@ export function cargarCategorias() {
 }
 export function cargarCategoria(categoria) {
    
-    
     fetch(`/categoria/${categoria}`)
     .then(response => response.json())
     .then(unique => mostrarCategoria(unique))
@@ -20,6 +24,13 @@ export function cargarCategoria(categoria) {
     })
 }
 
+export function mostrarTallas(talla){
+    let lista = '';
+    talla.forEach(talla => {
+        lista +=`<option value="${talla.talla}">${talla.talla}</option>`;       
+    }); 
+    document.getElementById('talla').innerHTML = lista
+}
 
 export function mostrarData(data){
     let body = '';
@@ -49,12 +60,10 @@ export function mostrarData(data){
        
         lista +=`<option value="${data[i].categoria}">${data[i].categoria}</option>`       
     }
-    document.getElementById('data').innerHTML = body
-    document.getElementById('categoria2').innerHTML = lista
-       
-       
-            
-        }
+    document.getElementById('data').innerHTML = body;
+    document.getElementById('categoria2').innerHTML = lista;
+                
+}
           
   
 

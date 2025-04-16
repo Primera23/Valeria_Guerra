@@ -32,8 +32,8 @@
                 <!--<li data-page="analytics"><a href="#analytics"><i class="fas fa-chart-line"></i>Analíticas</a></li>
                 <li data-page="sales"><a href="#sales"><i class="fas fa-shopping-cart"></i>Ventas</a></li>
                 <li data-page="customers"><a href="#customers"><i class="fas fa-users"></i>Clientes</a></li> -->
-                <li data-page="categoria"><a href="#categoria"><i class="fa fa-tags"></i>Direcciones</a></li>
-                <li data-page="productos"><a href="#productos"><i class="fa fa-cart-plus"></i>pedidos</a></li>
+                <li data-page="categoria"><a href="#categoria"><i class="fa fa-tags"></i>Categoria</a></li>
+                <li data-page="productos"><a href="#productos"><i class="fa fa-cart-plus"></i>Productos</a></li>
                 <li data-page="informacion"><a href="#informacion">ℹ️ INFORMACIÓN</a></li>
                 <li data-page="autenticacion"><a href="#autenticacion">🔒 AUTENTICACIÓN</a></li>
                 <li data-page="cerrar"><a href="#">🚪 CERRAR SESIÓN</a></li>
@@ -58,7 +58,7 @@
                 <!-- <li data-page="inventory"><a href="#inventory"><i class="fas fa-box"></i>Inventario</a></li>
                 <li data-page="settings"><a href="#settings"><i class="fas fa-cog"></i>Ajustes</a></li> -->
             </ul>
-        </nav> -->
+        </nav> 
         <main class="main-content">
             <header>
                 <div class="search-bar">
@@ -353,7 +353,7 @@
 
                              <div class="input-group mb-3">
                                 <span class="input-group-text">$</span>
-                                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+                                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="precio">
                               </div>
 
                             <div class="form-floating mb-2">
@@ -363,7 +363,24 @@
                             <div class="form-floating mb-2">
                                 <input type="file" class="form-control"  id="Imagen" name="Imagen">
                                 <label for="Imagen">Imagen del Producto</label>
+                            </div>
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" for="categoria2">Talla</label>
+                                <select class="form-select" name="talla" id="talla">
+                                  <option selected>Selecciona</option>
+                                  
+                                </select>
+                              </div>
+                            <div class="form-floating mb-2">
+                                <input type="text" class="form-control"  id="cantidad" name="cantidad">
+                                <label for="Imagen">Cantidad</label>
                              </div>
+                             <div class="form-floating mb-2">
+                                <input type="text" class="form-control"  id="color" name="color">
+                                <label for="Imagen">Color</label>
+                             </div>
+
+
                             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
                                 <button class="btn btn-primary me-md-2">Enviar</button>
                               </div>
