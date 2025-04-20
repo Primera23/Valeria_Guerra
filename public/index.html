@@ -14,9 +14,9 @@
  <!-- <link href="css/tailwind.css" rel="stylesheet">  -->
 
 
+ <link rel="stylesheet" href="css/styles.css" >
+ <link rel="stylesheet" href="css/output.css">
 
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="css/styles.css" >
 <!-- Flowbite JS -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>  -->
 </head>
@@ -31,10 +31,10 @@
         <!-- Altura exacta de 90px -->
         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4 h-full">
             <!-- Logo -->
-            <a href="https://flowbite.com" class="flex items-center space-x-3 rtl:space-x-reverse">
-                <img src="ImagenesProyecto/image00003.jpeg" alt="Logo Valeria Guerra " class="h-8" />
-                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Valeria Guerra</span>
-            </a>
+           
+            
+                
+            
             
             <!-- Botón Hamburguesa -->
             <button data-collapse-toggle="mega-menu-full" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mega-menu-full" aria-expanded="false">
@@ -96,20 +96,34 @@
     
 
     <div id="default-carousel" class="relative w-full" data-carousel="slide">
-        <!-- Carousel wrapper -->
-        <div class="relative h-[360px] overflow-hidden rounded-lg md:h-[360px]">
-             <!-- Item 1 -->
-                <div class="hidden duration-700 ease-in-out " data-carousel-item>
-                    <img src="ImagenesProyecto/image00004.jpeg" alt="Producto 4" >
+        <!-- Contenedor principal con altura fija y fondo de respaldo -->
+        <div class="relative h-[80vh] md:h-[80vh] bg-gray-200 overflow-hidden rounded-lg">
+            
+            <!-- Item 1 -->
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                <div class="flex items-center justify-center w-full h-full">
+                    <img src="ImagenesProyecto/image00004.jpeg" 
+                         class="max-w-full max-h-full" 
+                         alt="Producto 4">
                 </div>
+            </div>
             <!-- Item 2 -->
-            <div class="hidden duration-700 ease-in-out " data-carousel-item>
-                    <img src="ImagenesProyecto/image00004.jpeg" alt="Producto 4" >   
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                <div class="flex items-center justify-center w-full h-full">
+                    <img src="ImagenesProyecto/image00004.jpeg" 
+                         class=" max-h-full max-w-full" 
+                         alt="Producto 4">
+                </div>
             </div>
             <!-- Item 3 -->
-            <div class="hidden duration-700 ease-in-out " data-carousel-item>
-                < <img src="ImagenesProyecto/image00004.jpeg" alt="Producto 4" >
+            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                <div class="flex items-center justify-center w-full h-full">
+                    <img src="ImagenesProyecto/image00004.jpeg" 
+                         class="max-w-full max-h-full " 
+                         alt="Producto 4">
+                </div>
             </div>
+        </div>
             <!-- Item 4 -->
             
         <!-- Slider indicators -->
@@ -236,7 +250,7 @@
         <form id="adminForm" >
             <div class="login">
                 <article class="fondo">
-                    <div id="alertContainer"></div>
+                <div id="alertAdmin"></div>
                 <h2>Inicio Admin</h2>
                 <input type="text" placeholder="Correo" name="correo">
                 <input type="password" placeholder="Contraseña" name="password2">
@@ -291,13 +305,16 @@
         <hr>
         <p>Todos los derechos reservados © 2024 <b>valeria guerra</b></p>
     </div>
-    <script src="js/auth/cambioModal.js"></script>
+    
     <!-- Incluye el archivo JS de Flowbite -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script> -->
 
-     <script src="js/flowbite.min.js"></script> 
+     
 
     
 </footer>
+<script src="js/auth/cambioModal.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script> -->
+<script src="js/flowbite.min.js"></script>
 </body>
 </html>

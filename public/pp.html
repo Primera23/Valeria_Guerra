@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="css/tailwind.css">
+    <link rel="stylesheet" href="css/output.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -34,9 +34,9 @@
                 <li data-page="customers"><a href="#customers"><i class="fas fa-users"></i>Clientes</a></li> -->
                 <li data-page="categoria"><a href="#categoria"><i class="fa fa-tags"></i>Categoria</a></li>
                 <li data-page="productos"><a href="#productos"><i class="fa fa-cart-plus"></i>Productos</a></li>
-                <li data-page="informacion"><a href="#informacion">ℹ️ INFORMACIÓN</a></li>
-                <li data-page="autenticacion"><a href="#autenticacion">🔒 AUTENTICACIÓN</a></li>
-                <li data-page="cerrar"><a href="#">🚪 CERRAR SESIÓN</a></li>
+                <li data-page="Ajustes"><a href="#Ajustes"><i class="fas fa-cog"></i>Ajustes</a></li>
+                <li data-page="Asistentes"><a href="#asistentes">Asistentes</a></li>
+                <li data-page="cerrar"><a href="#logout">🚪 CERRAR SESIÓN</a></li>
                 
                 <!-- <li data-page="inventory"><a href="#inventory"><i class="fas fa-box"></i>Inventario</a></li>
                 <li data-page="settings"><a href="#settings"><i class="fas fa-cog"></i>Ajustes</a></li> -->
@@ -65,40 +65,12 @@
                     <input type="text" placeholder="Buscar...">
                     <i class="fas fa-search"></i>
                 </div>
-                <div class="user-info" id="dropdownInformationButton" data-dropdown-toggle="dropdownInformation">
-                    
-                    <div id="dropdownInformationButton" data-dropdown-toggle="dropdownInformation"><span>Usuario</span>
-                    
-                    <i class="fas fa-chevron-down"></i></div>
-                    
-                        <!-- <a href="#profile"><i class="fas fa-user"></i> Perfil</a>
-                        <a href="#settings"><i class="fas fa-cog"></i> Ajustes</a>
-                        <a href="#logout"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a> -->
-                        <!-- Dropdown menu -->
-                        <div id="dropdownInformation" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600">
-                            <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-                            <div>Bonnie Green</div>
-                            <div class="font-medium truncate">name@flowbite.com</div>
-                            </div>
-                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownInformationButton">
-                            <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><i class="fas fa-user"></i> Perfil</a>
-                            </li>
-                            <li data-page="settings">
-                                <a href="#settings" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><i class="fas fa-cog"></i> Ajustes</a>
-                            </li>
-                            <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
-                            </li>
-                            </ul>
-                            
-                        
-                    </div>
-                </div>
+                
+                
             </header>
             <div id="dashboard" class="page-content active">
                 <h1>Bienvenid@ <span>Usuario</span> a el dashboard de Valeria Guerra con el rol de <span id="rol">""</span></h1>
-                <!-- <h1>Resumen del Tablero</h1>
+                <h1>Resumen del Tablero</h1>
                 <div class="stats-grid">
                     <div class="stat-card glow">
                         <i class="fas fa-users"></i>
@@ -169,7 +141,7 @@
                             <tbody id="topProductsBody"></tbody>
                         </table>
                     </div>
-                </div> -->
+                </div>
             </div>
             <div id="analytics" class="page-content">
                 <h1>Analíticas</h1>
@@ -288,6 +260,7 @@
                                 <th scope="col" class="px-6 py-3">
                                     Descripcion
                                 </th>
+                                
                                 <th scope="col" class="px-6 py-3">
                                     <i class="fa fa-trash"></i>
                                 </th>
@@ -303,74 +276,93 @@
                     </table>
                 </div>
                 
-<div id="actualizarCategoria" class="modalmask" style="display: none;">
-    <a href="#close" title="Close" class="close">X</a>
-    <div class="container">
-        <div id="aja"></div>
-        <form id="container">
-            <div class="form-floating mb-2">
-                <input type="text" class="form-control" id="categoria1" name="categoria1" disabled>
-                <label for="categoria">Categoria Actual</label>
+            <div id="actualizarCategoria" class="modalmask" style="display: none;">
+                <a href="#close" title="Close" class="close">X</a>
+                <div class="container">
+                    <div id="aja"></div>
+                    <form id="container">
+                        <div class="form-floating mb-2">
+                            <input type="text" class="form-control" id="categoria1" name="categoria1" disabled>
+                            <label for="categoria">Categoria Actual</label>
+                        </div>
+                    
+                        <div class="form-floating mb-2">
+                            <input type="text" class="form-control" id="descripcion1" name="descripcion1">
+                            <label for="descripcion1">Descripcion</label>
+                        </div>
+                    
+                        <div class="form-floating mb-2">
+                            <input type="text" class="form-control" id="nuevoNombre" name="nuevoNombre">
+                            <label for="nuevoNombre">Nuevo Nombre</label>
+                        </div>
+                    
+                        <div id="boton"></div>  
+                    </form>
+                </div>
             </div>
-        
-            <div class="form-floating mb-2">
-                <input type="text" class="form-control" id="descripcion1" name="descripcion1">
-                <label for="descripcion1">Descripcion</label>
-            </div>
-        
-            <div class="form-floating mb-2">
-                <input type="text" class="form-control" id="nuevoNombre" name="nuevoNombre">
-                <label for="nuevoNombre">Nuevo Nombre</label>
-            </div>
-        
-            <div id="boton"></div>  
-        </form>
-    </div>
 </div>
-
-                
-            </div>
             <div id="productos" class="page-content">
                 <h2>Gestión de Productos</h2>
                 <div class="charts-container">
         
                     <div class="chart-card">
                         <h3>Registro de Productos</h3>
-                        <form id="formularioPro" method="post" action="/producto">
-                            <div id="alertContainer"></div>
-                            <div class="input-group mb-3">
+                        
+                            
+                            <!-- <div class="input-group mb-3">
                                 <label class="input-group-text" for="categoria2">Categoria</label>
                                 <select class="form-select" name="categoria2" id="categoria2">
                                   <option selected>Selecciona</option>
                                   
                                 </select>
-                              </div>
+                              </div> -->
+                              <form class="max-w-sm mx-auto" id="formularioPro" method="post" action="/producto">
+                                <div id="alertProducto"></div>
+                                <label for="categoria2" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Categoria</label>
+                                <select id="categoria2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="categoria2" id="categoria2">
+                                  <option selected>Selecciona</option>
+                                  
+                                </select>
+                              
         
-                            <div class="form-floating mb-2">
-                                <input type="text" class="form-control" id="producto" name="producto">
+                            <!-- <div class="form-floating mb-2">
+                                <input type="text" class="form-control">
                                 <label for="categoria">Producto</label>
-                             </div>
+                             </div> -->
+                             <div class="mb-6">
+                                <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Producto</label>
+                                <input type="text" id="default-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  id="producto" name="producto">
+                            </div>
 
-                             <div class="input-group mb-3">
+                             <!-- <div class="input-group mb-3">
                                 <span class="input-group-text">$</span>
                                 <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="precio">
+                              </div> -->
+
+                              <div class="flex p-2">
+                                <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                    <i class="fa fa-usd"></i>
+                                </span>
+                                <input type="text" id="website-admin" class="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Precio" name="precio">
                               </div>
 
                             <div class="form-floating mb-2">
                                <input type="text" class="form-control"  id="descripcion2" name="descripcion2">
                                <label for="descripcion2">Descripcion</label>
                             </div>
-                            <div class="form-floating mb-2">
-                                <input type="file" class="form-control"  id="Imagen" name="Imagen">
+                            <!-- <div class="form-floating mb-2">
+                                <input type="file" class="form-control"  >
                                 <label for="Imagen">Imagen del Producto</label>
-                            </div>
-                            <div class="input-group mb-3">
-                                <label class="input-group-text" for="categoria2">Talla</label>
-                                <select class="form-select" name="talla" id="talla">
+                            </div> -->
+                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="Imagen">Imagen del Producto</label>
+                            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="Imagen" name="Imagen" type="file" accept="/im">
+                            
+                            <label for="talla" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Talla</label>
+                                <select  name="talla" id="talla" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                   <option selected>Selecciona</option>
                                   
                                 </select>
-                              </div>
+                            
                             <div class="form-floating mb-2">
                                 <input type="text" class="form-control"  id="cantidad" name="cantidad">
                                 <label for="Imagen">Cantidad</label>
@@ -389,29 +381,46 @@
                     </div>   
             
         </div>
-        <div class="data-tables">
-            <div class="table-card glow">
+        <!-- <div class="data-tables">
+            <div class="table-card glow"> -->
                 <h3>Productos registradas hasta el momento</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Categoria</th>
-                            <th scope="col">Producto</th>
-                            <th scope="col">Descripcion</th>
-                            <th scope="col">Imagen</th>
-                            <th scope="col"><i class="fa fa-usd" ></i></th>
-                            <th scope="col"><i class="fa fa-trash"></i></th>
-                            <th scope="col"><i class="fa fa-pencil"></i></th>
-                        </tr>
-                    </thead>
-                    <tbody id="data">
-                        
-                    </tbody>
-
-                </table>
-            </div>
-        </div>
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">
+                                   #
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Categoria
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Producto
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Descripcion
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    <i class="fa fa-usd"></i>
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                   Imagen
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    <i class="fa fa-trash"></i>
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    <i class="fa fa-pencil"></i>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaProducto">
+                            
+                            
+                        </tbody>
+                    </table>
+                </div>
+        <!-- </div> -->
             </div>
             <div id="customers" class="page-content">
                 <h2>Gestión de Clientes</h2>
@@ -471,7 +480,7 @@
                     </div>
                 </div>
             </div>
-            <div id="settings" class="page-content">
+            <div id="Ajustes" class="page-content">
                 <h1>Ajustes</h1>
                 <div class="settings-container">
                     <div class="settings-card glow">
@@ -479,11 +488,11 @@
                         <form id="accountSettingsForm">
                             <div class="form-group">
                                 <label for="username">Nombre de Usuario</label>
-                                <input type="text" id="username" name="username" value="juamperez">
+                                <input type="text" id="username" name="username" value="">
                             </div>
                             <div class="form-group">
                                 <label for="email">Correo Electrónico</label>
-                                <input type="email" id="email" name="email" value="juan@example.com">
+                                <input type="email" id="email" name="email" value="">
                             </div>
                             <div class="form-group">
                                 <label for="password">Nueva Contraseña</label>
@@ -491,7 +500,7 @@
                             </div>
                             <button type="submit" class="btn-primary">Guardar Cambios</button>
                         </form>
-                    </div>
+            </div>
                     <div class="settings-card glow">
                         <h3>Preferencias de Notificación</h3>
                         <form id="notificationSettingsForm">
@@ -525,6 +534,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <script type="module" src="js/Categoria/crud.categoria.js"></script>
+    <script type="module" src="js/Producto/crud.producto.js"></script>
     <script src="js/auth/authAdmin.js"></script>
     <script src="js/flowbite.min.js"></script>
 </body>

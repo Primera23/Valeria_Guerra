@@ -4,7 +4,8 @@ module.exports = {
     './node_modules/flowbite/**/*.js' // Asegúrate de incluir Flowbite
   ],
   theme: {
-    extend: {colors: {
+    extend: {
+      colors: {
       'custom-green': '#159f8f',
     }},
     

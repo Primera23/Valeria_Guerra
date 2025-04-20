@@ -25,7 +25,7 @@ export function cargarCategoria(categoria) {
 }
 
 export function mostrarTallas(talla){
-    let lista = '';
+    let lista = '<option selected>Selecciona</option>';
     talla.forEach(talla => {
         lista +=`<option value="${talla.talla}">${talla.talla}</option>`;       
     }); 
@@ -37,7 +37,6 @@ export function mostrarData(data){
     let lista = '<option selected>Selecciona</option>';
     for (var i = 0; i < data.length; i++) {
         body += `
-            
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
                                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 ${i + 1}
@@ -88,5 +87,7 @@ export function mostrarData(data){
             document.getElementById('boton').innerHTML = boton;
             
         }
+
+
         
         

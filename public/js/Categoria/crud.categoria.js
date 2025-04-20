@@ -9,6 +9,7 @@ cargarCategorias()
 
 
 
+
     document.getElementById('formularioCate').addEventListener('submit',crearCategoria);
     
 
@@ -16,7 +17,7 @@ cargarCategorias()
     window.actualizarCategoria = actualizarCategoria;
     window.cargarCategoria = cargarCategoria;
     window.cargarTallas = cargarTallas;
-    
+   
 
 
 

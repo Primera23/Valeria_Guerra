@@ -340,12 +340,18 @@ class AuthModalManager {
             })
             .then(response => response.json())
             .then(data => {
-                const alertContainer = document.getElementById('alertContainer');
+                const alertContainer = document.getElementById('alertAdmin');
                 if (alertContainer) {
+                    // Determinar el tipo de alerta según el resultado
+                    const isSuccess = data.result;
+                    const alertClass = isSuccess 
+                        ? 'text-green-800 bg-green-50 dark:bg-gray-800 dark:text-green-400' 
+                        : 'text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400';
+                    const alertIcon = isSuccess ? 'Success' : 'Danger';
+            
                     alertContainer.innerHTML = `
-                        <div class="alert ${data.result ? 'alert-success' : 'alert-danger'} alert-dismissible fade show" role="alert">
-                            ${data.message}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <div class="p-4 mb-4 text-[15px] rounded-lg ${alertClass}" role="alert">
+                            <span class="font-medium"></span> ${data.message}
                         </div>`;
                 }
 

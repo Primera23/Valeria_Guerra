@@ -42,8 +42,9 @@ class AdminAuthManager {
     static loadAdminData(admin) {
         // Actualizar UI con datos del admin
         const userAdmin=  document.querySelector('#dashboard span');
-        const userInfo = document.querySelector('.user-info span');
+        const userInfo = document.querySelector('#sidebar-nombre');
         const userRol = document.querySelector('#rol');
+
         if (userInfo) {
             userInfo.textContent = admin.nombre || 'Administrador';
         }

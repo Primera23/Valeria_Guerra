@@ -968,14 +968,14 @@ section{
   
 .fondo {
       width: 350px;
-      height: 350px;
+      
       background: #ffffff;
       top: 70%;
       left: 50%;
       position: absolute;
       transform: translate(-50%, -50%);
       box-sizing: border-box;
-      padding: 25px 20px;
+      padding: 25px ;
       align-items: center;
       border-radius: 3%;
       font-family: 'Ubuntu', sans-serif;
@@ -1328,3 +1328,4 @@ footer {
 .swal2-popup {
   font-family: inherit !important;
 }
+

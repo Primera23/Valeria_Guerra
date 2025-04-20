@@ -270,6 +270,10 @@ const adminLogin = async (req, res) => {
     try {
         const { correo_electronico, contraseña } = req.body;
         
+        
+    if (!correo_electronico || !contraseña) {
+        return res.status(400).json({ result: false, message: 'Todos los campos son obligatorios' });
+    }
         // 1. Verificar si el correo existe en la tabla administrador
         const [admins] = await pool.query(
             'SELECT id_admin, contraseña, permiso2, nombre FROM administrador WHERE correo_electronico = ?', 
@@ -426,12 +430,12 @@ const isAdmin = (req, res, next) => {
     if (req.session.isAdmin) {
         return next();
     }
-    res.status(403).json({
-        success: false,
-        message: 'Acceso denegado: se requieren privilegios de administrador'
-    });
-};
 
+    // Decide la respuesta según el tipo de solicitud
+    if (req.accepts('html')) {
+        return res.status(404).redirect('/index.html');
+    }
+};
 // Modifica tu exportación para incluir las nuevas funciones
 module.exports = {
     registro,
