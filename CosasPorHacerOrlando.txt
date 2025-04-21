@@ -1,0 +1,5 @@
+Cosas que hacer en el proyecto:
+1.Separar el modelo del controlador
+2.Hacer sesion con google
+3.Terminar el dashboard de usuario
+4.Terminar el dashboard de admin

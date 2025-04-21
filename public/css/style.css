@@ -16,6 +16,11 @@
     box-sizing: border-box;
 }
 
+h2{
+    font-size: medium;
+    font-weight: bold;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     background-color: var(--background-color);

@@ -20,12 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        userInfo.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('data-page') === pageId) {
-                link.classList.add('active');
-            }
-        });
+        
     }
     
    

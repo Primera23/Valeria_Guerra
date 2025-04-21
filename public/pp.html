@@ -22,10 +22,14 @@
         <nav class="sidebar menuppal">
             <div class="sidebar-header">
                 <img src="ImagenesProyecto/image00003.jpeg" alt="Logo" class="logo">
-                <a href="index.html"><h2>Valeria Guerra</h2></a>
+                <a href="index.html"><h1>Valeria Guerra</h1></a>
                 
             </div>
-            <h3>Hola, <span id="sidebar-nombre">Usuario</span></h3>
+
+            <div class="stat-card glow mb-6">
+                <h2>Hola, <span id="sidebar-nombre"></span></h2>
+            </div>
+            
 
             <ul class="nav-links">
                 <li class="active" data-page="dashboard"><a href="#dashboard"><i class="fas fa-home"></i>Inicio</a></li>
@@ -35,30 +39,15 @@
                 <li data-page="categoria"><a href="#categoria"><i class="fa fa-tags"></i>Categoria</a></li>
                 <li data-page="productos"><a href="#productos"><i class="fa fa-cart-plus"></i>Productos</a></li>
                 <li data-page="Ajustes"><a href="#Ajustes"><i class="fas fa-cog"></i>Ajustes</a></li>
-                <li data-page="Asistentes"><a href="#asistentes">Asistentes</a></li>
-                <li data-page="cerrar"><a href="#logout">🚪 CERRAR SESIÓN</a></li>
+                <li data-page="asistentes"><a href="#asistentes"><i class="fa-solid fa-user"></i>Asistentes</a></li>
+                <li data-page="cerrar"><a href="#logout"><i class="fa-solid fa-door-open"></i>Cerrar Sesión</a></li>
                 
                 <!-- <li data-page="inventory"><a href="#inventory"><i class="fas fa-box"></i>Inventario</a></li>
                 <li data-page="settings"><a href="#settings"><i class="fas fa-cog"></i>Ajustes</a></li> -->
             </ul>
         </nav>
-        <!-- <nav class="sidebar menuppal">
-            <div class="sidebar-header">
-                <img src="ImagenesProyecto/image00003.jpeg" alt="Logo" class="logo">
-                <h2>Valeria Guerra</h2>
-            </div>
-            <ul class="nav-links">
-                <li class="active" data-page="dashboard"><a href="#dashboard"><i class="fas fa-home"></i>Inicio</a></li>
-                -<li data-page="analytics"><a href="#analytics"><i class="fas fa-chart-line"></i>Analíticas</a></li>
-                <li data-page="sales"><a href="#sales"><i class="fas fa-shopping-cart"></i>Ventas</a></li>
-                <li data-page="customers"><a href="#customers"><i class="fas fa-users"></i>Clientes</a></li> -->
-                <!-- <li data-page="categoria"><a href="#categoria"><i class="fa fa-tags"></i>Categorias</a></li>
-                <li data-page="productos"><a href="#productos"><i class="fa fa-cart-plus"></i>Productos</a></li> -->
-                
-                <!-- <li data-page="inventory"><a href="#inventory"><i class="fas fa-box"></i>Inventario</a></li>
-                <li data-page="settings"><a href="#settings"><i class="fas fa-cog"></i>Ajustes</a></li> -->
-            </ul>
-        </nav> 
+        
+        
         <main class="main-content">
             <header>
                 <div class="search-bar">
@@ -69,24 +58,26 @@
                 
             </header>
             <div id="dashboard" class="page-content active">
-                <h1>Bienvenid@ <span>Usuario</span> a el dashboard de Valeria Guerra con el rol de <span id="rol">""</span></h1>
+                <div class="stat-card glow mb-6">
+                    <h1>Bienvenid@ <span>Usuario</span> a el dashboard de Valeria Guerra con el rol de <span id="rol"></span></h1>
+                </div>
                 <h1>Resumen del Tablero</h1>
                 <div class="stats-grid">
                     <div class="stat-card glow">
                         <i class="fas fa-users"></i>
                         <div class="stat-info">
                             <h3>Total de Usuarios</h3>
-                            <p>15,687</p>
+                            <p id="countUsers"></p>
                         </div>
                     </div>
                     <div class="stat-card glow">
                         <i class="fas fa-shopping-bag"></i>
                         <div class="stat-info">
                             <h3>Total de Ventas</h3>
-                            <p>$124,563</p>
+                            <p></p>
                         </div>
                     </div>
-                    <div class="stat-card glow">
+                    <!-- <div class="stat-card glow">
                         <i class="fas fa-chart-line"></i>
                         <div class="stat-info">
                             <h3>Ingresos</h3>
@@ -99,7 +90,7 @@
                             <h3>Crecimiento</h3>
                             <p>+24.5%</p>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="charts-container">
                     <div class="chart-card glow">
@@ -316,7 +307,7 @@
                                   
                                 </select>
                               </div> -->
-                              <form class="max-w-sm mx-auto" id="formularioPro" method="post" action="/producto">
+                              <form class="max-w-sm mx-auto" id="formularioPro" method="post" action="/producto"  enctype="multipart/form-data">
                                 <div id="alertProducto"></div>
                                 <label for="categoria2" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Categoria</label>
                                 <select id="categoria2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="categoria2" id="categoria2">
@@ -330,8 +321,8 @@
                                 <label for="categoria">Producto</label>
                              </div> -->
                              <div class="mb-6">
-                                <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Producto</label>
-                                <input type="text" id="default-input" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  id="producto" name="producto">
+                                <label for="producto" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Producto</label>
+                                <input type="text"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  id="producto" name="producto">
                             </div>
 
                              <!-- <div class="input-group mb-3">
@@ -346,10 +337,13 @@
                                 <input type="text" id="website-admin" class="rounded-none rounded-e-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Precio" name="precio">
                               </div>
 
-                            <div class="form-floating mb-2">
-                               <input type="text" class="form-control"  id="descripcion2" name="descripcion2">
+                            <!-- <div class="form-floating mb-2">
+                               <input type="text" class="form-control"  >
                                <label for="descripcion2">Descripcion</label>
-                            </div>
+                            </div> -->
+
+                            <label for="descripcion2 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Descripción</label>
+                            <textarea id="descripcion2" name="descripcion2" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ej: Camiseta blanca"></textarea>
                             <!-- <div class="form-floating mb-2">
                                 <input type="file" class="form-control"  >
                                 <label for="Imagen">Imagen del Producto</label>
@@ -363,14 +357,16 @@
                                   
                                 </select>
                             
-                            <div class="form-floating mb-2">
-                                <input type="text" class="form-control"  id="cantidad" name="cantidad">
-                                <label for="Imagen">Cantidad</label>
-                             </div>
-                             <div class="form-floating mb-2">
-                                <input type="text" class="form-control"  id="color" name="color">
-                                <label for="Imagen">Color</label>
-                             </div>
+                            
+                             <div>
+                                <label for="cantidad" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cantidad</label>
+                                <input type="text"  id="cantidad" name="cantidad" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
+                            </div>
+                            <div>
+                                <label for="color" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Color</label>
+                                <input type="text"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  id="color" name="color">
+                            </div>
+                             
 
 
                             <div class="d-grid gap-2 d-md-flex justify-content-md-center">

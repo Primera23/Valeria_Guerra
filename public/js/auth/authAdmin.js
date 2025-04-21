@@ -65,6 +65,16 @@ class AdminAuthManager {
                 this.handleAdminLogout();
             });
         }
+
+        fetch('/usuarios')
+        .then(response => response.json())
+        .then(usuarios => {if (usuarios.success){
+            document.getElementById('countUsers').textContent = 
+                `${usuarios.totalUsuarios}`;
+        }}
+
+        )
+        .catch(error => console.log(error));
     }
 
     static async handleAdminLogout() {
