@@ -287,12 +287,22 @@ class AuthModalManager {
             registerForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 
-                const formData = new FormData(registerForm);
+                // Obtener valores directamente del formulario
+                const formData = {
+                    email: registerForm.email.value,
+                    password: registerForm.password.value,
+                    nombres: registerForm.nombres.value,
+                    apellidos: registerForm.apellidos.value
+                };
+                
                 fetch('/register', {
                     method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
                     body: JSON.stringify(formData)
                 })
-                .then(response => response.json())
+                .then(response =>response.json())
                 .then(data => {
                     const alertContainer = document.getElementById('alertContainer');
                     if (alertContainer) {
@@ -300,32 +310,27 @@ class AuthModalManager {
                         const alertClass = isSuccess 
                             ? 'text-green-800 bg-green-50 dark:bg-gray-800 dark:text-green-400' 
                             : 'text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400';
-                        const alertIcon = isSuccess ? 'Success' : 'Danger';
-                
+                        
                         alertContainer.innerHTML = `
                             <div class="p-4 mb-4 text-[15px] rounded-lg ${alertClass}" role="alert">
                                 <span class="font-medium"></span> ${data.message}
                             </div>`;
                     }
-
-                    if (data.success) {
+        
+                    if (data.result) {
                         Swal.fire({
                             title: '¡Registro exitoso!',
-                            html: `Se ha enviado un correo a <strong>${registerForm.email.value}</strong>`,
+                            html: `Se ha enviado un correo a <strong>${formData.email}</strong>`,
                             icon: 'success'
                         }).then(() => {
                             registerForm.reset();
-                            this.showLoginModal();
+                            // this.showLoginModal(); // Descomenta si es necesario
                         });
                     }
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    Swal.fire({
-                        title: 'Error',
-                        text: error.message,
-                        icon: 'error'
-                    });
+                    
                 });
             });
         }

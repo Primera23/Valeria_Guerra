@@ -1,16 +1,19 @@
+require('dotenv').config();
 const bcrypt = require('bcrypt');
 const { pool } = require('../db.js');  // Asegúrate de que `pool` esté importado correctamente
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const session = require('express-session');  // Necesitas esta librería para sesiones
 const { app } = require('express');
-const correo = 'valeriaguerra2341@gmail.com';
+// const correo = 'valeriaguerra2341@gmail.com';
 // Configura el transporte de nodemailer
 const transporter = nodemailer.createTransport({
     service: 'gmail', // o cualquier otro servicio de correo
     auth: {
-        user: correo,
-        pass: 'ovgk feyq alqg lizp'
+        // user: correo,
+        // pass: 'ovgk feyq alqg lizp'
+        user: process.env.EMAIL_USER || 'tucorreo@gmail.com', // Usar variables de entorno
+        pass: process.env.EMAIL_PASS || 'tucontraseña'
     }
 });
 
@@ -19,148 +22,137 @@ const tempUserStore = {};
 
 const registro = async (req, res) => {
     const { email, password, nombres, apellidos } = req.body;
-    
+    console.log('Datos recibidos:', req.body);
 
     try {
-        
-
-        // Validaciones para los datos
-        console.log(req.body);
-        const { email, password, nombres, apellidos } = req.body;
-
-try {
-    // 1. Validaciones básicas
-    if (!email || !password || !nombres || !apellidos) {
-        return res.status(400).json({ 
-            result: false, 
-            message: 'Todos los campos son obligatorios' 
-        });
-    }
-
-    // 2. Validación de formato de email
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        return res.status(400).json({ 
-            result: false, 
-            message: 'El formato del correo electrónico no es válido' 
-        });
-    }
-
-    // 3. Validación de contraseña
-    if (password.length < 8) {
-        return res.status(400).json({ 
-            result: false, 
-            message: 'La contraseña debe tener al menos 8 caracteres' 
-        });
-    }
-
-    if (!/[A-Z]/.test(password)) {
-        return res.status(400).json({ 
-            success: false, 
-            message: 'La contraseña debe contener al menos una mayúscula' 
-        });
-    }
-    
-    if (!/[0-9]/.test(password)) {
-        return res.status(400).json({ 
-            success: false, 
-            message: 'La contraseña debe contener al menos un número' 
-        });
-    }
-    
-    if (!/[^A-Za-z0-9]/.test(password)) {
-        return res.status(400).json({ 
-            success: false, 
-            message: 'La contraseña debe contener al menos un carácter especial' 
-        });
-    }
-
-    // 4. Validación de nombres
-    const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s']+$/;
-
-    if (!nameRegex.test(nombres)) {
-        return res.status(400).json({ 
-            success: false, 
-            message: 'El nombre solo puede contener letras y espacios' 
-        });
-    }
-    
-    if (!nameRegex.test(apellidos)) {
-        return res.status(400).json({ 
-            success: false, 
-            message: 'Los apellidos solo pueden contener letras y espacios' 
-        });
-    }
-    
-    if (nombres.length < 2) {
-        return res.status(400).json({ 
-            success: false, 
-            message: 'El nombre debe tener al menos 2 caracteres' 
-        });
-    }
-
-    // Verificar si el correo ya existe
-    const [results] = await pool.execute(
-        'SELECT * FROM user WHERE correo_electronico = ?', 
-        [email]
-    );
-    
-    if (results.length > 0) {
-        return res.status(400).json({ 
-            result: false, 
-            message: 'Este correo electrónico ya está registrado' 
-        });
-    }
-
-    // Resto de tu lógica de registro...
-    
-} catch (err) {
-    console.error('Error en registro de usuario:', err);
-    return res.status(500).json({ 
-        result: false, 
-        message: 'Error interno del servidor' 
-    });
-}
-        // Verificar si el correo ya existe en la tabla `user`
-        const [results] = await pool.execute('SELECT * FROM user WHERE correo_electronico = ?', [email]);
-        if (results.length > 0) {
-            return res.status(400).json({ result: false, message: 'Este correo electrónico ya está registrado' });
+        // 1. Validaciones básicas
+        if (!email || !password || !nombres || !apellidos) {
+            return res.status(400).json({ 
+                result: false, 
+                message: 'Todos los campos son obligatorios' 
+            });
         }
 
-        // Generar un token de verificación
+        // 2. Validación de formato de email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            return res.status(400).json({ 
+                result: false, 
+                message: 'El formato del correo electrónico no es válido' 
+            });
+        }
+
+        // 3. Validación de contraseña
+        if (password.length < 8) {
+            return res.status(400).json({ 
+                result: false, 
+                message: 'La contraseña debe tener al menos 8 caracteres' 
+            });
+        }
+
+        if (!/[A-Z]/.test(password)) {
+            return res.status(400).json({ 
+                result: false, 
+                message: 'La contraseña debe contener al menos una mayúscula' 
+            });
+        }
+        
+        if (!/[0-9]/.test(password)) {
+            return res.status(400).json({ 
+                result: false, 
+                message: 'La contraseña debe contener al menos un número' 
+            });
+        }
+        
+        if (!/[^A-Za-z0-9]/.test(password)) {
+            return res.status(400).json({ 
+                result: false, 
+                message: 'La contraseña debe contener al menos un carácter especial' 
+            });
+        }
+
+        // 4. Validación de nombres
+        const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s']+$/;
+        if (!nameRegex.test(nombres) || !nameRegex.test(apellidos)) {
+            return res.status(400).json({ 
+                result: false, 
+                message: 'Nombres y apellidos solo pueden contener letras y espacios' 
+            });
+        }
+        
+        if (nombres.length < 2) {
+            return res.status(400).json({ 
+                result: false, 
+                message: 'El nombre debe tener al menos 2 caracteres' 
+            });
+        }
+
+        // Verificar si el correo ya existe (una sola verificación)
+        const [results] = await pool.execute(
+            'SELECT * FROM user WHERE correo_electronico = ?', 
+            [email]
+        );
+        
+        if (results.length > 0) {
+            return res.status(400).json({ 
+                result: false, 
+                message: 'Este correo electrónico ya está registrado' 
+            });
+        }
+
+        // Generar token de verificación
         const verificationToken = crypto.randomBytes(32).toString('hex');
 
-        // Almacenar temporalmente los datos del usuario
+        // Almacenar temporalmente con contraseña hasheada
+        const hashedPassword = await bcrypt.hash(password, 10);
         tempUserStore[verificationToken] = {
             email,
-            password,
+            password: hashedPassword, // Almacenar hasheado por seguridad
             nombres,
-            apellidos
+            apellidos,
+            createdAt: Date.now() // Para limpieza de tokens expirados
         };
 
         // Enviar correo de verificación
         const mailOptions = {
-            from: correo,
+            from: process.env.EMAIL_USER || 'tucorreo@gmail.com',
             to: email,
             subject: 'Verifica tu correo electrónico - Valeria Guerra',
-            text: `Por favor, verifica tu correo electrónico haciendo clic en el siguiente enlace: https://localhost:3000/verify?token=${verificationToken}`
+            html: `
+                <h1>Verifica tu cuenta</h1>
+                <p>Por favor, haz clic en el siguiente enlace para verificar tu cuenta:</p>
+                <a href="http://localhost:3000/verify?token=${verificationToken}">
+                    Verificar cuenta
+                </a>
+                <p>Si no solicitaste este registro, ignora este correo.</p>
+            `
         };
 
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
                 console.error('Error enviando correo:', error);
-                return res.status(500).json({ result: false, message: 'Error al enviar el correo de verificación' });
-            } else {
-                console.log('Correo enviado:', info.response);
-                return res.status(200).json({ result: true, message: 'Correo de verificación enviado. Por favor, verifica tu correo electrónico.' });
+                // Eliminar el token si falla el envío
+                delete tempUserStore[verificationToken];
+                return res.status(500).json({ 
+                    result: false, 
+                    message: 'Error al enviar el correo de verificación' 
+                });
             }
+            console.log('Correo enviado:', info.response);
+            return res.status(200).json({ 
+                result: true, 
+                message: 'Correo de verificación enviado. Por favor, verifica tu correo electrónico.' 
+            });
         });
 
     } catch (err) {
-        console.error('Error en registro de usuario:', err.message);
-        return res.status(500).json({ success: false, message: 'Error interno del servidor' });
+        console.error('Error en registro de usuario:', err);
+        return res.status(500).json({ 
+            result: false, 
+            message: 'Error interno del servidor' 
+        });
     }
-};
+}; 
 
 const verifyEmail = async (req, res) => {
     const { token } = req.query;
@@ -525,8 +517,8 @@ const isAdmin = (req, res, next) => {
     }
 
     // Decide la respuesta según el tipo de solicitud
-    if (req.accepts('html')) {
-        return res.status(404).redirect('/index.html');
+     else if (req.accepts('html')) {
+        return res.status(404).redirect('/');
     }
 };
 
