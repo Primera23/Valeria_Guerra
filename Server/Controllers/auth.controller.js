@@ -121,7 +121,7 @@ const registro = async (req, res) => {
             html: `
                 <h1>Verifica tu cuenta</h1>
                 <p>Por favor, haz clic en el siguiente enlace para verificar tu cuenta:</p>
-                <a href="http://localhost:3000/verify?token=${verificationToken}">
+                <a href="https://localhost:3000/verify?token=${verificationToken}">
                     Verificar cuenta
                 </a>
                 <p>Si no solicitaste este registro, ignora este correo.</p>
