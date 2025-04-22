@@ -1,9 +1,9 @@
 const { Router } = require('express');  // Reemplazamos 'import' por 'require'
 const { 
-    postProducto,
-    getProductos,
-    getTallas,
-    countUsers
+    crearProducto,
+    obtenerProductos,
+    obtenerTallas,
+    contarUsuarios
     // deleteCategorias,
     // getCategorias,
     // patchCategorias
@@ -24,11 +24,11 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-router.get('/tallas',getTallas)
-router.post('/producto',upload.single('Imagen'),postProducto);
+router.get('/tallas',obtenerTallas)
+router.post('/producto',upload.single('Imagen'),crearProducto);
   
-router.get("/productos", getProductos);
-router.get("/usuarios",countUsers)
+router.get("/productos",obtenerProductos);
+router.get("/usuarios",contarUsuarios);
 // router.get("/producto/:producto", getProducto);
   
 // router.delete('/producto/:producto',deleteProducto)
