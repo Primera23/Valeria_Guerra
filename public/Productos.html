@@ -7,76 +7,71 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="shortcut icon" href="ImagenesProyecto/image00003.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/output.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/productoCarta.js"></script>
+     <!-- <link rel="stylesheet" href="css/output.css"> -->
 </head>
 <body>
   
 
-
-
-  <nav class="bg-white border-gray-200 dark:bg-gray-900">
-    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-    <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-        <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
-        
-    </a>
-    <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-        <button type="button" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-          <span class="sr-only">Open user menu</span>
-          <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user photo">
+  <!-- Header Telwin -->
+  <nav class="telwin-header w-full">
+    <div class="telwin-container flex justify-between items-center h-full">
+      
+      <!-- Lado izquierdo: Logo -->
+      <div class="flex items-center h-full">
+        <a href="#" class="flex items-center space-x-5 rtl:space-x-reverse h-full">
+          <img src="ImagenesProyecto/image00003.jpeg" alt="Logo Telwin"
+            class="h-28 w-28  md:h-40 md:w-40 object-cover rounded-full border-4 border-white shadow-2xl transition-all duration-300 hover:scale-105" />
+           
+        </a>
+      </div>
+  
+      <!-- Lado derecho: Menú + iconos -->
+      <div class="flex items-center space-x-4">
+        <!-- Botón Hamburguesa para móvil -->
+        <button data-collapse-toggle="telwin-mega-menu" type="button" class="md:hidden text-white text-3xl focus:outline-none">
+          <i class="fas fa-bars"></i>
         </button>
-        <!-- Dropdown menu -->
-        <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-sm dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
-          <div class="px-4 py-3">
-            <span class="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
-            <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
-          </div>
-          <ul class="py-2" aria-labelledby="user-menu-button">
-            <li>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
+  
+        <!-- Menú de Navegación -->
+        <div id="telwin-mega-menu"
+          class="items-center justify-between hidden w-full md:flex md:w-auto md:h-full">
+          <ul
+            class="flex flex-col mt-4 font-medium md:flex-row md:space-x-8 lg:space-x-10 xl:space-x-12 md:mt-0 md:h-full md:items-center">
+            <li class="md:h-full md:flex md:items-center">
+              <a href="index.html" class="telwin-nav-link block w-full text-center hover:text-orange-300 md:p-0"
+                aria-current="page">INICIO</a>
             </li>
-            <li>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
+            <li class="md:h-full md:flex md:items-center">
+              <a href="#nosotros " class="telwin-nav-link block w-full text-center hover:text-orange-300 md:p-0">NOSOTROS</a>
             </li>
-            <li>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</a>
+            <li class="md:h-full md:flex md:items-center">
+              <a href="#contacto" class="telwin-nav-link block w-full text-center hover:text-orange-300 md:p-0">CONTACTO</a>
             </li>
-            <li>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+             <!-- Ícono de usuario separado -->
+             <li class="md:h-full md:flex md:items-center ml-4">
+              <a href="#" id="openModal" class="telwin-user-icon">
+                <i class="fas fa-user"></i>
+              </a>
             </li>
+  
+            <!-- Ícono de carrito separado -->
+            <li class="md:h-full md:flex md:items-center ml-4">
+              <div class="cart-icon-container relative" id="cart-btn">
+                <i class="fas fa-shopping-cart telwin-user-icon"></i>
+                <span class="cart-counter absolute -top-2 -right-3 bg-orange-500 text-white text-xs px-1.5 py-0.5 rounded-full">0</span>
+              </div>
+            </li>
+            
+           
           </ul>
         </div>
-        <button data-collapse-toggle="navbar-user" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-user" aria-expanded="false">
-          <span class="sr-only">Open main menu</span>
-          <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-          </svg>
-      </button>
-    </div>
-    <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
-      <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-        <li>
-          <a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Home</a>
-        </li>
-        <li>
-          <a href="#" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
-        </li>
-        <li>
-          <a href="#" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
-        </li>
-        <li>
-          <a href="#" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Pricing</a>
-        </li>
-        <li>
-          <a href="#" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
-        </li>
-      </ul>
-    </div>
+      </div>
+  
     </div>
   </nav>
-  
 
 
   <!-- Modal del Carrito -->
@@ -99,76 +94,96 @@
   </div>
 </div>
   
-  <div id="modal" class="modal">
-    <div class="modal-content">
-      <div class="user-info">
-        <p>Nombre del Usuario</p>
-        <p>usuario@example.com</p>
-      </div>
-      <ul class="modal-options">
-        <li><a href="#">Cambiar de cuenta</a></li>
-        <li><a href="#" class="logout-btn">Salir</a></li>
-        <li><a href="#" class="config-btn">Configuración</a></li>
-        <li><a href="#">Ayuda</a></li>
-      </ul>
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <div class="user-info">
+      <p>Nombre del Usuario</p>
+      <p>usuario@example.com</p>
     </div>
+    <ul class="modal-options">
+      <li><a href="#" class="logout-btn">Salir</a></li>
+      <li><a href="#" class="config-btn">Configuración</a></li>
+    </ul>
   </div>
+</div>
 
 
 
 
 <div id="inicioSesion" class="modalmask">
-    <div class="modalbox Sesion">
-        <a href="#close" title="Close" class="close">X</a>
-        <form id="loginForm">
-            <div class="login">
-                
-                <article class="fondo">
-                <div id="aja"></div>
-                <div><input type="text" placeholder="Correo" name="correo_electronico"></div>
-                <div><input type="password" placeholder="Contraseña" name="password1"></div>
-                <button class="boton">Iniciar sesión</button>
-            
-            <div class="OtrosInicios">
-                <p><a href="#">¿Olvidaste la contraseña?</a></p>
-                <p>¿No tienes una cuenta?
-                     <a href="#registrarse">Registrate</a></p>
-                <p>¿Otro tipo de inicio? <a href="#sesionAdministrador">Admin</a></p>
-            </div>
+  <div class="modalbox Sesion">
+      <a href="#close" title="Close" class="close">X</a>
+      <form id="loginForm">
+          <div class="login">
+              <article class="fondo">
+                  <h2>Inicio de Sesion - Usuario</h2>
+              <div id="aja"></div>
+              <div><input type="text" placeholder="Correo" name="correo_electronico"></div>
+              <div><input type="password" placeholder="Contraseña" name="password1"></div>
+              <button class="boton">Iniciar sesión</button>
+          <div class="OtrosInicios">
+              <p><a href="#">¿Olvidaste la contraseña?</a></p>
+              <p>¿No tienes una cuenta?
+              <a href="#registrarse">Registrate</a></p>
+              <p>¿Otro tipo de inicio? <a href="#sesionAdministrador">Admin</a></p>
+          </div>
 
-            </div>
-        </form>
-    </div>
+          </div>
+      </form>
+  </article>
+  </div>
 </div>
 
 <div id="registrarse" class="modalmask">
-  <form id="registerForm" method="post" action="/register">
-    <div class="modalbox registrarse">
-        <a href="#close" title="Close" class="close">X</a>
-        <article class="fondo2">
-        <div class="registro">
-            
-                <div><input type="text" placeholder="Nombres" name="nombres"></div>
-                <div><input type="text" placeholder="Apellidos" name="apellidos"></div>
-                <div><input type="email" placeholder="Correo" name="correo"></div>
-                <div><input type="password" placeholder="Contraseña" name="contraseña"></div>
-                <div><input type="password" placeholder="Repetir Contraseña" name="confirmar_contraseña"></div>
-                <br></br>
-
-                <button class="boton">Registrarse</button>
-                <div class="OtrosInicios">
-                    <p>¿Ya tienes una cuenta? 
-                        <a href="#inicioSesion">Inicia Sesión</a> 
-                        <br></br>
-                        <br></br>
-
-                    incia como 
-                    <a href="#sesionAdministrador">Administrador</a></p>
-                </div>
-            </form>
-        </div>
-    </div>
+  <div class="modalbox registrarse">
+      <a href="#close" title="Close" class="close">X</a>
+      <form id="registerForm" method="post" action="/register">
+      <div class="registro">
+          <article class="fondo2">
+              <h2>Registrate</h2>
+              <div id="alertContainer"></div>
+              <div><input type="text" placeholder="Nombres" name="nombres" id="nombres"></div>
+              <div><input type="text" placeholder="Apellidos" name="apellidos" id="apellidos"></div>
+              <div><input type="email" placeholder="Correo" name="email" id="email" required></div>
+              <div><input type="password" placeholder="Contraseña" name="password"></div>
+              <button class="boton">Registrarse</button>
+              <div class="OtrosInicios">
+                  <p><a href="#">¿Olvidaste la contraseña?</a></p>
+                  <p>¿Ya tienes una cuenta?
+                  <a href="#inicioSesion">Inicia Sesion</a></p>
+                  <p>¿Otro tipo de inicio? <a href="#sesionAdministrador">Admin</a></p>
+              </div>
+              </div>
+          </form>
+      </article>
+      </div>
+  </div>
 </div>
+</div>
+
+<div id="sesionAdministrador" class="modalmask">
+  <div class="modalbox admin">
+      <a href="#close" title="Close" class="close">X</a>
+      
+      <form id="adminForm" >
+          <div class="login">
+              <article class="fondo">
+              <div id="alertAdmin"></div>
+              <h2>Inicio Admin</h2>
+              <input type="text" placeholder="Correo" name="correo">
+              <input type="password" placeholder="Contraseña" name="password2">
+              <button class="boton" type="submit">Iniciar Sesion</button>
+              <div class="OtrosInicios">
+                  <p><a href="#">¿Olvidaste la contraseña?</a></p>
+                  <p>¿No tienes una cuenta?
+                  <a href="#registrarse">Registrate</a></p>
+                  <p>¿Otro tipo de inicio? <a href="#inicioSesion">Usuario</a></p>
+              </div>
+          </div>
+         
+      </form>
+  </article>
+  </div>
 </div>
 
 <div id="sesionAdministrador" class="modalmask">
@@ -209,8 +224,8 @@
         <div class="box-img1">
           <h1>Siguenos 
           </h1>
-          <p>Siguenos en Instagram</p>
-          <a href="https://www.instagram.com/valeriaguerrabrand?igsh=djBvaHQycnppdDN0">Instagram</a>
+          <p id="#nosotros">Siguenos en Instagram</p>
+          <a href="https://www.instagram.com/valeriaguerrabrand?igsh=OHFkZ3FwMWw1NHNy">Instagram</a>
         </div>
         <div class="box-img2">
           <h1>Registrate</h1>
@@ -219,7 +234,7 @@
         </div>
       </div>
        
-        <h1 class="center">Ropague</h1>
+        <h1 class="center"> </h1>
         <div class="food" >
             <div class="product-container" id="food">
              
@@ -247,12 +262,12 @@
         </div>
 
         <div class="box__footer" id="contacto">
-            <h2>Contactanos</h2>
-            <a href="#"> <i class="fab fa-facebook-square"></i> Facebook</a>
-            <a href="#"><i class="fab fa-twitter-square"></i> Twitter</a>
-            <a href="#"><i class="fab fa-linkedin"></i> Linkedin</a>
-            <a href="#"><i class="fab fa-instagram-square"></i> Instagram</a>
-        </div>
+          <h2>Contactanos</h2>
+          <a href="https://www.instagram.com/valeriaguerrabrand?igsh=OHFkZ3FwMWw1NHNy"><i class="fab fa-instagram-square"></i> Instagram</a>
+          <a href="https://www.facebook.com/share/1BYcnFQ9uv/"> <i class="fab fa-facebook-square"></i> Facebook</a>
+          <a href="#"><i class="fab fa-twitter-square"></i> Twitter</a>
+      
+      </div>
 
     </div>
 

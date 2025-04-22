@@ -66,27 +66,39 @@ export function mostrarData(data){
           
   
 
-        export function mostrarCategoria(unique) {
-            
-            let boton=''
-            boton='<button class="btn btn-warning" onclick="actualizarCategoria(${categoria.categoria})">Modificar</button>'
-            if (unique && unique.length > 0) {
-                const categoria = unique[0];  // Usamos el primer elemento del arreglo
+export function mostrarCategoria(unique) {
+    // Verificar si hay datos y si es un array con elementos
+    if (!unique || !Array.isArray(unique) || unique.length === 0) {
+        console.error('No se encontraron datos para la categoría:', unique);
+        return; // Salir de la función si no hay datos
+    }
+
+    const categoria = unique[0]; // Tomar el primer elemento del array
+
+    try {
+        // Llenar el formulario con los datos
+        const categoriaInput = document.getElementById('categoria1');
+        const descripcionInput = document.getElementById('descripcion1');
+        const nuevoNombreInput = document.getElementById('nuevoNombre');
         
-                // Llena el formulario con los datos
-                document.getElementById('categoria1').value = categoria.categoria;
-                document.getElementById('descripcion1').value = categoria.descripcion;
-                document.getElementById('nuevoNombre').value = categoria.categoria;  // Esto está asignando el nombre actual de la categoría a 'nuevoNombre'
-                
-                // Muestra el modal
-                
-            } else {
-                console.error('No se encontraron datos para la categoría:', unique);
-            }
-        
-            document.getElementById('boton').innerHTML = boton;
-            
+        if (categoriaInput) categoriaInput.value = categoria.categoria || '';
+        if (descripcionInput) descripcionInput.value = categoria.descripcion || '';
+        if (nuevoNombreInput) nuevoNombreInput.value = categoria.categoria || '';
+
+        // Crear botón solo si existe el contenedor
+        const botonContainer = document.getElementById('boton');
+        if (botonContainer) {
+            botonContainer.innerHTML = `
+                <button class="btn btn-warning" onclick="actualizarCategoria('${categoria.categoria}')">
+                    Modificar
+                </button>
+            `;
         }
+
+    } catch (error) {
+        console.error('Error al mostrar categoría:', error);
+    }
+}
 
 
         

@@ -11,16 +11,23 @@ function mostrarData(data) {
     // Iteramos sobre cada producto en el array
     data.forEach(producto => {
         body += `
-        <div class="recipe">
-            <div class="img">
-                <img src="ImagenesProyecto/${producto.url_imagen}" alt="${producto.nombre}">
-                <p>${producto.nombre}</p>
-            </div>
-            <div class="buttons">
-                <button class="buy-btn">Comprar</button>
-                <button class="details-btn">Detalles</button>
-            </div>
-        </div>`;
+   <div class="recipe" onclick="verDetalles('${producto.id}')">
+  <div class="img">
+    <img src="/uploads/${producto.url_imagen}" alt="${producto.nombre}">
+    <div class="top-icons">
+      <span class="icon cart">&#128722;</span>
+      <span class="icon heart">&#10084;</span>
+    </div>
+  </div>
+  <div class="info">
+    <p class="product-name">${producto.nombre}</p>
+    <p class="price">$${producto.precio}</p>
+  </div>
+</div>
+
+
+
+`;
     });
     
     document.getElementById('food').innerHTML = body;

@@ -8,17 +8,13 @@
     <link rel="shortcut icon" href="ImagenesProyecto/image00003.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
-   
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
- 
- <!-- <link href="css/tailwind.css" rel="stylesheet">  -->
-
-
- <link rel="stylesheet" href="css/styles.css" >
- <link rel="stylesheet" href="css/output.css">
-
-<!-- Flowbite JS -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>  -->
+    <link rel="stylesheet" href="css/styles.css" >
+    <!-- <link href="css/tailwind.css" rel="stylesheet">  -->
+    <!-- <link rel="stylesheet" href="css/output.css"> -->
+    <!-- Flowbite JS -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>  -->
 </head>
 <body>
 
@@ -26,46 +22,49 @@
      
 
     
-
-    <nav class="bg-custom-green border-gray-200 dark:border-gray-600 dark:bg-gray-900 h-[90px]">
-        <!-- Altura exacta de 90px -->
-        <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4 h-full">
-            <!-- Logo -->
-           
-            
+    <heeader> 
+        <!-- Header Telwin -->
+        <nav class="telwin-header w-full">
+            <div class="telwin-container flex flex-wrap justify-between items-center h-full">
+                <!-- Logo y texto centrado verticalmente -->
+                <div class="flex items-center h-full">
+                    <a href="#" class="flex items-center space-x-5 rtl:space-x-reverse h-full">
+                        <img src="ImagenesProyecto/image00003.jpeg" alt="Logo Telwin" 
+                             class="h-28 w-28 md:h-40 md:w-40 object-cover rounded-full 
+                                    border-4 border-white shadow-2xl transition-all 
+                                    duration-300 hover:scale-105" />
+                       
+                    </a>
+                </div>
                 
-            
-            
-            <!-- Botón Hamburguesa -->
-            <button data-collapse-toggle="mega-menu-full" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mega-menu-full" aria-expanded="false">
-                <span class="sr-only">Abrir menú</span>
-                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-                </svg>
-            </button>
-    
-            <!-- Menú de Navegación -->
-            <div id="mega-menu-full" class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
-                <ul class="flex flex-col mt-4 font-medium md:flex-row md:mt-0 md:space-x-8 rtl:space-x-reverse">
-                    <li>
-                        <a href="Productos.html" class="block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700" aria-current="page">Productos</a>
-                    </li>
-                    <li>
-                        <a href="#" class="block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">Sobre Nosotros</a>
-                    </li>
-                    <li>
-                        <a href="#" id="openModal" class="block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">
-                            <div class="fas fa-user" id="fa-user"></div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="block py-2 px-3 text-gray-900 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
-                    </li>
-                </ul>
+                <!-- Botón Hamburguesa para mobile -->
+                <button data-collapse-toggle="telwin-mega-menu" type="button" class="md:hidden text-white text-3xl focus:outline-none">
+                    <i class="fas fa-bars"></i>
+                </button>
+        
+                <!-- Menú de Navegación Mejorado -->
+                <div id="telwin-mega-menu" class="items-center justify-between hidden w-full md:flex md:w-auto md:h-full">
+                    <ul class="flex flex-col mt-4 font-medium md:flex-row md:space-x-8 lg:space-x-10 xl:space-x-12 md:mt-0 md:h-full md:items-center">
+                        <li class="md:h-full md:flex md:items-center">
+                            <a href="Productos.html" class="telwin-nav-link block w-full text-center hover:text-orange-300 md:p-0" aria-current="page">PRODUCTOS</a>
+                        </li>
+                        <li class="md:h-full md:flex md:items-center">
+                            
+                            <a href="#nosotros" class="telwin-nav-link block w-full text-center hover:text-orange-300 md:p-0">NOSOTROS</a>
+                        </li>
+                        <li class="md:h-full md:flex md:items-center">
+                            <a href="#contacto" class="telwin-nav-link block w-full text-center hover:text-orange-300 md:p-0">CONTACTO</a>
+                        </li>
+                        <li class="md:h-full md:flex md:items-center ml-4">
+                            <a href="#" id="openModal" class="telwin-user-icon">
+                                <i class="fas fa-user"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
-    
+        </nav>
+    </header>
 
 
 <section class="home" id="home">
@@ -91,65 +90,14 @@
     
 
 
-
-    <!-- Carousel -->
-    
-
-    <div id="default-carousel" class="relative w-full" data-carousel="slide">
-        <!-- Contenedor principal con altura fija y fondo de respaldo -->
-        <div class="relative h-[80vh] md:h-[80vh] bg-gray-200 overflow-hidden rounded-lg">
-            
-            <!-- Item 1 -->
-            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <div class="flex items-center justify-center w-full h-full">
-                    <img src="ImagenesProyecto/image00004.jpeg" 
-                         class="max-w-full max-h-full" 
-                         alt="Producto 4">
-                </div>
-            </div>
-            <!-- Item 2 -->
-            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <div class="flex items-center justify-center w-full h-full">
-                    <img src="ImagenesProyecto/image00004.jpeg" 
-                         class=" max-h-full max-w-full" 
-                         alt="Producto 4">
-                </div>
-            </div>
-            <!-- Item 3 -->
-            <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                <div class="flex items-center justify-center w-full h-full">
-                    <img src="/uploads/1745150302587.jpeg" 
-                         class="max-w-full max-h-full " 
-                         alt="Producto 4">
-                </div>
-            </div>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+        <img src="ImagenesProyecto/image00006.jpeg" alt="Imagen 1" class="w-full rounded-lg">
+        <img src="ImagenesProyecto/image00004.jpeg" alt="Imagen 2" class="w-full rounded-lg">
+        <img src="ImagenesProyecto/image00005.jpeg" alt="Imagen 3" class="w-full rounded-lg">
+        <div class="flex overflow-x-auto gap-4 py-2">
         </div>
-            <!-- Item 4 -->
-            
-        <!-- Slider indicators -->
-        <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
-            <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
-        </div>
-        <!-- Slider controls -->
-        <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-                </svg>
-                <span class="sr-only">Previous</span>
-            </span>
-        </button>
-        <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-            <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-                </svg>
-                <span class="sr-only">Next</span>
-            </span>
-        </button>
     </div>
+</div>
 
 
 
@@ -157,8 +105,8 @@
 
 </section>
 
-<section class="about" id="about">
-    <h1 class="heading"><span>sobre</span> <span class="n1">nosotros</span></h1>
+<section class="about" >
+    <h1 class="heading" id="nosotros"><span>sobre</span> <span class="n1">nosotros</span></h1>
     <div class="row">
         <div class="img">
             <img src="ImagenesProyecto/4.jpeg" alt="">
@@ -224,8 +172,8 @@
             <article class="fondo2">
                 <h2>Registrate</h2>
                 <div id="alertContainer"></div>
-                <div><input type="text" placeholder="Nombres" name="nombres"></div>
-                <div><input type="text" placeholder="Apellidos" name="apellidos"></div>
+                <div><input type="text" placeholder="Nombres" name="nombres" id="nombres"></div>
+                <div><input type="text" placeholder="Apellidos" name="apellidos" id="apellidos"></div>
                 <div><input type="email" placeholder="Correo" name="email" id="email" required></div>
                 <div><input type="password" placeholder="Contraseña" name="password"></div>
                 <button class="boton">Registrarse</button>
@@ -259,7 +207,7 @@
                     <p><a href="#">¿Olvidaste la contraseña?</a></p>
                     <p>¿No tienes una cuenta?
                     <a href="#registrarse">Registrate</a></p>
-                    <p>¿Otro tipo de inicio? <a href="#InicioSesion">Usuario</a></p>
+                    <p>¿Otro tipo de inicio? <a href="#inicioSesion">Usuario</a></p>
                 </div>
             </div>
            
@@ -276,7 +224,7 @@
     <footer>
          
 
-        <div class="container__footer">
+        <div class="container__footer" >
             <div class="box__footer">
                 <div class="logo">
                     <img src="ImagenesProyecto/image00002.jpeg" alt="">
@@ -293,10 +241,10 @@
 
         <div class="box__footer" id="contacto">
             <h2>Contactanos</h2>
-            <a href="#"> <i class="fab fa-facebook-square"></i> Facebook</a>
+            <a href="https://www.instagram.com/valeriaguerrabrand?igsh=OHFkZ3FwMWw1NHNy"><i class="fab fa-instagram-square"></i> Instagram</a>
+            <a href="https://www.facebook.com/share/1BYcnFQ9uv/"> <i class="fab fa-facebook-square"></i> Facebook</a>
             <a href="#"><i class="fab fa-twitter-square"></i> Twitter</a>
-            <a href="#"><i class="fab fa-linkedin"></i> Linkedin</a>
-            <a href="#"><i class="fab fa-instagram-square"></i> Instagram</a>
+        
         </div>
 
     </div>

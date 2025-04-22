@@ -19,23 +19,112 @@ const tempUserStore = {};
 
 const registro = async (req, res) => {
     const { email, password, nombres, apellidos } = req.body;
-
-    // Validaciones para los datos
-    if (!email || !email.includes('@')) {
-        return res.status(400).json({ success: false, message: 'El correo electrónico no es válido' });
-    }
-    if (typeof nombres !== 'string' || nombres.length < 3) {
-        return res.status(400).json({ success: false, message: 'El nombre debe tener más de 3 caracteres' });
-    }
-    if (typeof apellidos !== 'string' || apellidos.length < 3) {
-        return res.status(400).json({ success: false, message: 'El apellido debe tener más de 3 caracteres' });
-    }
+    
 
     try {
+        
+
+        // Validaciones para los datos
+        console.log(req.body);
+        const { email, password, nombres, apellidos } = req.body;
+
+try {
+    // 1. Validaciones básicas
+    if (!email || !password || !nombres || !apellidos) {
+        return res.status(400).json({ 
+            result: false, 
+            message: 'Todos los campos son obligatorios' 
+        });
+    }
+
+    // 2. Validación de formato de email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        return res.status(400).json({ 
+            result: false, 
+            message: 'El formato del correo electrónico no es válido' 
+        });
+    }
+
+    // 3. Validación de contraseña
+    if (password.length < 8) {
+        return res.status(400).json({ 
+            result: false, 
+            message: 'La contraseña debe tener al menos 8 caracteres' 
+        });
+    }
+
+    if (!/[A-Z]/.test(password)) {
+        return res.status(400).json({ 
+            success: false, 
+            message: 'La contraseña debe contener al menos una mayúscula' 
+        });
+    }
+    
+    if (!/[0-9]/.test(password)) {
+        return res.status(400).json({ 
+            success: false, 
+            message: 'La contraseña debe contener al menos un número' 
+        });
+    }
+    
+    if (!/[^A-Za-z0-9]/.test(password)) {
+        return res.status(400).json({ 
+            success: false, 
+            message: 'La contraseña debe contener al menos un carácter especial' 
+        });
+    }
+
+    // 4. Validación de nombres
+    const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s']+$/;
+
+    if (!nameRegex.test(nombres)) {
+        return res.status(400).json({ 
+            success: false, 
+            message: 'El nombre solo puede contener letras y espacios' 
+        });
+    }
+    
+    if (!nameRegex.test(apellidos)) {
+        return res.status(400).json({ 
+            success: false, 
+            message: 'Los apellidos solo pueden contener letras y espacios' 
+        });
+    }
+    
+    if (nombres.length < 2) {
+        return res.status(400).json({ 
+            success: false, 
+            message: 'El nombre debe tener al menos 2 caracteres' 
+        });
+    }
+
+    // Verificar si el correo ya existe
+    const [results] = await pool.execute(
+        'SELECT * FROM user WHERE correo_electronico = ?', 
+        [email]
+    );
+    
+    if (results.length > 0) {
+        return res.status(400).json({ 
+            result: false, 
+            message: 'Este correo electrónico ya está registrado' 
+        });
+    }
+
+    // Resto de tu lógica de registro...
+    
+} catch (err) {
+    console.error('Error en registro de usuario:', err);
+    return res.status(500).json({ 
+        result: false, 
+        message: 'Error interno del servidor' 
+    });
+}
         // Verificar si el correo ya existe en la tabla `user`
         const [results] = await pool.execute('SELECT * FROM user WHERE correo_electronico = ?', [email]);
         if (results.length > 0) {
-            return res.status(400).json({ success: false, message: 'Este correo electrónico ya está registrado' });
+            return res.status(400).json({ result: false, message: 'Este correo electrónico ya está registrado' });
         }
 
         // Generar un token de verificación
@@ -60,10 +149,10 @@ const registro = async (req, res) => {
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
                 console.error('Error enviando correo:', error);
-                return res.status(500).json({ success: false, message: 'Error al enviar el correo de verificación' });
+                return res.status(500).json({ result: false, message: 'Error al enviar el correo de verificación' });
             } else {
                 console.log('Correo enviado:', info.response);
-                return res.status(200).json({ success: true, message: 'Correo de verificación enviado. Por favor, verifica tu correo electrónico.' });
+                return res.status(200).json({ result: true, message: 'Correo de verificación enviado. Por favor, verifica tu correo electrónico.' });
             }
         });
 
@@ -80,7 +169,7 @@ const verifyEmail = async (req, res) => {
     const tempUserData = tempUserStore[token];
 
     if (!tempUserData) {
-        return res.status(400).json({ success: false, message: 'Token de verificación inválido o expirado' });
+        return res.status(400).json({ result: false, message: 'Token de verificación inválido o expirado' });
     }
 
     try {
@@ -97,7 +186,7 @@ const verifyEmail = async (req, res) => {
 
         if (!userId || userId <= 0) {
             console.error('El ID del usuario no es válido:', userId);
-            return res.status(500).json({ success: false, message: 'No se pudo recuperar el ID del nuevo usuario' });
+            return res.status(500).json({ result: false, message: 'No se pudo recuperar el ID del nuevo usuario' });
         }
 
         // Insertar en la tabla `usuario` (datos personales) con permiso1 por defecto como 'Usuario'
@@ -113,7 +202,7 @@ const verifyEmail = async (req, res) => {
 
     } catch (err) {
         console.error('Error en verificación de correo:', err.message);
-        return res.status(500).json({ success: false, message: 'Error interno del servidor' });
+        return res.status(500).json({ result: false, message: 'Error interno del servidor' });
     }
 };
 
@@ -121,6 +210,10 @@ const login = async (req, res) => {
     try {
         const { correo_electronico, password1 } = req.body;
         
+        if (!correo_electronico || !password1) {
+            return res.status(400).json({ success: false, message: 'Todos los campos son obligatorios' });
+        }
+
         const [users] = await pool.query(
             'SELECT id, password FROM user WHERE correo_electronico = ?', 
             [correo_electronico]
@@ -128,8 +221,8 @@ const login = async (req, res) => {
 
         if (users.length === 0) {
             return res.status(404).json({
-                success: false,
-                message: 'Usuario no encontrado'
+                result: false,
+                message: 'Correo Incorrecto'
             });
         }
 
@@ -138,7 +231,7 @@ const login = async (req, res) => {
 
         if (!match) {
             return res.status(401).json({
-                success: false,
+                result: false,
                 message: 'Contraseña incorrecta'
             });
         }
@@ -153,7 +246,7 @@ const login = async (req, res) => {
         `, [user.id]);
 
         res.json({
-            success: true,
+            result: true,
             message: 'Inicio de sesión exitoso',
             user: {
                 id: user.id,
@@ -274,7 +367,7 @@ const adminLogin = async (req, res) => {
     if (!correo_electronico || !contraseña) {
         return res.status(400).json({ result: false, message: 'Todos los campos son obligatorios' });
     }
-        // 1. Verificar si el correo existe en la tabla administrador
+       
         const [admins] = await pool.query(
             'SELECT id_admin, contraseña, permiso2, nombre FROM administrador WHERE correo_electronico = ?', 
             [correo_electronico]
@@ -289,7 +382,7 @@ const adminLogin = async (req, res) => {
 
         const admin = admins[0];
         
-        // 2. Verificar que el permiso sea 'Admin'
+     // Verificar que el permiso sea 'Admin'
         if (admin.permiso2 !== 'Admin') {
             return res.status(403).json({
                 result: false,
@@ -297,7 +390,7 @@ const adminLogin = async (req, res) => {
             });
         }
 
-        // 3. Comparar contraseñas
+        // Comparar contraseñas
         const match = await bcrypt.compare(contraseña, admin.contraseña);
 
         if (!match) {
@@ -307,7 +400,7 @@ const adminLogin = async (req, res) => {
             });
         }
 
-        // 4. Crear sesión específica para administrador
+        //Crear sesión específica para administrador
         req.session.adminId = admin.id_admin;
         req.session.isAdmin = true;
         
@@ -346,7 +439,7 @@ const checkAdminSession = (req, res) => {
             isAdmin: true,
             admin: {
                 id: req.session.adminId,
-                // Puedes agregar más datos si es necesario
+                
             }
         });
 
@@ -436,7 +529,7 @@ const isAdmin = (req, res, next) => {
         return res.status(404).redirect('/index.html');
     }
 };
-// Modifica tu exportación para incluir las nuevas funciones
+
 module.exports = {
     registro,
     verifyEmail,

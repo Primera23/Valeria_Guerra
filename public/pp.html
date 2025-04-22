@@ -60,8 +60,9 @@
             <div id="dashboard" class="page-content active">
                 <div class="stat-card glow mb-6">
                     <h1>Bienvenid@ <span>Usuario</span> a el dashboard de Valeria Guerra con el rol de <span id="rol"></span></h1>
-                </div>
-                <h1>Resumen del Tablero</h1>
+                </div> 
+                <div  class="stat-card glow mb-6"><h1>Resumen del Tablero</h1></div>
+                
                 <div class="stats-grid">
                     <div class="stat-card glow">
                         <i class="fas fa-users"></i>
@@ -267,30 +268,32 @@
                     </table>
                 </div>
                 
-            <div id="actualizarCategoria" class="modalmask" style="display: none;">
-                <a href="#close" title="Close" class="close">X</a>
-                <div class="container">
-                    <div id="aja"></div>
-                    <form id="container">
-                        <div class="form-floating mb-2">
-                            <input type="text" class="form-control" id="categoria1" name="categoria1" disabled>
-                            <label for="categoria">Categoria Actual</label>
+                <div id="actualizarCategoria" class="modalmask" style="display: none;">
+                    <div class="modalbox">
+                        <a href="#close" title="Close" class="close">X</a>
+                        <div class="modal-content">
+                            <div id="aja"></div>
+                            <form id="categoriaForm"> <!-- Cambiado el ID del formulario -->
+                                <div class="form-floating mb-2">
+                                    <input type="text" class="form-control" id="categoria1" name="categoria1" disabled>
+                                    <label for="categoria1">Categoria Actual</label>
+                                </div>
+                            
+                                <div class="form-floating mb-2">
+                                    <input type="text" class="form-control" id="descripcion1" name="descripcion1">
+                                    <label for="descripcion1">Descripcion</label>
+                                </div>
+                            
+                                <div class="form-floating mb-2">
+                                    <input type="text" class="form-control" id="nuevoNombre" name="nuevoNombre">
+                                    <label for="nuevoNombre">Nuevo Nombre</label>
+                                </div>
+                            
+                                <button type="submit" class="btn btn-primary">Actualizar</button>
+                            </form>
                         </div>
-                    
-                        <div class="form-floating mb-2">
-                            <input type="text" class="form-control" id="descripcion1" name="descripcion1">
-                            <label for="descripcion1">Descripcion</label>
-                        </div>
-                    
-                        <div class="form-floating mb-2">
-                            <input type="text" class="form-control" id="nuevoNombre" name="nuevoNombre">
-                            <label for="nuevoNombre">Nuevo Nombre</label>
-                        </div>
-                    
-                        <div id="boton"></div>  
-                    </form>
+                    </div>
                 </div>
-            </div>
 </div>
             <div id="productos" class="page-content">
                 <h2>Gestión de Productos</h2>
