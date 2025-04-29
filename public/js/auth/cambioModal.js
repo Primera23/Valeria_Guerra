@@ -250,7 +250,7 @@ class AuthModalManager {
                             </div>`;
                     }
 
-                    if (data.success) {
+                    if (data.result) {
                         return fetch('/protected', {
                             credentials: 'include'
                         })

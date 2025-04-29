@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Obtener todos los elementos del menú
     const navLinks = document.querySelectorAll('.nav-links li');
-    const userInfo = document.querySelector('#dropdownInformation ul li');
+    const cardGlow = document.querySelectorAll('.more-links')
     // Función para cambiar de página
     function changePage(pageId) {
         // Ocultar todas las páginas
@@ -12,6 +12,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // Mostrar la página seleccionada
         document.getElementById(pageId).classList.add('active');
         
+        cardGlow.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('data-page') === pageId) {
+                link.classList.add('active');
+            }
+        });
         // Actualizar el estado activo del menú
         navLinks.forEach(link => {
             link.classList.remove('active');
@@ -19,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 link.classList.add('active');
             }
         });
-
+        
         
     }
     
@@ -41,7 +47,20 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     });
 
+    cardGlow.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const pageId = this.getAttribute('data-page');
+            changePage(pageId);
 
+   
+                       
+            // Cerrar el menú hamburguesa en móviles si está abierto
+            if (document.querySelector('.sidebar').classList.contains('active')) {
+                toggleSidebar();
+            }
+            });
+    });
     
     // Mostrar la página dashboard por defecto
     changePage('dashboard');

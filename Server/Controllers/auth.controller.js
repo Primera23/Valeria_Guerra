@@ -166,12 +166,12 @@ const verifyEmail = async (req, res) => {
 
     try {
         // Encriptar la contraseña
-        const hashedPassword = await bcrypt.hash(tempUserData.password, 10);
+        
 
         // Insertar en la tabla `user`
         const [result] = await pool.execute(
             'INSERT INTO user (correo_electronico, password) VALUES (?, ?)',
-            [tempUserData.email, hashedPassword]
+            [tempUserData.email, tempUserData.password]
         );
 
         const userId = result.insertId;
