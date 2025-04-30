@@ -171,7 +171,18 @@
         <div class="registro">
             <article class="fondo2">
                 <h2>Registrate</h2>
-                <div id="alertContainer"></div>
+                <div id="alertContainer">
+                    <div class="p-4 mb-4 text-[15px] text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"  role="alert">
+                        <span class="font-medium">Ojo!</span> La Contraseña debe contener
+                        <ul>
+                            <li>al menos 8 caracteres</li>
+                            <li>al menos una mayúscula</li>
+                            <li>al menos un número</li>
+                            <li>al menos un carácter especial</li>
+                        </ul>
+                    </div>
+                </div>
+                
                 <div><input type="text" placeholder="Nombres" name="nombres" id="nombres"></div>
                 <div><input type="text" placeholder="Apellidos" name="apellidos" id="apellidos"></div>
                 <div><input type="email" placeholder="Correo" name="email" id="email" required></div>

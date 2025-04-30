@@ -3,3 +3,6 @@ Cosas que hacer en el proyecto:
 2.Hacer sesion con google
 3.Terminar el dashboard de usuario
 4.Terminar el dashboard de admin
+5.no importa el orden pero en este caso insertar un asistente en la tabla admin ademas de poder cambiar la contraseña de administrador
+6.ocultar productos y categorias
+7.agg filtros a la tabla da categoria y productos ademas de agg las categorias existentes en la pagina y tambien poner filtros
