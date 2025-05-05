@@ -1,20 +1,20 @@
 const { Router } = require('express');  // Reemplazamos 'import' por 'require'
 const {
-    postCategorias,
-    getCategoria,
-    deleteCategorias,
-    getCategorias,
-    patchCategorias
+    crearCategorias,
+    obtenerCategoria,
+    borrarCategorias,
+    obtenerCategorias,
+    actualizarCategorias
 } = require('../Controllers/categoria.controller.js');  // Reemplazamos 'import' por 'require'
 
 const router = Router();
 
 // Rutas
-router.post('/categoria', postCategorias);
-router.get("/categorias", getCategorias);
-router.get("/categoria/:categoria", getCategoria);
-router.delete('/categoria/:categoria', deleteCategorias);
-router.patch('/categoria/:categoria', patchCategorias);
+router.post('/categoria', crearCategorias);
+router.get("/categorias", obtenerCategorias);
+router.get("/categoria/:categoria", obtenerCategoria);
+router.delete('/categoria/:categoria', borrarCategorias);
+router.patch('/categoria/:categoria', actualizarCategorias);
 
 // Exportar el router usando 'module.exports'
 module.exports = router;

@@ -3,8 +3,13 @@ const bcrypt = require('bcrypt');
 const { pool } = require('../db.js');  // Asegúrate de que `pool` esté importado correctamente
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
-const session = require('express-session');  // Necesitas esta librería para sesiones
-const { app } = require('express');
+const {
+verifyIfexist,
+registerUser,
+registerUsuario
+} = require('../Models/auth.model.js');
+const passport = require('passport');
+
 // const correo = 'valeriaguerra2341@gmail.com';
 // Configura el transporte de nodemailer
 const transporter = nodemailer.createTransport({
@@ -88,10 +93,7 @@ const registro = async (req, res) => {
         }
 
         // Verificar si el correo ya existe (una sola verificación)
-        const [results] = await pool.execute(
-            'SELECT * FROM user WHERE correo_electronico = ?', 
-            [email]
-        );
+        const results = await verifyIfexist(email);
         
         if (results.length > 0) {
             return res.status(400).json({ 
@@ -166,13 +168,12 @@ const verifyEmail = async (req, res) => {
 
     try {
         // Encriptar la contraseña
-        
-
+        const email = tempUserData.email 
+        const password = tempUserData.password 
+        const nombres= tempUserData.nombres
+        const apellidos= tempUserData.apellidos
         // Insertar en la tabla `user`
-        const [result] = await pool.execute(
-            'INSERT INTO user (correo_electronico, password) VALUES (?, ?)',
-            [tempUserData.email, tempUserData.password]
-        );
+        const result = await registerUser(email, password) 
 
         const userId = result.insertId;
 
@@ -182,10 +183,7 @@ const verifyEmail = async (req, res) => {
         }
 
         // Insertar en la tabla `usuario` (datos personales) con permiso1 por defecto como 'Usuario'
-        await pool.execute(
-            'INSERT INTO usuario (nombre, apellido, user_id, permiso1) VALUES (?, ?, ?, ?)',
-            [tempUserData.nombres, tempUserData.apellidos, userId, 'Usuario']
-        );
+        await registerUsuario(nombres, apellidos, userId);
 
         // Eliminar los datos temporales
         delete tempUserStore[token];
@@ -308,7 +306,7 @@ const perfil = async (req, res) => {
         }    
     }
 
-  const  checkSession = (req, res) => {
+const  checkSession = (req, res) => {
         try {
             if (!req.session.userId) {
                 return res.json({ 
@@ -511,16 +509,7 @@ const adminPerfil = async (req, res) => {
     }
 };
 // Middleware para verificar administrador
-const isAdmin = (req, res, next) => {
-    if (req.session.isAdmin) {
-        return next();
-    }
 
-    // Decide la respuesta según el tipo de solicitud
-     else if (req.accepts('html')) {
-        return res.status(404).redirect('/');
-    }
-};
 
 module.exports = {
     registro,
@@ -533,6 +522,5 @@ module.exports = {
     adminLogin,
     adminLogout,
     checkAdminSession,
-    isAdmin,
     adminPerfil
 };

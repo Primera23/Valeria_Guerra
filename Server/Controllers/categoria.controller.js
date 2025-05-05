@@ -1,8 +1,15 @@
 const { pool } = require('../db.js');  // Reemplazamos 'import' por 'require'
+const {
+    getCategorias,
+    getCategoria,
+    patchCategorias,
+    deleteCategorias,
+    postCategorias,
+} = require('../Models/categoria.model.js');
 
-const getCategorias = async (req, res) => {
+const obtenerCategorias = async (req, res) => {
     try {
-        const [rows] = await pool.query("SELECT * FROM `categoria` ORDER BY `categoria`.`Createt` ASC");
+        const rows = await getCategorias();
         res.json(rows);
     } catch (err) {
         console.error(err);
@@ -10,11 +17,11 @@ const getCategorias = async (req, res) => {
     }
 };
 
-const getCategoria = async (req, res) => {
+const obtenerCategoria = async (req, res) => {
     try {
         const { categoria } = req.params;
         console.log(categoria);
-        const [rows] = await pool.query(`SELECT * FROM categoria WHERE categoria = ?`, [req.params.categoria]);
+        const rows = await getCategoria(categoria);
         res.json(rows);
     } catch (err) {
         console.error(err);
@@ -22,7 +29,7 @@ const getCategoria = async (req, res) => {
     }
 };
 
-const patchCategorias = async (req, res) => {
+const actualizarCategorias = async (req, res) => {
     const { categoria } = req.params;
     const { descripcion1, nuevoNombre } = req.body;
 
@@ -34,10 +41,10 @@ const patchCategorias = async (req, res) => {
         return res.status(400).json({ success: false, message: 'El campo nombre no debe exceder de 50 caracteres' });
     }
 
-    const actualizar = 'UPDATE categoria SET categoria = ?, descripcion = ? WHERE categoria = ?';
+    
 
     try {
-        const [result] = await pool.query(actualizar, [nuevoNombre, descripcion1, categoria]);
+        const result = await patchCategorias(categoria,descripcion1,nuevoNombre);
 
         if (result.affectedRows === 0) {
             return res.status(404).json({ success: false, message: 'Categoría no encontrada' });
@@ -51,13 +58,13 @@ const patchCategorias = async (req, res) => {
     }
 };
 
-const deleteCategorias = async (req, res) => {
+const borrarCategorias = async (req, res) => {
     const { categoria } = req.params;
 
-    const eliminar = 'DELETE FROM categoria WHERE categoria = ?';
+    
 
     try {
-        const [result] = await pool.query(eliminar, [categoria]);
+        const result = await deleteCategorias(categoria);
         if (result.affectedRows === 0) {
             return res.status(404).json({ success: false, message: 'Categoría no encontrada' });
         }
@@ -68,7 +75,7 @@ const deleteCategorias = async (req, res) => {
     }
 };
 
-const postCategorias = async (req, res) => {
+const crearCategorias = async (req, res) => {
     const { categoria, descripcion } = req.body;
 
     if (!categoria || !descripcion) {
@@ -81,9 +88,9 @@ const postCategorias = async (req, res) => {
         return res.status(400).json({ success: false, message: 'El campo nombre no debe exceder mas de 20 caracteres' });
     }
 
-    const insertar = 'INSERT INTO categoria(categoria, descripcion) VALUES(?, ?)';
+    
     try {
-        const [result] = await pool.query(insertar, [categoria, descripcion]);
+        const result = await postCategorias(categoria,descripcion);
         return res.status(200).json({ success: true, message: 'Registro exitoso' });
     } catch (err) {
         console.error(err);
@@ -94,9 +101,9 @@ const postCategorias = async (req, res) => {
 
 
 module.exports = {
-    getCategorias,
-    getCategoria,
-    patchCategorias,
-    deleteCategorias,
-    postCategorias
+    obtenerCategorias,
+    obtenerCategoria,
+    actualizarCategorias,
+    borrarCategorias,
+    crearCategorias
 };
