@@ -62,16 +62,16 @@ document.querySelectorAll('.details-btn').forEach(button => {
 });
 
 // Cerrar modal de detalles
-document.querySelector('.close-detail').addEventListener('click', function() {
-    document.getElementById('productDetailModal').style.display = 'none';
-});
+// document.querySelector('.close-detail').addEventListener('click', function() {
+//     document.getElementById('productDetailModal').style.display = 'none';
+// });
 
-// Cerrar al hacer clic fuera
-window.addEventListener('click', function(event) {
-    if (event.target == document.getElementById('productDetailModal')) {
-        document.getElementById('productDetailModal').style.display = 'none';
-    }
-});
+// // Cerrar al hacer clic fuera
+// window.addEventListener('click', function(event) {
+//     if (event.target == document.getElementById('productDetailModal')) {
+//         document.getElementById('productDetailModal').style.display = 'none';
+//     }
+// });
 
  
  

@@ -30,11 +30,16 @@ const countUsers = async () => {
     const [results] = await pool.query('SELECT COUNT(*) AS total FROM usuario');
     return results[0].total;
 };
+const getProducto = async(id_producto)=>{
+    const [productos] = await pool.query(`SELECT * FROM producto WHERE id_producto = ?`, [id_producto]);
+    return productos;
+}
 
 module.exports = {
     getTallas,
     getProductos,
     insertProducto,
     insertColorTalla,
-    countUsers
+    countUsers,
+    getProducto
 };

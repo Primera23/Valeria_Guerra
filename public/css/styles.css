@@ -1511,3 +1511,103 @@ footer {
   font-family: inherit !important;
 }
 
+/* Estilos del modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.modal-content {
+  background: white;
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 800px;
+  position: relative;
+  animation: modalFadeIn 0.3s;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  font-size: 30px;
+  color: #aaa;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close-modal:hover {
+  color: #333;
+}
+
+.modal-body {
+  display: flex;
+  gap: 30px;
+}
+
+.modal-image {
+  flex: 1;
+}
+
+.modal-image img {
+  width: 100%;
+  border-radius: 8px;
+  max-height: 400px;
+  object-fit: contain;
+}
+
+.modal-info {
+  flex: 1;
+}
+
+.modal-info h2 {
+  margin-top: 0;
+  color: #333;
+}
+
+.description {
+  color: #666;
+  line-height: 1.6;
+  margin: 20px 0;
+}
+
+.btn-add-to-cart {
+  background: #e63946;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+.btn-add-to-cart:hover {
+  background: #c1121f;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .modal-body {
+      flex-direction: column;
+  }
+  
+  .modal-content {
+      width: 90%;
+      margin: 20px auto;
+  }
+}

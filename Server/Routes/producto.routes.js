@@ -3,7 +3,8 @@ const {
     crearProducto,
     obtenerProductos,
     obtenerTallas,
-    contarUsuarios
+    contarUsuarios,
+    obtenerProducto
     // deleteCategorias,
     // getCategorias,
     // patchCategorias
@@ -29,6 +30,7 @@ router.post('/producto',upload.single('Imagen'),crearProducto);
   
 router.get("/productos",obtenerProductos);
 router.get("/usuarios",contarUsuarios);
+router.get("/productos/:id_producto",obtenerProducto)
 // router.get("/producto/:producto", getProducto);
   
 // router.delete('/producto/:producto',deleteProducto)

@@ -245,8 +245,27 @@
       </div>
        
         <h1 class="center"> </h1>
-        <div class="food" >
-            <div class="product-container" id="food">
+        <div id="food" class="products-container"></div>
+
+<!-- Modal de detalles del producto -->
+<div id="productoModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div class="modal-body">
+            <div class="modal-image">
+                <img id="modalImagen" src="" alt="">
+            </div>
+            <div class="modal-info">
+                <h2 id="modalNombre"></h2>
+                <p id="modalPrecio" class="price"></p>
+                <p id="modalDescripcion" class="description"></p>
+                <div class="modal-actions">
+                    <button class="btn-add-to-cart">Añadir al carrito</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
              
 
             </div>
@@ -293,7 +312,7 @@
             
 
     <script src="js/auth/cambioModal.js"></script>
-    <script src="js/auth/authCrud.js" type="module"></script>
+    
     <script src="js/productos.js"></script>
   <script src="js/flowbite.min.js"></script>
 </body>

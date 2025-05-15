@@ -55,9 +55,10 @@ app.use(productoRoutes);
 app.use(authRoutes);
 
 // Ruta estática para archivos públicos
+app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
-app.use(express.static(path.join(__dirname, '..', 'public')));
+
 
 // Configuración de los certificados SSL
 const sslOptions = {

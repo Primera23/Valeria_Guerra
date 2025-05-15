@@ -3,7 +3,8 @@ const {
     getProductos,
     insertProducto,
     insertColorTalla,
-    countUsers
+    countUsers,
+    getProducto
 } = require('../Models/producto.model.js');
 
 const obtenerTallas = async (req, res) => {
@@ -25,6 +26,23 @@ const obtenerProductos = async (req, res) => {
     try {
         const productos = await getProductos();
         res.json(productos); // Envía solo el array si es lo que necesitas
+    } catch (error) {
+        console.error('Error al obtener productos:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error al obtener productos',
+            error: error.message
+        });
+    }
+    
+};
+
+const obtenerProducto = async (req, res) => {
+    const { id_producto } = req.params;
+    console.log(id_producto)
+    try {
+        const productos = await getProducto(id_producto);
+        res.json(productos[0]); // Envía solo el array si es lo que necesitas
     } catch (error) {
         console.error('Error al obtener productos:', error);
         res.status(500).json({
@@ -132,5 +150,6 @@ module.exports = {
     crearProducto, 
     obtenerProductos,
     obtenerTallas,
-    contarUsuarios
+    contarUsuarios,
+    obtenerProducto
 }
