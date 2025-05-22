@@ -631,7 +631,27 @@
   }
   
   
-  
+  .fondo1{
+    text-align: center;
+     width: 350px;
+      
+      background: #ffffff;
+      top: 70%;
+      left: 50%;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      box-sizing: border-box;
+      padding: 25px ;
+      align-items: center;
+      border-radius: 3%;
+      font-family: 'Ubuntu', sans-serif;
+  }
+
+  .fondo1 p{
+    margin-bottom: 4px;
+    font-size: 12px;
+    font-weight: bold;
+  }
   
   @keyframes cambioFondo {
       25%{
@@ -1057,9 +1077,7 @@ section{
       margin-bottom: 40px;
   }
   
-  .modalbox p{
-      line-height: 4px;
-  }
+  
   .modalbox h4 {
       color:#0f6b60;
   }

@@ -152,7 +152,7 @@
                 <div><input type="password" placeholder="Contraseña" name="password1"></div>
                 <button class="boton">Iniciar sesión</button>
             <div class="OtrosInicios">
-                <p><a href="#">¿Olvidaste la contraseña?</a></p>
+                <p><a href="#olvidarContra">¿Olvidaste la contraseña?</a></p>
                 <p>¿No tienes una cuenta?
                 <a href="#registrarse">Registrate</a></p>
                 <p>¿Otro tipo de inicio? <a href="#sesionAdministrador">Admin</a></p>
@@ -161,6 +161,25 @@
             </div>
         </form>
     </article>
+    </div>
+</div>
+
+<div id="olvidarContra" class="modalmask">
+    <div class="modalbox Sesion">
+        <a href="#close" title="Close" class="close">X</a>
+        <form id="resetForm" method="post" action="/soliRPassword">
+            <div class="login">
+                <article class="fondo1">
+                    <h2>Recuperar Contraseña</h2>
+                    <p>Introduce tu correo electrónico para restablecer tu contraseña.</p>
+                    <div><input type="email" placeholder="Correo electrónico" name="email" required></div>
+                    <button class="boton">Enviar enlace</button>
+
+                    <p><a href="#inicioSesion">Volver al inicio de sesión</a></p>
+                </article>
+
+            </div>
+        </form>
     </div>
 </div>
 

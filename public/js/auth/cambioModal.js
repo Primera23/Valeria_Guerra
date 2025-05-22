@@ -101,9 +101,21 @@ class AuthModalManager {
             
         }
     }
+
+    static showRecoverPModal() {
+        this.hideAllModals();
+        const recoverPModal = document.getElementById('olvidarContra');
+        if (recoverPModal) {
+            recoverPModal.style.display = 'block';
+            
+                recoverPModal.style.opacity = '1';
+                recoverPModal.style.pointerEvents = 'auto';
+            
+        }
+    }
     
     static hideAllModals() {
-        const modals = ['inicioSesion', 'registrarse', 'sesionAdministrador', 'modal'];
+        const modals = ['inicioSesion', 'registrarse', 'sesionAdministrador', 'modal','olvidarContra'];
         modals.forEach(modalId => {
             const modal = document.getElementById(modalId);
             if (modal) {
@@ -171,9 +183,11 @@ class AuthModalManager {
             });
         }
 
+        
+
         // Cerrar modales al hacer click fuera
         window.addEventListener('click', (e) => {
-            ['inicioSesion', 'registrarse', 'sesionAdministrador', 'modal'].forEach(modalId => {
+            ['inicioSesion', 'registrarse', 'sesionAdministrador', 'modal','olvidarContra'].forEach(modalId => {
                 const modal = document.getElementById(modalId);
                 if (modal && e.target === modal) {
                     this.hideAllModals();
@@ -181,6 +195,18 @@ class AuthModalManager {
             });
         });
 
+        document.querySelectorAll('a[href="#olvidarContra"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.showRecoverPModal();
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            this.hideAllModals();
+            }
+        });
         // Cerrar modales con botón X
         document.querySelectorAll('.modalmask .close').forEach(closeBtn => {
             closeBtn.addEventListener('click', (e) => {
