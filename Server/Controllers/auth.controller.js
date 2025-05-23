@@ -504,9 +504,22 @@ const adminPerfil = async (req, res) => {
 const soliRPassword = async (req, res) => {
     const { email } = req.body;
 
+
+     if (!email) {
+            return res.status(400).json({ success: false, message: 'Todos los campos son obligatorios' });
+        }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            return res.status(400).json({ 
+                result: false, 
+                message: 'El formato del correo electrónico no es válido' 
+            });
+        }
+
   try {
     const [users] = await pool.query('SELECT id FROM user WHERE correo_electronico = ?', [email]);
-    if (users.length === 0) return res.status(404).json({ message: 'No user found' });
+    if (users.length === 0) return res.status(404).json({result:false, message: 'Correo no encontrado' });
 
     const token = jwt.sign(
       { userId: users[0].id },
@@ -523,11 +536,11 @@ const soliRPassword = async (req, res) => {
       html: `<p>Haz clic <a href="${resetUrl}">aquí</a> para restablecer tu contraseña. Este enlace expira en 1 hora.</p>`
     });
 
-    res.json({ message: 'Correo enviado' });
+    res.json({result:true, message: 'Correo enviado' });
 
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Error del servidor' });
+    res.status(500).json({result:false, message: 'Error del servidor' });
   }
 }
 
@@ -544,6 +557,45 @@ const verifyResetPassword = (req, res) => {
 
 const resetPassword = async (req, res) => {
   const { token, password } = req.body;
+
+   if (!password) {
+            return res.status(400).json({ 
+                result: false, 
+                message: 'Todos los campos son obligatorios' 
+            });
+        }
+
+       
+        
+
+        // 3. Validación de contraseña
+        if (password.length < 8) {
+            return res.status(400).json({ 
+                result: false, 
+                message: 'La contraseña debe tener al menos 8 caracteres' 
+            });
+        }
+
+        if (!/[A-Z]/.test(password)) {
+            return res.status(400).json({ 
+                result: false, 
+                message: 'La contraseña debe contener al menos una mayúscula' 
+            });
+        }
+        
+        if (!/[0-9]/.test(password)) {
+            return res.status(400).json({ 
+                result: false, 
+                message: 'La contraseña debe contener al menos un número' 
+            });
+        }
+        
+        if (!/[^A-Za-z0-9]/.test(password)) {
+            return res.status(400).json({ 
+                result: false, 
+                message: 'La contraseña debe contener al menos un carácter especial' 
+            });
+        }
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);

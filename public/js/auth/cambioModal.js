@@ -156,7 +156,7 @@ class AuthModalManager {
         const registerForm = document.getElementById('registerForm');
         const adminForm = document.getElementById('adminForm')
         const configBtn = document.querySelector('.config-btn');
-
+        const resetPasswordForm = document.getElementById('resetForm');
         // Botón principal que alterna modales
         if (btn) {
             btn.addEventListener('click', (e) => {
@@ -351,6 +351,55 @@ class AuthModalManager {
                         }).then(() => {
                             registerForm.reset();
                             // this.showLoginModal(); // Descomenta si es necesario
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    
+                });
+            });
+        }
+
+        if (resetPasswordForm) {
+            resetPasswordForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // Obtener valores directamente del formulario
+                
+                
+                fetch('/soliRPassword', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+  email: resetPasswordForm.mail.value
+})
+                })
+                .then(response =>response.json())
+                .then(data => {
+                    const alertContainer = document.getElementById('alertResetPassword');
+                    if (alertContainer) {
+                        const isSuccess = data.result;
+                        const alertClass = isSuccess 
+                            ? 'text-green-800 bg-green-50 dark:bg-gray-800 dark:text-green-400' 
+                            : 'text-red-800 bg-red-50 dark:bg-gray-800 dark:text-red-400';
+                        
+                        alertContainer.innerHTML = `
+                            <div class="p-4 mb-4 text-[15px] rounded-lg ${alertClass}" role="alert">
+                                <span class="font-medium"></span> ${data.message}
+                            </div>`;
+                    }
+        
+                    if (data.result) {
+                        const emailValue = document.getElementById('mail').value; // Obtener el valor del email
+                        Swal.fire({
+                            title: '¡Solicitud exitosa!',
+                            html: `Se ha enviado un correo a <strong>${emailValue}</strong> para reestablecer la contraseña`,
+                            icon: 'success'
+                        }).then(() => {
+                            resetPasswordForm.reset();
                         });
                     }
                 })
