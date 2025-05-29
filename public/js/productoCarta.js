@@ -165,8 +165,8 @@ function abrirModalProducto(idProducto) {
 
             // Actualizar contenido del modal
             document.getElementById('modalImagen').src = `/uploads/${producto.url_imagen || 'default.jpg'}`;
-            document.getElementById('modalNombre').textContent = producto.nombre || 'Nombre no disponible';
-            document.getElementById('modalPrecio').textContent = `$${producto.precio ? producto.precio.toFixed(2) : '0.00'}`;
+            document.getElementById('modalNombre').textContent = `${producto.nombre}` || 'Nombre no disponible';
+            document.getElementById('modalPrecio').textContent = `${producto.precio}` ||  '0.00';
             document.getElementById('modalDescripcion').textContent = producto.descripcion || 'Descripción no disponible';
 
             // Mostrar el modal
