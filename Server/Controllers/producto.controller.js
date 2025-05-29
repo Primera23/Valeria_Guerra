@@ -24,8 +24,9 @@ const obtenerTallas = async (req, res) => {
 
 const obtenerProductos = async (req, res) => {
     try {
-        const productos = await getProductos();
-        res.json(productos); // Envía solo el array si es lo que necesitas
+        const categoria = req.query.categoria; // Obtiene el parámetro de consulta
+        const productos = await getProductos(categoria); // Pasa la categoría a la función
+        res.json(productos);
     } catch (error) {
         console.error('Error al obtener productos:', error);
         res.status(500).json({
@@ -34,7 +35,6 @@ const obtenerProductos = async (req, res) => {
             error: error.message
         });
     }
-    
 };
 
 const obtenerProducto = async (req, res) => {

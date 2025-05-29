@@ -1629,3 +1629,36 @@ footer {
       margin: 20px auto;
   }
 }
+
+#filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f9f9f9; /* fondo suave */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#filtros button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #159f8f; /* color base */
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#filtros button:hover {
+  background-color: #117f73; /* tono más oscuro al pasar el mouse */
+  transform: scale(1.05);
+}
+
+#filtros button:active {
+  transform: scale(0.97);
+  background-color: #0e6e63;
+}

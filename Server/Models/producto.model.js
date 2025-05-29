@@ -5,8 +5,16 @@ const getTallas = async () => {
     return talla;
 };
 
-const getProductos = async () => {
-    const [productos] = await pool.query("SELECT * FROM producto");
+const getProductos = async (categoria) => {
+    let query = "SELECT * FROM producto";
+    let params = [];
+    
+    if (categoria && categoria !== 'Todos') {
+        query += " WHERE id_categoria2 = ?";
+        params.push(categoria);
+    }
+    
+    const [productos] = await pool.query(query, params);
     return productos;
 };
 

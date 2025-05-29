@@ -1,7 +1,8 @@
 const { pool } = require('../db');
 
 const getCategorias = async () => {
-    const [rows] = await pool.query("SELECT * FROM `categoria` ORDER BY `categoria`.`Createt` ASC");
+    // Modificamos la consulta para obtener las categorías únicas de los productos
+    const [rows] = await pool.query("SELECT* FROM categoria");
     return rows;
 };
 
