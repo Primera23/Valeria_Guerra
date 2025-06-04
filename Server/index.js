@@ -15,6 +15,7 @@ const indexRoutes = require('./Routes/index.routes.js');
 const categoriaRoutes = require('./Routes/categoria.routes.js');
 const productoRoutes = require('./Routes/producto.routes.js');
 const authRoutes = require('./Routes/auth.routes.js');
+const paymentRoutes = require('./Routes/payment.routes.js')
 
 // Crear la aplicación
 const app = express();

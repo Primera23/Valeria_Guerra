@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="js/productoCarta.js"></script>
+    
      <!-- <link rel="stylesheet" href="css/output.css"> -->
 </head>
 <body>
@@ -81,7 +81,7 @@
       <h2>BOLSA DE COMPRAS</h2>
       
       <!-- Productos añadidos -->
-       
+      <div id="carrito-items-lateral" style="max-height:250px;overflow-y:auto;margin-bottom:16px;"></div>
 
       <!-- Total -->
       <div class="cart-total">
@@ -90,8 +90,8 @@
       </div>
 
       <!-- Botón de pago -->
-      <button class="checkout-btn">IR A PAGAR</button>
-  </div>
+      <button id="checkout-btn" class="checkout-btn">IR A PAGAR</button>
+  </div>
 </div>
   
 <div id="modal" class="modal">
@@ -317,7 +317,7 @@
             
 
     <script src="js/auth/cambioModal.js"></script>
-    
+    <script src="js/productoCarta.js"></script>
     <script src="js/productos.js"></script>
   <script src="js/flowbite.min.js"></script>
 </body>
