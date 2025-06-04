@@ -9,18 +9,10 @@ registerUser,
 registerUsuario
 } = require('../Models/auth.model.js');
 const passport = require('passport');
-
+const jwt = require('jsonwebtoken');
 // const correo = 'valeriaguerra2341@gmail.com';
 // Configura el transporte de nodemailer
-const transporter = nodemailer.createTransport({
-    service: 'gmail', // o cualquier otro servicio de correo
-    auth: {
-        // user: correo,
-        // pass: 'ovgk feyq alqg lizp'
-        user: process.env.EMAIL_USER || 'tucorreo@gmail.com', // Usar variables de entorno
-        pass: process.env.EMAIL_PASS || 'tucontraseña'
-    }
-});
+const transporter = require('../Services/mailer.js')
 
 // Objeto temporal para almacenar datos de usuario pendientes de verificación
 const tempUserStore = {};
@@ -508,7 +500,114 @@ const adminPerfil = async (req, res) => {
         });
     }
 };
-// Middleware para verificar administrador
+
+const soliRPassword = async (req, res) => {
+    const { email } = req.body;
+
+
+     if (!email) {
+            return res.status(400).json({ success: false, message: 'Todos los campos son obligatorios' });
+        }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            return res.status(400).json({ 
+                result: false, 
+                message: 'El formato del correo electrónico no es válido' 
+            });
+        }
+
+  try {
+    const [users] = await pool.query('SELECT id FROM user WHERE correo_electronico = ?', [email]);
+    if (users.length === 0) return res.status(404).json({result:false, message: 'Correo no encontrado' });
+
+    const token = jwt.sign(
+      { userId: users[0].id },
+      process.env.JWT_SECRET,
+      { expiresIn: '1h' }
+    );
+
+    const resetUrl = `${process.env.FRONTEND_URL}/reset-password.html?token=${token}`;
+
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: 'Restablece tu contraseña',
+      html: `<p>Haz clic <a href="${resetUrl}">aquí</a> para restablecer tu contraseña. Este enlace expira en 1 hora.</p>`
+    });
+
+    res.json({result:true, message: 'Correo enviado' });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({result:false, message: 'Error del servidor' });
+  }
+}
+
+const verifyResetPassword = (req, res) => {
+  const { token } = req.query;
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    res.json({ valid: true, userId: decoded.userId });
+  } catch (err) {
+    res.status(400).json({ valid: false, message: 'Token inválido o expirado' });
+  }
+}
+
+const resetPassword = async (req, res) => {
+  const { token, password } = req.body;
+
+   if (!password) {
+            return res.status(400).json({ 
+                result: false, 
+                message: 'Todos los campos son obligatorios' 
+            });
+        }
+
+       
+        
+
+        // 3. Validación de contraseña
+        if (password.length < 8) {
+            return res.status(400).json({ 
+                result: false, 
+                message: 'La contraseña debe tener al menos 8 caracteres' 
+            });
+        }
+
+        if (!/[A-Z]/.test(password)) {
+            return res.status(400).json({ 
+                result: false, 
+                message: 'La contraseña debe contener al menos una mayúscula' 
+            });
+        }
+        
+        if (!/[0-9]/.test(password)) {
+            return res.status(400).json({ 
+                result: false, 
+                message: 'La contraseña debe contener al menos un número' 
+            });
+        }
+        
+        if (!/[^A-Za-z0-9]/.test(password)) {
+            return res.status(400).json({ 
+                result: false, 
+                message: 'La contraseña debe contener al menos un carácter especial' 
+            });
+        }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    await pool.query('UPDATE user SET password = ? WHERE id = ?', [hashedPassword, decoded.userId]);
+    res.json({ message: 'Contraseña actualizada' });
+
+  } catch (err) {
+    res.status(400).json({ message: 'Token inválido o expirado' });
+  }
+}
 
 
 module.exports = {
@@ -522,5 +621,8 @@ module.exports = {
     adminLogin,
     adminLogout,
     checkAdminSession,
-    adminPerfil
+    adminPerfil,
+    soliRPassword,
+    verifyResetPassword,
+    resetPassword
 };
