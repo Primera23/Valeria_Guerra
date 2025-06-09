@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Online</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="shortcut icon" href="ImagenesProyecto/image00003.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+     <!-- <link rel="stylesheet" href="css/output.css"> -->
+</head>
+<body>
+  
+
+  <!-- Header Telwin -->
+  <nav class="telwin-header w-full">
+    <div class="telwin-container flex justify-between items-center h-full">
+      
+      <!-- Lado izquierdo: Logo -->
+      <div class="flex items-center h-full">
+        <a href="#" class="flex items-center space-x-5 rtl:space-x-reverse h-full">
+          <img src="ImagenesProyecto/image00003.jpeg" alt="Logo Telwin"
+            class="h-28 w-28  md:h-40 md:w-40 object-cover rounded-full border-4 border-white shadow-2xl transition-all duration-300 hover:scale-105" />
+           
+        </a>
+      </div>
+  
+      <!-- Lado derecho: Menú + iconos -->
+      <div class="flex items-center space-x-4">
+        <!-- Botón Hamburguesa para móvil -->
+        <button data-collapse-toggle="telwin-mega-menu" type="button" class="md:hidden text-white text-3xl focus:outline-none">
+          <i class="fas fa-bars"></i>
+        </button>
+  
+        <!-- Menú de Navegación -->
+        <div id="telwin-mega-menu"
+          class="items-center justify-between hidden w-full md:flex md:w-auto md:h-full">
+          <ul
+            class="flex flex-col mt-4 font-medium md:flex-row md:space-x-8 lg:space-x-10 xl:space-x-12 md:mt-0 md:h-full md:items-center">
+            <li class="md:h-full md:flex md:items-center">
+              <a href="index.html" class="telwin-nav-link block w-full text-center hover:text-orange-300 md:p-0"
+                aria-current="page">INICIO</a>
+            </li>
+            <li class="md:h-full md:flex md:items-center">
+              <a href="#nosotros " class="telwin-nav-link block w-full text-center hover:text-orange-300 md:p-0">NOSOTROS</a>
+            </li>
+            <li class="md:h-full md:flex md:items-center">
+              <a href="#contacto" class="telwin-nav-link block w-full text-center hover:text-orange-300 md:p-0">CONTACTO</a>
+            </li>
+             <!-- Ícono de usuario separado -->
+             <li class="md:h-full md:flex md:items-center ml-4">
+              <a href="#" id="openModal" class="telwin-user-icon">
+                <i class="fas fa-user"></i>
+              </a>
+            </li>
+            
+            <!-- Ícono de carrito separado -->
+            <li class="md:h-full md:flex md:items-center ml-4">
+              <div class="cart-icon-container relative" id="cart-btn">
+                <i class="fas fa-shopping-cart telwin-user-icon"></i>
+                <span class="cart-counter absolute -top-2 -right-3 bg-orange-500 text-white text-xs px-1.5 py-0.5 rounded-full">0</span>
+              </div>
+            </li>
+            
+           
+          </ul>
+        </div>
+      </div>
+  
+    </div>
+  </nav>
+
+
+  <!-- Modal del Carrito -->
+<div id="cartModal" class="cart-modal">
+  <div class="cart-content">
+      <span class="close-modal">&times;</span>
+      <h2>BOLSA DE COMPRAS</h2>
+      
+      <!-- Productos añadidos -->
+      <div id="carrito-items-lateral" style="max-height:250px;overflow-y:auto;margin-bottom:16px;"></div>
+
+      <!-- Total -->
+      <div class="cart-total">
+          <p>TOTAL</p>
+          <p>$ <span id="total-price"></span></p>
+      </div>
+
+      <!-- Botón de pago -->
+      <button id="checkout-btn" class="checkout-btn">IR A PAGAR</button>
+  </div>
+</div>
+  
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <div class="user-info">
+      <p>Nombre del Usuario</p>
+      <p>usuario@example.com</p>
+    </div>
+    <ul class="modal-options">
+      <li><a href="#" class="logout-btn">Salir</a></li>
+      <li><a href="#" class="config-btn">Configuración</a></li>
+    </ul>
+  </div>
+</div>
+
+
+
+
+<div id="inicioSesion" class="modalmask">
+  <div class="modalbox Sesion">
+      <a href="#close" title="Close" class="close">X</a>
+      <form id="loginForm">
+          <div class="login">
+              <article class="fondo">
+                  <h2>Inicio de Sesion - Usuario</h2>
+              <div id="aja"></div>
+              <div><input type="text" placeholder="Correo" name="correo_electronico"></div>
+              <div><input type="password" placeholder="Contraseña" name="password1"></div>
+              <button class="boton">Iniciar sesión</button>
+          <div class="OtrosInicios">
+              <p><a href="#">¿Olvidaste la contraseña?</a></p>
+              <p>¿No tienes una cuenta?
+              <a href="#registrarse">Registrate</a></p>
+              <p>¿Otro tipo de inicio? <a href="#sesionAdministrador">Admin</a></p>
+          </div>
+
+          </div>
+      </form>
+  </article>
+  </div>
+</div>
+
+<div id="registrarse" class="modalmask">
+  <div class="modalbox registrarse">
+      <a href="#close" title="Close" class="close">X</a>
+      <form id="registerForm" method="post" action="/register">
+      <div class="registro">
+          <article class="fondo2">
+              <h2>Registrate</h2>
+              <div id="alertContainer">
+                <div class="p-4 mb-4 text-[15px] text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"  role="alert">
+                    <span class="font-medium">Ojo!</span> La Contraseña debe contener
+                    <ul>
+                        <li>al menos 8 caracteres</li>
+                        <li>al menos una mayúscula</li>
+                        <li>al menos un número</li>
+                        <li>al menos un carácter especial</li>
+                    </ul>
+                </div>
+            </div>
+              <div><input type="text" placeholder="Nombres" name="nombres" id="nombres"></div>
+              <div><input type="text" placeholder="Apellidos" name="apellidos" id="apellidos"></div>
+              <div><input type="email" placeholder="Correo" name="email" id="email" required></div>
+              <div><input type="password" placeholder="Contraseña" name="password"></div>
+              <button class="boton">Registrarse</button>
+              <div class="OtrosInicios">
+                  <p><a href="#">¿Olvidaste la contraseña?</a></p>
+                  <p>¿Ya tienes una cuenta?
+                  <a href="#inicioSesion">Inicia Sesion</a></p>
+                  <p>¿Otro tipo de inicio? <a href="#sesionAdministrador">Admin</a></p>
+              </div>
+              </div>
+          </form>
+      </article>
+      </div>
+  </div>
+</div>
+</div>
+
+<div id="sesionAdministrador" class="modalmask">
+  <div class="modalbox admin">
+      <a href="#close" title="Close" class="close">X</a>
+      
+      <form id="adminForm" >
+          <div class="login">
+              <article class="fondo">
+              <div id="alertAdmin"></div>
+              <h2>Inicio Admin</h2>
+              <input type="text" placeholder="Correo" name="correo">
+              <input type="password" placeholder="Contraseña" name="password2">
+              <button class="boton" type="submit">Iniciar Sesion</button>
+              <div class="OtrosInicios">
+                  <p><a href="#">¿Olvidaste la contraseña?</a></p>
+                  <p>¿No tienes una cuenta?
+                  <a href="#registrarse">Registrate</a></p>
+                  <p>¿Otro tipo de inicio? <a href="#inicioSesion">Usuario</a></p>
+              </div>
+          </div>
+         
+      </form>
+  </article>
+  </div>
+</div>
+
+<div id="sesionAdministrador" class="modalmask">
+    <div class="modalbox admin">
+
+        <a href="#close" title="Close" class="close">X</a>
+        <article class="fondo3">
+        <form action="pp.html" >
+            <div class="login admin">
+                <h2>Inicio Admin</h2>
+                <input type="text" placeholder="Correo" name="user">
+                <input type="password" placeholder="Contraseña" name="password">
+                <button class="boton" >Iniciar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+  <section class="home" id="home">
+    
+    <div class="content">
+        <div class="mini-content">
+            <h3>Universo Streetcolor</h3>
+            <p>
+                Abraza el color para crear un mundo más vibrante
+            </p>
+        </div>
+            
+    </div>
+</section>
+
+      <div class="article">
+        <div class="box">
+          <h1>LOS MEJORES ESTILOS </h1>
+        </div>
+      </div>
+      <div class="two-box">
+        <div class="box-img1">
+          <h1>Siguenos 
+          </h1>
+          <p id="#nosotros">Siguenos en Instagram</p>
+          <a href="https://www.instagram.com/valeriaguerrabrand?igsh=OHFkZ3FwMWw1NHNy">Instagram</a>
+        </div>
+        <div class="box-img2">
+          <h1>Registrate</h1>
+          <p>A la moda</p>
+          <a href="#">Estilos</a>
+        </div>
+      </div>
+      
+        <h1 class="center"> </h1>
+        <div id="filtros">
+          <button data-filtro="todos">Todos</button>
+         
+
+        </div>
+        <div id="food" class="products-container"></div>
+
+<!-- Modal de detalles del producto -->
+<div id="productoModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div class="modal-body">
+            <div class="modal-image">
+                <img id="modalImagen" src="" alt="">
+            </div>
+            <div class="modal-info">
+                <h2 id="modalNombre"></h2>
+                <p id="modalPrecio" class="price"></p>
+                <p id="modalDescripcion" class="description"></p>
+                <div class="modal-actions">
+                    <button class="btn-add-to-cart">Añadir al carrito</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+             
+
+            </div>
+          </div>
+          
+          
+          <!-- Main modal -->
+          
+            
+    <footer>
+     
+
+        <div class="container__footer">
+            <div class="box__footer">
+                <div class="logo">
+                    <img src="ImagenesProyecto/image00002.jpeg" alt="">
+                </div>
+                <div class="terms">
+                 </div>
+            </div>
+        
+        <div class="box__footer">
+            <h2>Descripcion</h2>
+            <p>Descubre tu estilo con nuestra colección única de moda. Calidad, elegancia y comodidad para cada ocasión. Viste con confianza, viste con nosotros.</p>
+
+        </div>
+
+        <div class="box__footer" id="contacto">
+          <h2>Contactanos</h2>
+          <a href="https://www.instagram.com/valeriaguerrabrand?igsh=OHFkZ3FwMWw1NHNy"><i class="fab fa-instagram-square"></i> Instagram</a>
+          <a href="https://www.facebook.com/share/1BYcnFQ9uv/"> <i class="fab fa-facebook-square"></i> Facebook</a>
+          <a href="#"><i class="fab fa-twitter-square"></i> Twitter</a>
+      
+      </div>
+
+    </div>
+
+    <div class="box__copyright">
+        <hr>
+        <p>Todos los derechos reservados © 2025 <b>valeria guerra</b></p>
+    </div>
+    
+</footer>
+            
+
+    <script type="module" src="js/auth/cambioModal.js"></script>
+<script type="module" src="js/productoCarta.js"></script>
+    
+  <script src="js/flowbite.min.js"></script>
+</body>
+</html>
