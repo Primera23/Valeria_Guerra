@@ -101,7 +101,7 @@ function mostrarProductos(productos) {
             <div class="img">
                 <img src="${API_BASE_URL}/uploads/${producto.url_imagen || 'default.jpg'}" alt="${producto.nombre}">
                 <div class="top-icons">
-                    <span class="icon cart">&#128722;</span>
+                    <span class="icon cart" data-id="${producto.id_producto}" data-nombre="${producto.nombre}" data-precio="${producto.precio}" data-imagen="${producto.url_imagen || 'default.jpg'}">&#128722;</span>
                     <span class="icon heart">&#10084;</span>
                 </div>
             </div>
@@ -112,10 +112,29 @@ function mostrarProductos(productos) {
         </div>`;
     }).join('');
 
-     container.querySelectorAll('.recipe').forEach(card => {
-        card.addEventListener('click', () => {
+    // Listener para abrir modal al hacer clic en la tarjeta (excepto en el carrito)
+    container.querySelectorAll('.recipe').forEach(card => {
+        card.addEventListener('click', (e) => {
+            // Si el click fue en el icono de carrito, no abrir modal
+            if (e.target.classList.contains('cart')) return;
             const id = card.getAttribute('data-id');
             abrirModalProducto(id);
+        });
+    });
+
+    // Listener para agregar al carrito
+    container.querySelectorAll('.icon.cart').forEach(cartIcon => {
+        cartIcon.addEventListener('click', (e) => {
+            e.stopPropagation(); // Evita que se abra el modal
+            const id = cartIcon.getAttribute('data-id');
+            const nombre = cartIcon.getAttribute('data-nombre');
+            const precio = parseFloat(cartIcon.getAttribute('data-precio')) || 0;
+            const imagen = cartIcon.getAttribute('data-imagen');
+            agregarAlCarrito(id, nombre, precio, imagen);
+
+            // Abre el carrito automáticamente
+            const cartModal = document.getElementById('cartModal');
+            if (cartModal) cartModal.style.display = 'block';
         });
     });
 }
@@ -158,6 +177,9 @@ function abrirModalProducto(idProducto) {
                     producto.url_imagen
                 );
                 cerrarModal();
+                // Abre el carrito automáticamente
+                const cartModal = document.getElementById('cartModal');
+                if (cartModal) cartModal.style.display = 'block';
             };
 
             modal.style.display = 'block';
@@ -196,12 +218,23 @@ function actualizarCarrito() {
     carritoContainer.innerHTML = carrito.map(item => `
         <div style="display:flex;align-items:center;margin-bottom:10px;">
           <img src="${API_BASE_URL}/uploads/${item.imagen || 'default.jpg'}" alt="${item.nombre}" style="width:40px;height:40px;object-fit:cover;margin-right:10px;">
-          <div>
+          <div style="flex:1;">
             <div>${item.nombre} x${item.cantidad}</div>
             <div>$${(item.precio * item.cantidad).toFixed(2)}</div>
           </div>
+          <button class="btn-remove-item" data-id="${item.id}" style="background:none;border:none;cursor:pointer;font-size:20px;margin-left:10px;" title="Eliminar">
+            🗑️
+          </button>
         </div>`
     ).join('');
+
+    // Listeners para eliminar productos
+    carritoContainer.querySelectorAll('.btn-remove-item').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const id = btn.getAttribute('data-id');
+            eliminarDelCarrito(id);
+        });
+    });
 
     const total = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
     totalContainer.innerText = total.toFixed(2);

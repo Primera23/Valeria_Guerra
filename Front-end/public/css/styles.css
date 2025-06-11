@@ -1428,10 +1428,10 @@ footer {
   display: none;
   position: fixed;
   top: 0;
-  left: 0;
-  width: 100%;
+  right: 0; /* Ahora el carrito sale del lado derecho */
+  width: 350px;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background: #fff;
   z-index: 1000;
   justify-content: flex-end;
   animation: fadeIn 0.3s;
