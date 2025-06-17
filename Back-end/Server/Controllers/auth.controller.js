@@ -621,6 +621,10 @@ const dashboardCli = (req, res) => {
     res.sendFile(path.join(__dirname, '../../views/dashboard-cli.html'));
 };
 
+const pp = (req, res) => {
+    console.log('pp ejecutado');
+    res.sendFile(path.join(__dirname, '../../views/pp.html'));
+};
 
 
 module.exports = {
@@ -638,5 +642,6 @@ module.exports = {
     soliRPassword,
     verifyResetPassword,
     resetPassword,
-    dashboardCli
+    dashboardCli,
+    pp
 };

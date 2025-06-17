@@ -1,5 +1,9 @@
 const { pool } = require('../db');
 
+const getProductosDisponibles = async () => {
+    const [productos] = await pool.query("SELECT * FROM `producto` WHERE estado = 1");
+    return productos;
+}
 const getTallas = async () => {
     const [talla] = await pool.query("SELECT * FROM tallas");
     return talla;
@@ -49,5 +53,6 @@ module.exports = {
     insertProducto,
     insertColorTalla,
     countUsers,
-    getProducto
+    getProducto,
+    getProductosDisponibles
 };

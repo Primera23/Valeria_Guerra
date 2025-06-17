@@ -34,9 +34,11 @@ export function mostrarProducto(productos){
                                         <td class="px-6 py-4">
                                             <img src="/uploads/${productos[i].url_imagen}" alt="Imagen del producto" style="width: 50px; height: 50px;">
                                         </td>
-                                         <td class="px-6 py-4">
-                                <button class="btn btn-danger" onclick="eliminarCategoria('${productos[i].id_categoria2}')">Eliminar</button>
-                                </td>
+                                        <td>
+                                            <button class="btn btn-${visible ? 'success' : 'secondary'}" onclick="cambiarVisibilidadProducto('${productos[i].id_producto}', ${visible})">
+                                                ${visible ? 'Visible' : 'Oculto'}
+                                            </button>
+                                        </td>
                                 <td class="px-6 py-4">
                                 <button class="btn btn-warning" onclick="actualizarCategoria('${productos[i].id_categoria2}')">Modificar</button>
                                 </td>

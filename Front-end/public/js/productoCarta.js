@@ -67,7 +67,7 @@ function cargarProductos(categoria = 'Todos') {
     const container = document.getElementById('food');
     if (container) container.innerHTML = '<div class="loader">Cargando productos...</div>';
 
-    fetch(`${API_BASE_URL}/productos`)	
+    fetch(`${API_BASE_URL}/productos-disponible`)	
         .then(response => {
             if (!response.ok) throw new Error('Error al cargar productos');
             return response.json();

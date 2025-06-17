@@ -473,7 +473,7 @@ class AuthModalManager {
                         }
                       }).then(() => {
                         adminForm.reset();
-                        window.location.href = 'pp.html';  // Redirección asegurada
+                        window.location.href = "https://localhost:3001/pp.html";  // Redirección asegurada
                       });
                 }
             })
@@ -513,13 +513,15 @@ class AuthModalManager {
         document.addEventListener('DOMContentLoaded', () => {
             this.initModalEvents();
             
-            if (window.location.pathname.includes('dashboard-cli.html')) {
+            if (window.location.pathname.includes('dashboard-cli.html') || window.location.pathname.includes('pp.html')) {
                 this.protectPage();
             } else {
                 this.checkAuth(false);
             }
         });
     }
+
+
 }
 
 AuthModalManager.init();

@@ -4,7 +4,8 @@ const {
     obtenerProductos,
     obtenerTallas,
     contarUsuarios,
-    obtenerProducto
+    obtenerProducto,
+    obtenerProductosDisponibles
     // deleteCategorias,
     // getCategorias,
     // patchCategorias
@@ -31,10 +32,19 @@ router.post('/producto',upload.single('Imagen'),crearProducto);
 router.get("/productos",obtenerProductos);
 router.get("/usuarios",contarUsuarios);
 router.get("/productos/:id_producto",obtenerProducto)
-// router.get("/producto/:producto", getProducto);
-  
-// router.delete('/producto/:producto',deleteProducto)
-  
-// router.patch('/producto/:producto', patchProducto);
+router.get("/productos-disponible", obtenerProductosDisponibles);
+router.patch('/producto/visibilidad/:id_producto', async (req, res) => {
+    const dbModule = require('../db');
+    const pool = dbModule.pool;
+    const { visible } = req.body;
+    const { id_producto } = req.params;
+    try {
+        const estado = visible ? 1 : 0;
+        await pool.query('UPDATE producto SET estado = ? WHERE id_producto = ?', [estado, id_producto]);
+        res.json({ success: true, message: 'Visibilidad actualizada' });
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Error al actualizar visibilidad' });
+    }
+});
 
 module.exports = router;

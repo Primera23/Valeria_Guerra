@@ -1,5 +1,5 @@
 const { Router } = require('express');  // Reemplazar 'import' por 'require'
-const { login, registro, verifyEmail, logout,perfil,checkSession,sesionesActivas,adminLogin,adminLogout,adminPerfil,checkAdminSession,soliRPassword,verifyResetPassword,resetPassword,dashboardCli } = require('../Controllers/auth.controller.js');  // Ajusta la importación del controlador
+const { login, registro, verifyEmail, logout,perfil,checkSession,sesionesActivas,adminLogin,adminLogout,adminPerfil,checkAdminSession,soliRPassword,verifyResetPassword,resetPassword,dashboardCli,pp } = require('../Controllers/auth.controller.js');  // Ajusta la importación del controlador
 const { isAdmin, reAuth } = require('../Middlewares/auth.Middleware.js');
 const router = Router();
 
@@ -18,7 +18,7 @@ router.post('/admin/login', adminLogin);
 router.post('/admin/logout', isAdmin, adminLogout);
 router.get('/admin/check-session', checkAdminSession);
 router.get('/admin/protected', isAdmin, adminPerfil);
-router.get('/pp.html',isAdmin);
+router.get('/pp.html',isAdmin,pp);
 
 router.post('/soliRPassword',soliRPassword)
 router.get('/verify-reset-token',verifyResetPassword)

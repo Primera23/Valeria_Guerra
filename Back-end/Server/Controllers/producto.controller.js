@@ -4,9 +4,25 @@ const {
     insertProducto,
     insertColorTalla,
     countUsers,
-    getProducto
+    getProducto,
+    getProductosDisponibles
 } = require('../Models/producto.model.js');
 
+const obtenerProductosDisponibles = async (req, res) => {
+    try {
+        const productos = await getProductosDisponibles();
+        // Filtrar productos que tienen cantidad mayor a 0
+        const productosDisponibles = productos.filter(producto => producto.cantidad > 0);
+        res.json(productosDisponibles); // Envía solo el array de productos disponibles
+    } catch (error) {
+        console.error('Error al obtener productos disponibles:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error al obtener productos disponibles',
+            error: error.message
+        });
+    }
+}
 const obtenerTallas = async (req, res) => {
     try {
         const talla = await getTallas();
@@ -151,5 +167,6 @@ module.exports = {
     obtenerProductos,
     obtenerTallas,
     contarUsuarios,
-    obtenerProducto
+    obtenerProducto,
+    obtenerProductosDisponibles
 }
