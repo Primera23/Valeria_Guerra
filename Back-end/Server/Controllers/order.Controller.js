@@ -1,22 +1,26 @@
 const OrderModel = require('../Models/order.model');
 const OrderItemModel = require('../Models/orderItem.model');
-const preference = require('../Services/mercadopagoConfig');
 
-// Configurar MercadoPago (esto podría ir en un archivo de configuración)
+const session = require('express-session');
+const { preference } = require('../Services/mercadopagoConfig');
+
 
 
 const OrderController = {
     createOrder: async (req, res) => {
+        console.log('Dentro de createOrder - sesión ID:', req.sessionID);
+        console.log('Dentro de createOrder - usuario:', req.session.userId);
+
         try {
-        if (!req.session.userId) {
-            return res.status(401).json({ result:false, message:'Inicie sesion' });
-        }
-        
-        const { items, total } = req.body;
-        if (!items || !total) {
-            return res.status(400).json({ error: 'Datos incompletos' });
-        }
-            
+            if (!req.session.userId) {
+                return res.status(401).json({ result: false, message: 'Inicie sesion' });
+            }
+
+            const { items, total } = req.body;
+            if (!items || !total) {
+                return res.status(400).json({ error: 'Datos incompletos' });
+            }
+
             // 1. Crear orden en la base de datos
             const nuevaOrden = await OrderModel.create({
                 user_id: req.session.userId,
@@ -25,7 +29,7 @@ const OrderController = {
                 payment_provider: 'mercadopago',
                 created_at: new Date()
             });
-            
+
             // 2. Crear items de la orden
             const orderItems = items.map(item => ({
                 order_id: nuevaOrden.id,
@@ -34,37 +38,57 @@ const OrderController = {
                 quantity: item.cantidad,
                 unit_price: item.precio
             }));
-            
+
             await OrderItemModel.bulkCreate(orderItems);
-            
+
             // 3. Crear preferencia en MercadoPago
-           const baseUrl = process.env.BASE_URL || 'http://localhost:3000';  // fallback por si no está definida
+            const baseUrl =  'https://localhost:3001';
 
             const preferencePayload = {
-  items: items.map(item => ({
-    title: item.nombre,
-    unit_price: Number(item.precio),   // asegurarse que sea número
-    quantity: item.cantidad,
-    picture_url: item.imagen ? `https://18a5-2800-484-df78-8c00-d5e5-595f-dac3-7e00.ngrok-free.app/uploads/${item.imagen}` : null,
-    currency_id: 'COP'  // <-- agregar la moneda correcta
-  })),
-  external_reference: nuevaOrden.id.toString(),
-  back_urls: {
-    success: `${process.env.BASE_URL}/pago-exitoso`,
-    failure: `${process.env.BASE_URL}/pago-fallido`,
-    pending: `${process.env.BASE_URL}/pago-pendiente`
-  },
-  auto_return: 'approved',
-  binary_mode: true
-};
+                items: items.map(item => {
+                    const product = {
+                        title: item.nombre,
+                        unit_price: Number(item.precio),
+                        quantity: item.cantidad,
+                        currency_id: 'COP'
+                    };
+
+                    if (item.imagen) {
+                        product.picture_url = `${baseUrl}/uploads/${item.imagen}`;
+                    }
+
+                    return product;
+                }),
+                external_reference: nuevaOrden.id.toString(),
+                back_urls: {
+                    success: `${baseUrl}/pago-exitoso`,
+                    failure: `${baseUrl}/pago-fallido`,
+                    pending: `${baseUrl}/pago-pendiente`
+                },
+                auto_return: 'approved',
+                binary_mode: true
+            };
+
             console.log('Preference payload:', JSON.stringify(preferencePayload, null, 2));
-            const response = await preference.create(preferencePayload);
+            console.log('Final payload keys:', Object.keys(preferencePayload));
+            console.log('First item keys:', Object.keys(preferencePayload.items[0]));
+
             
+
+
+           const response = await preference.create({ body: preferencePayload });
+
+            console.log('Orden creada con éxito');
+console.log('Preference ID:', response.id);
+console.log('ID orden DB:', nuevaOrden.id); 
+
             res.json({
-                preferenceId: response.body.id,
+                result: true,
+                message: 'Orden creada con éxito',
+                preferenceId: response.id,
                 orderId: nuevaOrden.id
             });
-            
+
         } catch (error) {
             console.error('Error al crear orden:', error);
             res.status(500).json({ error: 'Error al crear la orden' });
@@ -75,10 +99,10 @@ const OrderController = {
         try {
             const { orderId } = req.params;
             const { status } = req.body;
-            
+
             await OrderModel.update(orderId, { status });
             res.json({ message: 'Estado actualizado correctamente' });
-            
+
         } catch (error) {
             console.error('Error al actualizar orden:', error);
             res.status(500).json({ error: 'Error al actualizar la orden' });

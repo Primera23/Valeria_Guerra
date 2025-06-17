@@ -254,6 +254,7 @@ async function procesarPago() {
     try {
         const response = await fetch(`${API_BASE_URL}/crear-orden`, {
             method: 'POST',
+            credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 items: carrito,
@@ -262,32 +263,48 @@ async function procesarPago() {
         });
 
         const data = await response.json();
-    
-    if (!response.ok || !data.result) {
-        throw new Error(data.message || 'Error al crear la orden');
-    }
+        console.log('📦 Respuesta del backend:', data);
 
-        const { preferenceId } = await response.json();
+        // Validar estructura esperada
+        if (!response.ok || !data.result || !data.preferenceId) {
+            throw new Error(data.message || 'Error al crear la orden o preferenceId faltante');
+        }
+
+        const { preferenceId } = data;
+
+        console.log('✅ preferenceId recibido:', preferenceId);
+        console.log('🕐 Esperando 1 minuto para continuar...');
+
+        // Esperar 1 minuto (60,000 ms)
         
-        // Cargar SDK de MercadoPago si no está cargado
+
+        console.log('⏳ Tiempo de espera finalizado');
+        console.log('🧪 MercadoPago está definido:', typeof MercadoPago);
+
+        // Cargar SDK si no está disponible
         if (typeof MercadoPago === 'undefined') {
             const script = document.createElement('script');
             script.src = 'https://sdk.mercadopago.com/js/v2';
             script.onload = () => iniciarCheckoutMercadoPago(preferenceId);
+            script.onerror = () => {
+                throw new Error('Error al cargar el SDK de MercadoPago');
+            };
             document.body.appendChild(script);
         } else {
             iniciarCheckoutMercadoPago(preferenceId);
         }
     } catch (error) {
-        console.error('Error en el proceso de pago:', error);
+        console.error('❌ Error en el proceso de pago:', error);
         alert(error.message || 'Error al procesar el pago');
+    } finally {
         btnPago.disabled = false;
         btnPago.textContent = 'IR A PAGAR';
     }
 }
 
+
 function iniciarCheckoutMercadoPago(preferenceId) {
-    const mp = new MercadoPago('TU_CLAVE_PUBLICA_DE_MERCADOPAGO', {
+    const mp = new MercadoPago('TEST-6dbfd663-b426-4f61-a2fc-04437b5a29fc', {
         locale: 'es-AR'
     });
 
