@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VALERIA GUERRA</title>
+    
+    <link rel="shortcut icon" href="ImagenesProyecto/image00003.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="css/styles.css" >
+    <!-- <link href="css/tailwind.css" rel="stylesheet">  -->
+    <link rel="stylesheet" href="css/output.css">
+    <!-- Flowbite JS -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>  -->
+</head>
+<body>
+
+
+     
+
+    
+    <heeader> 
+        <!-- Header Telwin -->
+        <nav class="telwin-header w-full">
+            <div class="telwin-container flex flex-wrap justify-between items-center h-full">
+                <!-- Logo y texto centrado verticalmente -->
+                <div class="flex items-center h-full">
+                    <a href="#" class="flex items-center space-x-5 rtl:space-x-reverse h-full">
+                        <img src="ImagenesProyecto/image00003.jpeg" alt="Logo Telwin" 
+                             class="h-28 w-28 md:h-40 md:w-40 object-cover rounded-full 
+                                    border-4 border-white shadow-2xl transition-all 
+                                    duration-300 hover:scale-105" />
+                       
+                    </a>
+                </div>
+                
+                <!-- Botón Hamburguesa para mobile -->
+                <button data-collapse-toggle="telwin-mega-menu" type="button" class="md:hidden text-white text-3xl focus:outline-none">
+                    <i class="fas fa-bars"></i>
+                </button>
+        
+                <!-- Menú de Navegación Mejorado -->
+                <div id="telwin-mega-menu" class="items-center justify-between hidden w-full md:flex md:w-auto md:h-full">
+                    <ul class="flex flex-col mt-4 font-medium md:flex-row md:space-x-8 lg:space-x-10 xl:space-x-12 md:mt-0 md:h-full md:items-center">
+                        <li class="md:h-full md:flex md:items-center">
+                            <a href="Productos.html" class="telwin-nav-link block w-full text-center hover:text-orange-300 md:p-0" aria-current="page">PRODUCTOS</a>
+                        </li>
+                        <li class="md:h-full md:flex md:items-center">
+                            
+                            <a href="#nosotros" class="telwin-nav-link block w-full text-center hover:text-orange-300 md:p-0">NOSOTROS</a>
+                        </li>
+                        <li class="md:h-full md:flex md:items-center">
+                            <a href="#contacto" class="telwin-nav-link block w-full text-center hover:text-orange-300 md:p-0">CONTACTO</a>
+                        </li>
+                        <li class="md:h-full md:flex md:items-center ml-4">
+                            <a href="#" id="openModal" class="telwin-user-icon">
+                                <i class="fas fa-user"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+<section class="home" id="home">
+    
+    <div class="content">
+        <div class="mini-content">
+            <h3>Universo Streetcolor</h3>
+            <p>
+                Abraza el color para crear un mundo más vibrante
+            </p>
+        </div>
+            
+    </div>
+</section>
+
+
+
+<section class="prductos">
+    <article>
+        <h1 class="heading">nuestros <span>Productos</span></h1>
+    </article>
+    
+    
+
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+        <img src="ImagenesProyecto/image00006.jpeg" alt="Imagen 1" class="w-full rounded-lg">
+        <img src="ImagenesProyecto/image00004.jpeg" alt="Imagen 2" class="w-full rounded-lg">
+        <img src="ImagenesProyecto/image00005.jpeg" alt="Imagen 3" class="w-full rounded-lg">
+        <div class="flex overflow-x-auto gap-4 py-2">
+        </div>
+    </div>
+</div>
+
+
+
+   
+
+</section>
+
+<section class="about" >
+    <h1 class="heading" id="nosotros"><span>sobre</span> <span class="n1">nosotros</span></h1>
+    <div class="row">
+        <div class="img">
+            <img src="ImagenesProyecto/4.jpeg" alt="">
+        </div>
+        <div class="content">
+            <h3>Que es lo que hace que nuestra ropa sea unica?</h3>
+            <p>
+                En nuestra historia, el compromiso con la calidad y la pasión por la moda se unen para ofrecerte una experiencia de estilo excepcional en cada visita.
+            </p>
+            <div class="centrarBoton">
+                <a href="#" class="btn">Aprende mas</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+      <div class="user-info">
+        <p>Nombre del Usuario</p>
+        <p>usuario@example.com</p>
+      </div>
+      <ul class="modal-options">
+        <li><a href="#" class="logout-btn">Salir</a></li>
+        <li><a href="/dashboard-cli.html" class="config-btn">Configuración</a></li>
+      </ul>
+    </div>
+  </div>
+
+
+
+
+<div id="inicioSesion" class="modalmask">
+    <div class="modalbox Sesion">
+        <a href="#close" title="Close" class="close">X</a>
+        <form id="loginForm">
+            <div class="login">
+                <article class="fondo">
+                    <h2>Inicio de Sesion - Usuario</h2>
+                <div id="aja"></div>
+                <div><input type="text" placeholder="Correo" name="correo_electronico"></div>
+                <div><input type="password" placeholder="Contraseña" name="password1"></div>
+                <button class="boton">Iniciar sesión</button>
+            <div class="OtrosInicios">
+                <p><a href="#olvidarContra">¿Olvidaste la contraseña?</a></p>
+                <p>¿No tienes una cuenta?
+                <a href="#registrarse">Registrate</a></p>
+                <p>¿Otro tipo de inicio? <a href="#sesionAdministrador">Admin</a></p>
+            </div>
+
+            </div>
+        </form>
+    </article>
+    </div>
+</div>
+
+<div id="olvidarContra" class="modalmask">
+    <div class="modalbox Sesion">
+        <a href="#close" title="Close" class="close">X</a>
+        <form id="resetForm" method="post" action="/soliRPassword">
+            <div class="login">
+                <article class="fondo1">
+                    <div id="alertResetPassword"></div>
+                    <h2>Recuperar Contraseña</h2>
+                    <p>Introduce tu correo electrónico para restablecer tu contraseña.</p>
+                    <div><input type="email" placeholder="Correo electrónico" name="mail" id="mail" required></div>
+                    <button class="boton">Enviar enlace</button>
+
+                    <p><a href="#inicioSesion">Volver al inicio de sesión</a></p>
+                </article>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="registrarse" class="modalmask">
+    <div class="modalbox registrarse">
+        <a href="#close" title="Close" class="close">X</a>
+        <form id="registerForm" method="post" action="/register">
+        <div class="registro">
+            <article class="fondo2">
+                <h2>Registrate</h2>
+                <div id="alertContainer">
+                    <div class="p-4 mb-4 text-[15px] text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"  role="alert">
+                        <span class="font-medium">Ojo!</span> La Contraseña debe contener
+                        <ul>
+                            <li>al menos 8 caracteres</li>
+                            <li>al menos una mayúscula</li>
+                            <li>al menos un número</li>
+                            <li>al menos un carácter especial</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div><input type="text" placeholder="Nombres" name="nombres" id="nombres"></div>
+                <div><input type="text" placeholder="Apellidos" name="apellidos" id="apellidos"></div>
+                <div><input type="email" placeholder="Correo" name="email" id="email" required></div>
+                <div><input type="password" placeholder="Contraseña" name="password"></div>
+                <button class="boton">Registrarse</button>
+                <div class="OtrosInicios">
+                    <p><a href="#">¿Olvidaste la contraseña?</a></p>
+                    <p>¿Ya tienes una cuenta?
+                    <a href="#inicioSesion">Inicia Sesion</a></p>
+                    <p>¿Otro tipo de inicio? <a href="#sesionAdministrador">Admin</a></p>
+                </div>
+                </div>
+            </form>
+        </article>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="sesionAdministrador" class="modalmask">
+    <div class="modalbox admin">
+        <a href="#close" title="Close" class="close">X</a>
+        
+        <form id="adminForm" >
+            <div class="login">
+                <article class="fondo">
+                <div id="alertAdmin"></div>
+                <h2>Inicio Admin</h2>
+                <input type="text" placeholder="Correo" name="correo">
+                <input type="password" placeholder="Contraseña" name="password2">
+                <button class="boton" type="submit">Iniciar Sesion</button>
+                <div class="OtrosInicios">
+                    <p><a href="#">¿Olvidaste la contraseña?</a></p>
+                    <p>¿No tienes una cuenta?
+                    <a href="#registrarse">Registrate</a></p>
+                    <p>¿Otro tipo de inicio? <a href="#inicioSesion">Usuario</a></p>
+                </div>
+            </div>
+           
+        </form>
+    </article>
+    </div>
+</div>
+
+
+
+
+    
+
+    <footer>
+         
+
+        <div class="container__footer" >
+            <div class="box__footer">
+                <div class="logo">
+                    <img src="ImagenesProyecto/image00002.jpeg" alt="">
+                </div>
+                <div class="terms">
+                 </div>
+            </div>
+        
+        <div class="box__footer">
+            <h2>Descripcion</h2>
+            <p>Descubre tu estilo con nuestra colección única de moda. Calidad, elegancia y comodidad para cada ocasión. Viste con confianza, viste con nosotros.</p>
+
+        </div>
+
+        <div class="box__footer" id="contacto">
+            <h2>Contactanos</h2>
+            <a href="https://www.instagram.com/valeriaguerrabrand?igsh=OHFkZ3FwMWw1NHNy"><i class="fab fa-instagram-square"></i> Instagram</a>
+            <a href="https://www.facebook.com/share/1BYcnFQ9uv/"> <i class="fab fa-facebook-square"></i> Facebook</a>
+            <a href="#"><i class="fab fa-twitter-square"></i> Twitter</a>
+        
+        </div>
+
+    </div>
+
+    <div class="box__copyright">
+        <hr>
+        <p>Todos los derechos reservados © 2024 <b>valeria guerra</b></p>
+    </div>
+    
+    <!-- Incluye el archivo JS de Flowbite -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script> -->
+
+     
+
+    
+</footer>
+<script type="module" src="js/auth/cambioModal.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script> -->
+<script src="js/flowbite.min.js"></script>
+</body>
+</html>
