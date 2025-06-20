@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-06-2025 a las 19:15:03
+-- Tiempo de generación: 20-06-2025 a las 08:34:14
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -97,6 +97,13 @@ CREATE TABLE `orders` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `amount`, `status`, `payment_provider`, `payment_id`, `payment_receipt_url`, `created_at`) VALUES
+(32, 13, 40000.00, 'pending', 'mercadopago', NULL, NULL, '2025-06-17 04:53:13');
+
 -- --------------------------------------------------------
 
 --
@@ -108,8 +115,16 @@ CREATE TABLE `order_items` (
   `order_id` int(11) DEFAULT NULL,
   `product_name` varchar(255) DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL,
-  `unit_price` decimal(10,2) DEFAULT NULL
+  `unit_price` decimal(10,2) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `order_items`
+--
+
+INSERT INTO `order_items` (`id`, `order_id`, `product_name`, `quantity`, `unit_price`, `product_id`) VALUES
+(32, 32, 'Camisetas', 1, 40000.00, 31);
 
 -- --------------------------------------------------------
 
@@ -145,17 +160,19 @@ CREATE TABLE `producto` (
   `descripcion` text DEFAULT NULL,
   `precio` decimal(10,2) DEFAULT NULL,
   `id_categoria2` varchar(30) DEFAULT NULL,
-  `url_imagen` varchar(255) NOT NULL
+  `url_imagen` varchar(255) NOT NULL,
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `producto` (`id_producto`, `nombre`, `descripcion`, `precio`, `id_categoria2`, `url_imagen`) VALUES
-(31, 'Camisetas', '12346789', 40000.00, 'regueton', '1746597550647.jpeg'),
-(32, 'Camisetas', 'e', 40000.00, 'regueton', '1747522502105.jpeg'),
-(33, 'joda', 'negra', 40000.00, 'hombre', '1748497376975.jpeg');
+INSERT INTO `producto` (`id_producto`, `nombre`, `descripcion`, `precio`, `id_categoria2`, `url_imagen`, `estado`) VALUES
+(31, 'Camisetas', '12346789', 40000.00, 'regueton', '1746597550647.jpeg', 1),
+(32, 'Camisetas', 'e', 40000.00, 'regueton', '1747522502105.jpeg', 1),
+(33, 'joda', 'negra', 40000.00, 'hombre', '1748497376975.jpeg', 0),
+(34, 'nuevo', 'camiseta', 16000.00, 'regueton', '1750398938061.gif', 1);
 
 -- --------------------------------------------------------
 
@@ -176,7 +193,8 @@ CREATE TABLE `producto_color_talla` (
 
 INSERT INTO `producto_color_talla` (`id_producto2`, `talla2`, `color2`, `cantidad`) VALUES
 (31, 'L', 'rojo', 1),
-(33, 'L', 'rojo', 12);
+(33, 'L', 'rojo', 12),
+(34, 'L', 'rojo', 12);
 
 -- --------------------------------------------------------
 
@@ -196,7 +214,9 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`session_id`, `expires`, `data`, `user_id`) VALUES
-('5TfkNr3aRXf6sQgqeXpJ0QjfmJfRTPhB', 1748501865, '{\"cookie\":{\"originalMaxAge\":3600000,\"expires\":\"2025-05-29T06:20:53.252Z\",\"secure\":false,\"httpOnly\":true,\"path\":\"/\",\"sameSite\":\"strict\"},\"adminId\":1,\"isAdmin\":true}', NULL);
+('fjMDTD_Hah_eAWKA5O5YcBuaJBy1D5Sh', 1750401748, '{\"cookie\":{\"originalMaxAge\":86400000,\"expires\":\"2025-06-20T06:34:02.209Z\",\"secure\":true,\"httpOnly\":true,\"path\":\"/\",\"sameSite\":\"none\"},\"adminId\":1,\"isAdmin\":true}', NULL),
+('P9mrBFrzYaPm-YJ8tP92Fpj2XQLOTRRX', 1750401242, '{\"cookie\":{\"originalMaxAge\":86400000,\"expires\":\"2025-06-20T06:34:01.928Z\",\"secure\":true,\"httpOnly\":true,\"path\":\"/\",\"sameSite\":\"none\"},\"adminId\":1,\"isAdmin\":true}', NULL),
+('tpPeiCtMKGUsy4B4z9KpzUxVJlFhXi5m', 1750487609, '{\"cookie\":{\"originalMaxAge\":86400000,\"expires\":\"2025-06-21T05:48:41.693Z\",\"secure\":true,\"httpOnly\":true,\"path\":\"/\",\"sameSite\":\"none\"},\"adminId\":1,\"isAdmin\":true}', NULL);
 
 -- --------------------------------------------------------
 
@@ -306,7 +326,8 @@ ALTER TABLE `orders`
 --
 ALTER TABLE `order_items`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `order_id` (`order_id`);
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- Indices de la tabla `permisos`
@@ -371,19 +392,19 @@ ALTER TABLE `administrador`
 -- AUTO_INCREMENT de la tabla `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `user`
@@ -417,7 +438,8 @@ ALTER TABLE `orders`
 -- Filtros para la tabla `order_items`
 --
 ALTER TABLE `order_items`
-  ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`);
+  ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
+  ADD CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `producto` (`id_producto`);
 
 --
 -- Filtros para la tabla `producto`

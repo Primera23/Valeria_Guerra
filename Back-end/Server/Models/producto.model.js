@@ -1,9 +1,18 @@
 const { pool } = require('../db');
 
-const getProductosDisponibles = async () => {
-    const [productos] = await pool.query("SELECT * FROM `producto` WHERE estado = 1");
+const getProductosDisponibles = async (categoria) => {
+    let query = "SELECT * FROM producto WHERE estado = 1";
+    const params = [];
+
+    if (categoria && categoria !== 'Todos') {
+        query += " AND id_categoria2 = ?";
+        params.push(categoria);
+    }
+
+    const [productos] = await pool.query(query, params);
     return productos;
-}
+};
+
 const getTallas = async () => {
     const [talla] = await pool.query("SELECT * FROM tallas");
     return talla;

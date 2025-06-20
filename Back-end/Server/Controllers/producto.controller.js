@@ -10,10 +10,13 @@ const {
 
 const obtenerProductosDisponibles = async (req, res) => {
     try {
-        const productos = await getProductosDisponibles();
-        // Filtrar productos que tienen cantidad mayor a 0
-        const productosDisponibles = productos.filter(producto => producto.cantidad > 0);
-        res.json(productosDisponibles); // Envía solo el array de productos disponibles
+        const categoria = req.query.categoria;
+        const productos = await getProductosDisponibles(categoria);
+
+        // Filtrar productos con cantidad > 0
+        
+        
+        res.json(productos);
     } catch (error) {
         console.error('Error al obtener productos disponibles:', error);
         res.status(500).json({
@@ -22,7 +25,8 @@ const obtenerProductosDisponibles = async (req, res) => {
             error: error.message
         });
     }
-}
+};
+
 const obtenerTallas = async (req, res) => {
     try {
         const talla = await getTallas();

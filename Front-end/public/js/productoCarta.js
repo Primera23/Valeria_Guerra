@@ -61,13 +61,17 @@ function mostrarCategorias(categorias) {
 }
 
 function cargarProductos(categoria = 'Todos') {
+    let url = `${API_BASE_URL}/productos-disponible`;
     
-    if (categoria && categoria !== 'Todos') url += `?categoria=${encodeURIComponent(categoria)}`;
+    if (categoria && categoria !== 'Todos') {
+        url += `?categoria=${encodeURIComponent(categoria)}`;
+    }
 
     const container = document.getElementById('food');
     if (container) container.innerHTML = '<div class="loader">Cargando productos...</div>';
 
-    fetch(`${API_BASE_URL}/productos-disponible`)	
+    fetch(url) // usa la URL construida con ?categoria
+ // 👈 ahora sí se usa la URL con el filtro
         .then(response => {
             if (!response.ok) throw new Error('Error al cargar productos');
             return response.json();
@@ -81,6 +85,7 @@ function cargarProductos(categoria = 'Todos') {
             mostrarError('Error al cargar los productos');
         });
 }
+
 
 function mostrarProductos(productos) {
     const container = document.getElementById('food');
