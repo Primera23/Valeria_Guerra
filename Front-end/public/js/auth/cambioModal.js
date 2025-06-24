@@ -3,9 +3,15 @@ class AuthModalManager {
     static async checkAuth(showLogin = false) {
         try {
             // 1. Verificar sesión
-            const sessionResponse = await fetch(`${API_BASE_URL}/check-session`, {
-                credentials: 'include'
-            });
+            const sessionResponse = await fetch(`${API_BASE_URL}/check-session`, 
+                {
+  method: 'GET',
+  credentials: 'include',
+  headers: {
+    'Content-Type': 'application/json',
+    'ngrok-skip-browser-warning': 'true'
+  }
+})
             
             if (!sessionResponse.ok) throw new Error('Error en sesión');
             
@@ -19,8 +25,14 @@ class AuthModalManager {
             }
 
             // 2. Obtener datos del usuario
-            const userResponse = await fetch(`${API_BASE_URL}/protected`, {
-                credentials: 'include'
+            const userResponse = await fetch(`${API_BASE_URL}/protected`, 
+                 {
+  method: 'GET',
+  credentials: 'include',
+  headers: {
+    'Content-Type': 'application/json',
+    'ngrok-skip-browser-warning': 'true'
+  }
             });
             
             if (!userResponse.ok) throw new Error('Error en perfil');

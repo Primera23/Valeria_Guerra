@@ -534,7 +534,7 @@ const soliRPassword = async (req, res) => {
       { expiresIn: '1h' }
     );
 
-    const resetUrl = `${process.env.FRONTEND_URL}/reset-password.html?token=${token}`;
+    const resetUrl = `https://localhost:3001/pResetPassword?token=${token}`;
 
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
@@ -626,6 +626,13 @@ const pp = (req, res) => {
     res.sendFile(path.join(__dirname, '../../views/pp.html'));
 };
 
+const pResetPassword = (req, res) => {
+    console.log('pResetPassword ejecutado');
+    res.sendFile(path.join(__dirname, '../../views/reset-password.html'));
+};
+
+
+
 
 module.exports = {
     registro,
@@ -643,5 +650,6 @@ module.exports = {
     verifyResetPassword,
     resetPassword,
     dashboardCli,
-    pp
+    pp,
+    pResetPassword
 };

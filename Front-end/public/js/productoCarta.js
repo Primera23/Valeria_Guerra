@@ -22,7 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // --- FUNCIONES DE CATEGORÍAS Y PRODUCTOS ---
 function cargarCategorias() {
-    fetch(`${API_BASE_URL}/categorias`)
+    fetch(`${API_BASE_URL}/categorias`,{
+            method: 'GET',
+            credentials: 'include', // Asegura que las cookies de sesión se envíen
+            headers: { 'Content-Type': 'application/json','ngrok-skip-browser-warning': 'true' }
+        })
     .then(response => {
         if (!response.ok) throw new Error('Error al cargar categorías');
         return response.json();
@@ -70,7 +74,11 @@ function cargarProductos(categoria = 'Todos') {
     const container = document.getElementById('food');
     if (container) container.innerHTML = '<div class="loader">Cargando productos...</div>';
 
-    fetch(url) // usa la URL construida con ?categoria
+    fetch(url,{
+        method: 'GET',
+        credentials: 'include', // Asegura que las cookies de sesión se envíen
+        headers: { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': 'true' }
+    }) // usa la URL construida con ?categoria
  // 👈 ahora sí se usa la URL con el filtro
         .then(response => {
             if (!response.ok) throw new Error('Error al cargar productos');
@@ -148,7 +156,13 @@ function mostrarProductos(productos) {
 function abrirModalProducto(idProducto) {
     if (!idProducto) return console.error('ID de producto no proporcionado');
 
-    fetch(`${API_BASE_URL}/productos/${idProducto}`)
+    fetch(`${API_BASE_URL}/productos/${idProducto}`,
+        {
+            method: 'GET',
+            credentials: 'include', // Asegura que las cookies de sesión se envíen
+            headers: { 'Content-Type': 'application/json','ngrok-skip-browser-warning': 'true' }
+        }
+    )
         .then(response => {
             if (!response.ok) throw new Error('Producto no encontrado');
             return response.json();
