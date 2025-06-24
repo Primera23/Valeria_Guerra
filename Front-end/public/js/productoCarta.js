@@ -1,7 +1,7 @@
 import { API_BASE_URL } from './config.js'; 
 // --- VARIABLES GLOBALES ---
 
-let carrito = [];
+let carrito = []; 
 
 // --- FUNCIONES DE INICIALIZACIÓN ---
 document.addEventListener('DOMContentLoaded', () => {
