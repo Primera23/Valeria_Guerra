@@ -1,8 +1,8 @@
 const OrderModel = require('../Models/order.model');
 const OrderItemModel = require('../Models/orderItem.model');
 
-const session = require('express-session');
-const { preference } = require('../Services/mercadopagoConfig');
+
+const mercadopago = require('../Services/mercadopagoConfig');
 
 
 
@@ -66,7 +66,8 @@ const OrderController = {
                     pending: `${baseUrl}/pago-pendiente`
                 },
                 auto_return: 'approved',
-                binary_mode: true
+                binary_mode: true,
+                notification_url: `https://fc49-179-1-218-200.ngrok-free.app/webhook-mercadopago`
             };
 
             console.log('Preference payload:', JSON.stringify(preferencePayload, null, 2));
@@ -76,7 +77,7 @@ const OrderController = {
             
 
 
-           const response = await preference.create({ body: preferencePayload });
+           const response = await mercadopago.preferences.create(preferencePayload);
 
             console.log('Orden creada con éxito');
 console.log('Preference ID:', response.id);
@@ -93,21 +94,9 @@ console.log('ID orden DB:', nuevaOrden.id);
             console.error('Error al crear orden:', error);
             res.status(500).json({ error: 'Error al crear la orden' });
         }
-    },
-
-    updateOrderStatus: async (req, res) => {
-        try {
-            const { orderId } = req.params;
-            const { status } = req.body;
-
-            await OrderModel.update(orderId, { status });
-            res.json({ message: 'Estado actualizado correctamente' });
-
-        } catch (error) {
-            console.error('Error al actualizar orden:', error);
-            res.status(500).json({ error: 'Error al actualizar la orden' });
-        }
     }
+
+    
 };
 
 module.exports = OrderController;
