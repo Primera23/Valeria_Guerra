@@ -12,49 +12,17 @@ const MySQLStore = require('express-mysql-session')(session);
 const app = express();
 
 const corsOptions = {
-  origin: (origin, callback) => {
-    const allowedOrigins = [
-      'https://localhost:3000',
-      'https://873e-2800-484-df78-8c00-a5f4-6757-5114-8aba.ngrok-free.app'
-    ];
-    
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, origin); // Devuelve el origin exacto en lugar de true
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'ngrok-skip-browser-warning'],
-  exposedHeaders: ['set-cookie']
+  origin: ["https://localhost:3000", "https://localhost:3001"], // Reemplaza con el puerto de tu frontend (React/Vite)
+  credentials: true, // Si usas cookies/tokens de autenticación
+  allowedHeaders: [
+    'Content-Type', 
+    'Authorization',
+    'ngrok-skip-browser-warning' // <- Añade este header
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 };
 
 app.use(cors(corsOptions));
-
-app.use((req, res, next) => {
-  const allowedOrigins = [
-    'https://localhost:3000',
-    'https://ec02-2800-484-df78-8c00-a5f4-6757-5114-8aba.ngrok-free.app'
-  ];
-  
-  const origin = req.headers.origin;
-  
-  if (allowedOrigins.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
-    res.setHeader('Vary', 'Origin');
-  }
-  
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, ngrok-skip-browser-warning');
-  
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
-  
-  next();
-});
 
 
 // Configuración de sesión mejorada
@@ -94,11 +62,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 console.log("🚀 Este backend está corriendo y configurando CORS correctamente");
 
-app.use((req, res, next) => {
-  console.log('Sesión actual:', req.sessionID);
-  console.log('Usuario en sesión:', req.session.userId);
-  next();
-});
+
 
 
 

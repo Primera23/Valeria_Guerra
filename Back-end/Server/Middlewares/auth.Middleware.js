@@ -7,14 +7,15 @@ const reAuth = (req, res, next) => {
   next();
 };
 const isAdmin = (req, res, next) => {
-    if (req.session.isAdmin) {
-        return next();
-    }
-
-    // Decide la respuesta según el tipo de solicitud
-     else if (req.accepts('html')) {
-        return res.status(401).redirect('/');
-    }
+  console.log('🔵 isAdmin ejecutado - sesión:', req.session.adminId); // Mensaje azul para destacar
+  if (req.session.adminId) {
+    console.log('✅ Usuario es administrador');
+    return next();
+  } else if (req.accepts('html')) {
+    console.log('❌ Redirigiendo a la página de inicio (no admin)');
+    return res.status(401).redirect('/');
+  }
+  console.log('⚠️ No se cumplieron las condiciones anteriores');
 };
 
 module.exports = {

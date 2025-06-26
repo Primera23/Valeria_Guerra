@@ -1,45 +1,80 @@
-import { API_BASE_URL } from '../config.js';
+
 class AdminAuthManager {
     
-    static async checkAdminAuth() {
-        try {
-            // Verificar si es admin
-            const response = await fetch(`${API_BASE_URL}/admin/check-session`, {
-                credentials: 'include'
-            });
-            
-            if (!response.ok) throw new Error('Error al verificar sesión');
-            
-            const data = await response.json();
-            
-            if (!data.isAdmin) {
-                window.location.href = 'index.html'; // Redirige si no es admin
-                return false;
-            }
-            
-            const adminResponse = await fetch('/admin/protected', {
-                credentials: 'include'
-            });
-            
-            if (!adminResponse.ok) throw new Error('Error en perfil');
-            
-            const adminData = await adminResponse.json();
+   static async checkAdminAuth() {
+    console.log("🔍 Iniciando verificación de admin");
 
-            if (adminData.success) {
-                this.loadAdminData(adminData.admin);
-                return true;
-            } else {
-                throw new Error(adminData.message || 'Error en datos de usuario');
-            }
-            // Cargar datos del admin
-            
-            
-        } catch (error) {
-            console.error('Error en autenticación admin:', error);
-            window.location.href = 'index.html';
-            return false;
+
+    try {
+        // 1. Verificar sesión
+        console.log("⏳ Verificando sesión en:", `/admin/check-session`);
+        const sessionResponse = await fetch(`/admin/check-session`, {
+            credentials: 'include'
+        });
+        
+        console.log("📊 Respuesta de sesión:", {
+            status: sessionResponse.status,
+            ok: sessionResponse.ok,
+            headers: Object.fromEntries(sessionResponse.headers.entries())
+        });
+
+        if (!sessionResponse.ok) {
+            const errorText = await sessionResponse.text();
+            console.error("❌ Error en sesión:", errorText);
+            throw new Error(`HTTP ${sessionResponse.status}: ${errorText}`);
         }
+        
+        const sessionData = await sessionResponse.json();
+        console.log("📦 Datos de sesión:", sessionData);
+        
+        if (!sessionData.isAdmin) {
+            console.warn("⚠️ Usuario no es admin");
+            return this.redirectToIndex();
+        }
+
+        // 2. Obtener datos protegidos
+        console.log("⏳ Obteniendo datos protegidos");
+        const protectedResponse = await fetch('/admin/protected', {
+            credentials: 'include'
+        });
+        
+        console.log("📊 Respuesta protegida:", {
+            status: protectedResponse.status,
+            ok: protectedResponse.ok
+        });
+
+        if (!protectedResponse.ok) {
+            const errorText = await protectedResponse.text();
+            console.error("❌ Error en datos protegidos:", errorText);
+            throw new Error(`HTTP ${protectedResponse.status}: ${errorText}`);
+        }
+        
+        const protectedData = await protectedResponse.json();
+        console.log("📦 Datos protegidos:", protectedData);
+
+        if (protectedData.success) {
+            console.log("✅ Autenticación exitosa");
+            this.loadAdminData(protectedData.admin);
+            return true;
+        } else {
+            console.warn("⚠️ Datos de admin inválidos:", protectedData.message);
+            throw new Error(protectedData.message || 'Datos de admin inválidos');
+        }
+        
+    } catch (error) {
+        console.error("💥 Error crítico:", error);
+        return this.redirectToIndex();
     }
+}
+
+static redirectToIndex() {
+    setTimeout(() => {
+        console.log("⏰ Redirigiendo a index.html en 3 segundos"); 
+    console.log("🔀 Redirigiendo a index.html");
+    window.location.href = 'https://localhost:3000/index.html';
+    return false;
+    }, 310000)
+}
 
     static loadAdminData(admin) {
         // Actualizar UI con datos del admin

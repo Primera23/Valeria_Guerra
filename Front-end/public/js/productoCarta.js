@@ -324,7 +324,7 @@ async function procesarPago() {
 
 function iniciarCheckoutMercadoPago(preferenceId) {
     const mp = new MercadoPago('TEST-6dbfd663-b426-4f61-a2fc-04437b5a29fc', {
-        locale: 'es-AR'
+        locale: 'es-CO'
     });
 
     mp.checkout({

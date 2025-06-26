@@ -18,7 +18,7 @@ router.post('/admin/login', adminLogin);
 router.post('/admin/logout', isAdmin, adminLogout);
 router.get('/admin/check-session', checkAdminSession);
 router.get('/admin/protected', isAdmin, adminPerfil);
-router.get('/pp.html',isAdmin,pp);
+router.get('/pp.html',pp);
 
 router.post('/soliRPassword',soliRPassword)
 router.get('/pResetPassword',pResetPassword) // Cambia 'pResetPassword' a 'reAuth' para proteger la ruta

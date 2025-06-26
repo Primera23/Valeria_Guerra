@@ -414,31 +414,10 @@ const adminLogin = async (req, res) => {
 };
 
 const checkAdminSession = (req, res) => {
-    try {
-        if (!req.session.adminId || !req.session.isAdmin) {
-            return res.json({ 
-                success: true, 
-                isAdmin: false,
-                message: 'No hay sesión de administrador activa'
-            });
-        }
-
-        res.json({
-            success: true,
-            isAdmin: true,
-            admin: {
-                id: req.session.adminId,
-                
-            }
-        });
-
-    } catch (error) {
-        console.error('Error en checkAdminSession:', error);
-        res.status(500).json({
-            success: false,
-            message: 'Error al verificar sesión de administrador'
-        });
-    }
+   if (req.session.adminId && req.session.isAdmin) {
+    return res.json({ isAdmin: true });
+  }
+  res.json({ isAdmin: false });
 };
 
 const adminLogout = (req, res) => {
@@ -459,6 +438,8 @@ const adminLogout = (req, res) => {
 };
 
 const adminPerfil = async (req, res) => {
+    console.log('adminPerfil ejecutado');
+    console.log('ID de administrador en sesión:', req.session.adminId);
     try {
         // Verificar primero que la sesión es de administrador
         if (!req.session.adminId || !req.session.isAdmin) {
