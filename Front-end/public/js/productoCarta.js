@@ -241,7 +241,7 @@ function actualizarCarrito() {
             <div>${item.nombre} x${item.cantidad}</div>
             <div>$${(item.precio * item.cantidad).toFixed(2)}</div>
           </div>
-          <button class="btn-remove-item" data-id="${item.id}" style="background:none;border:none;cursor:pointer;font-size:20px;margin-left:10px;" title="Eliminar">
+           <button class="btn-remove-item" data-id="${item.id}" style="background:none;border:none;cursor:pointer;font-size:20px;margin-left:10px;" title="Eliminar">
             🗑️
           </button>
         </div>`
@@ -250,6 +250,7 @@ function actualizarCarrito() {
     // Listeners para eliminar productos
     carritoContainer.querySelectorAll('.btn-remove-item').forEach(btn => {
         btn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Evita que se dispare otro evento
             const id = btn.getAttribute('data-id');
             eliminarDelCarrito(id);
         });
@@ -258,6 +259,12 @@ function actualizarCarrito() {
     const total = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
     totalContainer.innerText = total.toFixed(2);
 }
+
+// Función para eliminar producto del carrito
+window.eliminarDelCarrito = function(id) {
+  carrito = carrito.filter(item => item.id !== id);
+  actualizarCarrito();
+};
 
 // --- FUNCIONES DE PAGO CON MERCADOPAGO ---
 async function procesarPago() {
