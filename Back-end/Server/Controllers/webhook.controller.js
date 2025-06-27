@@ -1,50 +1,47 @@
-const { payment, merchantOrder } = require('../Services/mercadopagoConfig');
-
+const mercadopago = require('../Services/mercadopagoConfig');
 const OrderModel = require('../Models/order.model');
+const OrderController = require('./order.Controller');
 
 const WebhookController = {
   recibirNotificacion: async (req, res) => {
     try {
-      const topic = req.query.topic;
-      const id = req.query.id || req.body?.data?.id;
+      const { type, data } = req.body;
 
-      if (!topic || !id) {
-        console.error('❌ Falta id o topic en la notificación');
-        return res.status(400).send('Falta id o topic');
-      }
+      if (type === 'payment' && data?.id) {
+        const paymentId = data.id;
 
-      let mpResponse;
-      if (topic === 'payment') {
-        mpResponse = await mercadopago.payment.get(id);
-      } else if (topic === 'merchant_order') {
-        mpResponse = await mercadopago.merchant_orders.get(id);
-      } else {
-        return res.status(400).send('Topic no soportado');
-      }
+        const payment = await mercadopago.payment.get(paymentId);
+        const orderData = payment.body;
 
-      const data = mpResponse.body;
+        const status = orderData.status; // 'approved', 'in_process', 'rejected', etc.
+        const externalReference = orderData.external_reference;
+        const receiptUrl = orderData.transaction_details?.external_resource_url || null;
 
-      // Aquí puedes extraer y actualizar tu modelo según corresponda,
-      // ejemplo si es payment:
-      if (topic === 'payment') {
-        const estado = data.status; // approved, rejected, pending...
-        const orderId = data.external_reference;
+        console.log('📦 Webhook -> orderData:', JSON.stringify(orderData, null, 2));
+        console.log('🔎 preference_id:', orderData.metadata?.preference_id || '❌ undefined');
+        console.log('🔎 external_reference:', externalReference || '❌ undefined');
 
-        let nuevoEstado;
-        if (estado === 'approved') nuevoEstado = 'paid';
-        else if (estado === 'rejected') nuevoEstado = 'cancelled';
-        else nuevoEstado = 'pending';
+        // Buscar orden por paymentId
+        const existingOrder = await OrderModel.findByPaymentId(paymentId);
 
-        await OrderModel.update(orderId, {
-          status: nuevoEstado,
-          payment_id: data.id,
-          payment_recapt_url: data.transaction_details?.external_resource_url || null,
+        if (!existingOrder && externalReference) {
+          // Solo crear la orden si no existe aún
+          await OrderController.crearOrdenDesdeWebhook(orderData);
+          console.log('✅ Orden creada desde webhook para:', externalReference);
+        } else {
+          console.log('⚠️ Orden ya existente para este paymentId');
+        }
+
+        // Siempre actualizar el estado y recibo, exista o no
+        await OrderModel.updateByPaymentId(paymentId, {
+          status: status, // Guardar el estado real
+          payment_receipt_url: receiptUrl
         });
 
-        console.log(`✅ Orden ${orderId} actualizada a ${nuevoEstado}`);
+        return res.sendStatus(200);
       }
 
-      res.sendStatus(200);
+      res.sendStatus(400); // No era un evento de pago válido
     } catch (error) {
       console.error('❌ Error en webhook:', error);
       res.sendStatus(500);
@@ -53,4 +50,3 @@ const WebhookController = {
 };
 
 module.exports = WebhookController;
-
