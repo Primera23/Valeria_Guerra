@@ -269,7 +269,11 @@ window.eliminarDelCarrito = function(id) {
 // --- FUNCIONES DE PAGO CON MERCADOPAGO ---
 async function procesarPago() {
     if (carrito.length === 0) {
-        alert('El carrito está vacío');
+        Swal.fire({
+    icon: 'warning',
+    title: 'Carrito vacío',
+    text: 'Agrega productos antes de pagar.'
+  });
         return;
     }
 
@@ -321,7 +325,11 @@ async function procesarPago() {
         }
     } catch (error) {
         console.error('❌ Error en el proceso de pago:', error);
-        alert(error.message || 'Error al procesar el pago');
+        Swal.fire({
+    icon: 'error',
+    title: 'Error al pagar',
+    text: error.message || 'Error al procesar el pago'
+  });
     } finally {
         btnPago.disabled = false;
         btnPago.textContent = 'IR A PAGAR';
@@ -347,12 +355,16 @@ function iniciarCheckoutMercadoPago(preferenceId) {
 // --- FUNCIÓN PARA MOSTRAR ERRORES ---
 function mostrarError(mensaje) {
     const container = document.getElementById('food') || document.body;
-    const errorElement = document.createElement('div');
+    Swal.fire({
+  icon: 'error',
+  title: 'Error',
+  text: mensaje
+});;
     errorElement.className = 'error-message';
     errorElement.textContent = mensaje;
     container.appendChild(errorElement);
     
-    setTimeout(() => errorElement.remove(), 5000);
+    setTimeout(() => errorElement.remove(), 1000);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
