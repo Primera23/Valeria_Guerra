@@ -2,7 +2,7 @@ const reAuth = (req, res, next) => {
   console.log('reAuth ejecutado - sesión:', req.session.userId);
   if (!req.session.userId) {
     console.log('No autenticado');
-    return res.status(401).json({ success: false, message: 'No autenticado' });
+    return res.status(401).redirect('https://localhost:3000/');
   }
   next();
 };
@@ -13,7 +13,7 @@ const isAdmin = (req, res, next) => {
     return next();
   } else if (req.accepts('html')) {
     console.log('❌ Redirigiendo a la página de inicio (no admin)');
-    return res.status(401).redirect('/');
+    return res.status(401).redirect('https://localhost:3000/');
   }
   console.log('⚠️ No se cumplieron las condiciones anteriores');
 };

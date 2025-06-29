@@ -116,7 +116,7 @@ const registro = async (req, res) => {
             html: `
                 <h1>Verifica tu cuenta</h1>
                 <p>Por favor, haz clic en el siguiente enlace para verificar tu cuenta:</p>
-                <a href="https://localhost:3000/verify?token=${verificationToken}">
+                <a href="https://localhost:3001/verify?token=${verificationToken}">
                     Verificar cuenta
                 </a>
                 <p>Si no solicitaste este registro, ignora este correo.</p>
@@ -149,7 +149,7 @@ const registro = async (req, res) => {
     }
 }; 
 
-const verifyEmail = async (req, res) => {
+const verifyEmailS = async (req, res) => {
     const { token } = req.query;
 
     // Buscar el token en el almacenamiento temporal
@@ -612,12 +612,16 @@ const pResetPassword = (req, res) => {
     res.sendFile(path.join(__dirname, '../../views/reset-password.html'));
 };
 
+const verifyEmailP = (req, res) => {
+    console.log('verificar pagina email ejecutado');
+    res.sendFile(path.join(__dirname, '../../views/verify.html'));
+};
 
 
 
 module.exports = {
     registro,
-    verifyEmail,
+    verifyEmailS,
     login,
     perfil,
     logout,
@@ -632,5 +636,6 @@ module.exports = {
     resetPassword,
     dashboardCli,
     pp,
-    pResetPassword
+    pResetPassword,
+    verifyEmailP
 };

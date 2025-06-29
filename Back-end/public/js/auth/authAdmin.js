@@ -122,7 +122,7 @@ static redirectToIndex() {
             });
             
             if (response.ok) {
-                window.location.href = 'index.html';
+                window.location.href = 'https://localhost:3000/index.html';
             }
         } catch (error) {
             console.error('Error al cerrar sesión admin:', error);

@@ -74,7 +74,7 @@ class AuthManager {
                 // Limpiar cualquier dato de sesión del cliente
                 sessionStorage.clear();
                 // Redirigir al login
-                window.location.href = 'index.html';
+                window.location.href = 'https://localhost:3000/index.html';
             } else {
                 throw new Error('Error al cerrar sesión');
             }

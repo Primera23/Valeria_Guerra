@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/css/confirm.css" />
+  <title>Verificar Email</title>
+</head>
+<body>
+  
+  
+  
+
+  <div class="fondo">
+    <h2>Verificar correo</h2>
+    <div id="mensaje"></div>
+    <div id="mensajeB" style="color:rgb(0, 255, 21); display: none;">bienvenido</div>
+  </div>
+
+  <footer>
+    &copy; 2025 Valeria Guerra <ion-icon name="heart"></ion-icon>
+  </footer>
+  <script>
+    const token = new URLSearchParams(window.location.search).get('token');
+    const mensaje = document.getElementById('mensaje');
+    const mensajeB= document.getElementById('mensajeB');
+
+    if (!token) {
+      mensaje.innerText = 'Token no encontrado.';
+    } else {
+      fetch(`/verify-reset-token?token=${token}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.valid) {
+            mensajeB.style.display = 'block';
+          } else {
+            mensaje.innerText = data.message;
+          }
+        });
+    }
+
+    
+  </script>
+</body>
+</html>
