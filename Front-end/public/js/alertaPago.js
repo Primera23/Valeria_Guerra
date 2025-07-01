@@ -15,7 +15,7 @@ window.addEventListener('DOMContentLoaded', () => {
     Swal.fire({
       icon: 'success',
       title: '¡Pago exitoso!',
-      text: '✅ ¡Gracias por tu compra!'
+      text: '✅ ¡Gracias por tu compra!, nos pondremos en contacto contigo pronto.'
     });
   } else if (status === 'pending') {
     Swal.fire({

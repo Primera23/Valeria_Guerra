@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-06-2025 a las 23:42:03
+-- Tiempo de generación: 01-07-2025 a las 17:11:42
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -97,6 +97,21 @@ CREATE TABLE `orders` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `amount`, `status`, `payment_provider`, `payment_id`, `payment_receipt_url`, `created_at`) VALUES
+(67, 15, 80000.00, 'approved', 'mercadopago', '1338519977', NULL, '2025-07-01 13:15:25'),
+(68, 15, 80000.00, 'completed', 'mercadopago', '1338520055', NULL, '2025-07-01 13:31:02'),
+(69, 15, 80000.00, 'approved', 'mercadopago', '1323911550', NULL, '2025-07-01 13:35:31'),
+(70, 15, 56000.00, 'approved', 'mercadopago', '1323913138', NULL, '2025-07-01 13:37:53'),
+(71, 15, 96000.00, 'approved', 'mercadopago', '1338535987', NULL, '2025-07-01 13:41:36'),
+(72, 15, 80000.00, 'approved', 'mercadopago', '1323913088', NULL, '2025-07-01 13:46:33'),
+(73, 15, 136000.00, 'approved', 'mercadopago', '1323911766', NULL, '2025-07-01 14:10:34'),
+(74, 15, 168000.00, 'approved', 'mercadopago', '1338532471', NULL, '2025-07-01 14:17:09'),
+(75, 15, 272000.00, 'approved', 'mercadopago', '1323911734', NULL, '2025-07-01 14:21:02');
+
 -- --------------------------------------------------------
 
 --
@@ -111,6 +126,32 @@ CREATE TABLE `order_items` (
   `unit_price` decimal(10,2) DEFAULT NULL,
   `product_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `order_items`
+--
+
+INSERT INTO `order_items` (`id`, `order_id`, `product_name`, `quantity`, `unit_price`, `product_id`) VALUES
+(72, 67, 'joda', 2, 40000.00, 33),
+(75, 69, 'Camisetas', 1, 40000.00, 31),
+(76, 69, 'joda', 1, 40000.00, 33),
+(77, 70, 'nuevo', 1, 16000.00, 34),
+(78, 70, 'joda', 1, 40000.00, 33),
+(79, 71, 'Camisetas', 1, 40000.00, 31),
+(80, 71, 'joda', 1, 40000.00, 33),
+(81, 71, 'nuevo', 1, 16000.00, 34),
+(82, 72, 'Camisetas', 1, 40000.00, 31),
+(83, 72, 'Camisetas', 1, 40000.00, 32),
+(84, 73, 'Camisetas', 1, 40000.00, 31),
+(85, 73, 'Camisetas', 1, 40000.00, 32),
+(86, 73, 'joda', 1, 40000.00, 33),
+(87, 73, 'nuevo', 1, 16000.00, 34),
+(88, 74, 'joda', 2, 40000.00, 33),
+(89, 74, 'nuevo', 3, 16000.00, 34),
+(90, 74, 'Camisetas', 1, 40000.00, 32),
+(91, 75, 'Camisetas', 2, 40000.00, 31),
+(92, 75, 'nuevo', 2, 16000.00, 34),
+(93, 75, 'joda', 4, 40000.00, 33);
 
 -- --------------------------------------------------------
 
@@ -137,7 +178,21 @@ INSERT INTO `pending_orders` (`id`, `user_id`, `preference_id`, `total`, `items`
 (18, 13, '1287411847-d9a659e0-02cb-4176-a322-9622a5cff840', 40000.00, '[{\"id\":\"31\",\"nombre\":\"Camisetas\",\"precio\":40000,\"imagen\":\"1746597550647.jpeg\",\"cantidad\":1}]', '2025-06-27 04:49:37', '13'),
 (19, 13, '1287411847-c7782323-f4db-48ec-9571-d7f5c7e72285', 40000.00, '[{\"id\":\"31\",\"nombre\":\"Camisetas\",\"precio\":40000,\"imagen\":\"1746597550647.jpeg\",\"cantidad\":1}]', '2025-06-27 04:55:04', '13'),
 (20, 13, '1287411847-009c2ebf-fefd-497e-b2e0-ecc5dcb0e4c0', 40000.00, '[{\"id\":\"31\",\"nombre\":\"Camisetas\",\"precio\":40000,\"imagen\":\"1746597550647.jpeg\",\"cantidad\":1}]', '2025-06-27 04:58:43', '13'),
-(21, 13, '1287411847-9db4bf88-a126-4e6e-9531-aa6ee23c13f8', 40000.00, '[{\"id\":\"31\",\"nombre\":\"Camisetas\",\"precio\":40000,\"imagen\":\"1746597550647.jpeg\",\"cantidad\":1}]', '2025-06-27 05:21:34', '13');
+(21, 13, '1287411847-9db4bf88-a126-4e6e-9531-aa6ee23c13f8', 40000.00, '[{\"id\":\"31\",\"nombre\":\"Camisetas\",\"precio\":40000,\"imagen\":\"1746597550647.jpeg\",\"cantidad\":1}]', '2025-06-27 05:21:34', '13'),
+(22, 17, '1287411847-0e8bbb2a-babb-460c-816e-ea5407c13873', 40000.00, '[{\"id\":\"31\",\"nombre\":\"Camisetas\",\"precio\":40000,\"imagen\":\"1746597550647.jpeg\",\"cantidad\":1}]', '2025-07-01 00:03:11', '17'),
+(29, 15, '1287411847-3755c5a4-8946-4c5d-8904-f82f1f3e7a03', 56000.00, '[{\"id\":\"31\",\"nombre\":\"Camisetas\",\"precio\":40000,\"imagen\":\"1746597550647.jpeg\",\"cantidad\":1},{\"id\":\"34\",\"nombre\":\"nuevo\",\"precio\":16000,\"imagen\":\"1750398938061.gif\",\"cantidad\":1}]', '2025-07-01 01:25:09', '15'),
+(30, 15, '1287411847-d4d40598-da0c-4401-b13d-70db4f576797', 56000.00, '[{\"id\":\"31\",\"nombre\":\"Camisetas\",\"precio\":40000,\"imagen\":\"1746597550647.jpeg\",\"cantidad\":1},{\"id\":\"34\",\"nombre\":\"nuevo\",\"precio\":16000,\"imagen\":\"1750398938061.gif\",\"cantidad\":1}]', '2025-07-01 01:28:28', '15'),
+(31, 15, '1287411847-02519f5e-d781-49df-998a-2accdf9f1146', 56000.00, '[{\"id\":\"31\",\"nombre\":\"Camisetas\",\"precio\":40000,\"imagen\":\"1746597550647.jpeg\",\"cantidad\":1},{\"id\":\"34\",\"nombre\":\"nuevo\",\"precio\":16000,\"imagen\":\"1750398938061.gif\",\"cantidad\":1}]', '2025-07-01 01:32:08', '15'),
+(32, 15, '1287411847-fe6efe6d-cf27-4439-85b6-a3a3956fc1a3', 80000.00, '[{\"id\":\"32\",\"nombre\":\"Camisetas\",\"precio\":40000,\"imagen\":\"1747522502105.jpeg\",\"cantidad\":1},{\"id\":33,\"nombre\":\"joda\",\"precio\":\"40000.00\",\"imagen\":\"1748497376975.jpeg\",\"cantidad\":1}]', '2025-07-01 01:32:37', '15'),
+(33, 15, '1287411847-dda37cfb-96d4-40da-b895-159c9880ab41', 80000.00, '[{\"id\":\"31\",\"nombre\":\"Camisetas\",\"precio\":40000,\"imagen\":\"1746597550647.jpeg\",\"cantidad\":1},{\"id\":\"32\",\"nombre\":\"Camisetas\",\"precio\":40000,\"imagen\":\"1747522502105.jpeg\",\"cantidad\":1}]', '2025-07-01 01:34:30', '15'),
+(34, 15, '1287411847-5eb6a315-e158-48e3-96a7-78d1ff2acc3c', 136000.00, '[{\"id\":\"32\",\"nombre\":\"Camisetas\",\"precio\":40000,\"imagen\":\"1747522502105.jpeg\",\"cantidad\":2},{\"id\":\"33\",\"nombre\":\"joda\",\"precio\":40000,\"imagen\":\"1748497376975.jpeg\",\"cantidad\":1},{\"id\":\"34\",\"nombre\":\"nuevo\",\"precio\":16000,\"imagen\":\"1750398938061.gif\",\"cantidad\":1}]', '2025-07-01 01:42:25', '15'),
+(35, 15, '1287411847-ad1b463e-fc08-467e-b3bd-c74d44521c45', 272000.00, '[{\"id\":\"31\",\"nombre\":\"Camisetas\",\"precio\":40000,\"imagen\":\"1746597550647.jpeg\",\"cantidad\":2},{\"id\":\"32\",\"nombre\":\"Camisetas\",\"precio\":40000,\"imagen\":\"1747522502105.jpeg\",\"cantidad\":2},{\"id\":\"33\",\"nombre\":\"joda\",\"precio\":40000,\"imagen\":\"1748497376975.jpeg\",\"cantidad\":2},{\"id\":\"34\",\"nombre\":\"nuevo\",\"precio\":16000,\"imagen\":\"1750398938061.gif\",\"cantidad\":2}]', '2025-07-01 07:49:46', '15'),
+(36, 15, '1287411847-0b063da8-e1a6-4774-b3d3-5f51123a86da', 120000.00, '[{\"id\":\"31\",\"nombre\":\"Camisetas\",\"precio\":40000,\"imagen\":\"1746597550647.jpeg\",\"cantidad\":1},{\"id\":\"32\",\"nombre\":\"Camisetas\",\"precio\":40000,\"imagen\":\"1747522502105.jpeg\",\"cantidad\":1},{\"id\":\"33\",\"nombre\":\"joda\",\"precio\":40000,\"imagen\":\"1748497376975.jpeg\",\"cantidad\":1}]', '2025-07-01 08:20:40', '15'),
+(37, 15, '1287411847-6e245dda-a78d-40cb-8c6a-e94a3c68f7e5', 136000.00, '[{\"id\":\"31\",\"nombre\":\"Camisetas\",\"precio\":40000,\"imagen\":\"1746597550647.jpeg\",\"cantidad\":1},{\"id\":\"32\",\"nombre\":\"Camisetas\",\"precio\":40000,\"imagen\":\"1747522502105.jpeg\",\"cantidad\":1},{\"id\":\"33\",\"nombre\":\"joda\",\"precio\":40000,\"imagen\":\"1748497376975.jpeg\",\"cantidad\":1},{\"id\":34,\"nombre\":\"nuevo\",\"precio\":\"16000.00\",\"imagen\":\"1750398938061.gif\",\"cantidad\":1}]', '2025-07-01 08:21:23', '15'),
+(38, 15, '1287411847-4bcc8ed0-f713-444b-99c1-b5ed96bff9cd', 152000.00, '[{\"id\":\"31\",\"nombre\":\"Camisetas\",\"precio\":40000,\"imagen\":\"1746597550647.jpeg\",\"cantidad\":1,\"subtotal\":40000},{\"id\":\"32\",\"nombre\":\"Camisetas\",\"precio\":40000,\"imagen\":\"1747522502105.jpeg\",\"cantidad\":1,\"subtotal\":40000},{\"id\":\"33\",\"nombre\":\"joda\",\"precio\":40000,\"imagen\":\"1748497376975.jpeg\",\"cantidad\":1,\"subtotal\":40000},{\"id\":\"34\",\"nombre\":\"nuevo\",\"precio\":16000,\"imagen\":\"1750398938061.gif\",\"cantidad\":2,\"subtotal\":32000}]', '2025-07-01 08:27:56', '15'),
+(39, 15, '1287411847-6f866a2c-82ef-4247-8632-ba31ad4ed371', 80000.00, '[{\"id\":\"31\",\"nombre\":\"Camisetas\",\"precio\":40000,\"imagen\":\"1746597550647.jpeg\",\"cantidad\":1},{\"id\":\"32\",\"nombre\":\"Camisetas\",\"precio\":40000,\"imagen\":\"1747522502105.jpeg\",\"cantidad\":1}]', '2025-07-01 08:34:57', '15'),
+(40, 15, '1287411847-7e129761-10f2-456f-a3cb-f97252bdcf12', 136000.00, '[{\"id\":\"31\",\"nombre\":\"Camisetas\",\"precio\":40000,\"imagen\":\"1746597550647.jpeg\",\"cantidad\":1},{\"id\":\"32\",\"nombre\":\"Camisetas\",\"precio\":40000,\"imagen\":\"1747522502105.jpeg\",\"cantidad\":1},{\"id\":\"33\",\"nombre\":\"joda\",\"precio\":40000,\"imagen\":\"1748497376975.jpeg\",\"cantidad\":1},{\"id\":\"34\",\"nombre\":\"nuevo\",\"precio\":16000,\"imagen\":\"1750398938061.gif\",\"cantidad\":1}]', '2025-07-01 08:37:18', '15'),
+(41, 15, '1287411847-b28ecd08-bd89-46ec-85ed-33e42584d21e', 136000.00, '[{\"id\":\"31\",\"nombre\":\"Camisetas\",\"precio\":40000,\"imagen\":\"1746597550647.jpeg\",\"cantidad\":1},{\"id\":\"32\",\"nombre\":\"Camisetas\",\"precio\":40000,\"imagen\":\"1747522502105.jpeg\",\"cantidad\":1},{\"id\":\"33\",\"nombre\":\"joda\",\"precio\":40000,\"imagen\":\"1748497376975.jpeg\",\"cantidad\":1},{\"id\":\"34\",\"nombre\":\"nuevo\",\"precio\":16000,\"imagen\":\"1750398938061.gif\",\"cantidad\":1}]', '2025-07-01 08:52:03', 'user-15-1751377923798');
 
 -- --------------------------------------------------------
 
@@ -222,6 +277,13 @@ CREATE TABLE `sessions` (
   `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `sessions`
+--
+
+INSERT INTO `sessions` (`session_id`, `expires`, `data`, `user_id`) VALUES
+('ebn5jpW60L-twixi8CbbVKPa5xu6ebid', 1751465835, '{\"cookie\":{\"originalMaxAge\":86400000,\"expires\":\"2025-07-02T12:49:17.997Z\",\"secure\":true,\"httpOnly\":true,\"path\":\"/\",\"sameSite\":\"none\"},\"userId\":15}', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -261,7 +323,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `correo_electronico`, `password`) VALUES
-(15, 'orlandorojas2312@gmail.com', '$2b$10$gR6tTP2QNpMLTmTSIE2PreHnLyJn0Oo8wnuoU6NWEaIQJ4matBMHK');
+(15, 'orlandorojas2312@gmail.com', '$2b$10$gR6tTP2QNpMLTmTSIE2PreHnLyJn0Oo8wnuoU6NWEaIQJ4matBMHK'),
+(17, 'orlanditorojas123@gmail.com', '$2b$10$eKtQrC5BqzyHkQO/7hEOZuVb7Gdf5JpDP8bF2dr1LYDy6CfSdBalW');
 
 -- --------------------------------------------------------
 
@@ -287,7 +350,8 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_usuario`, `nombre`, `apellido`, `telefono`, `ciudad`, `direccion`, `correo_electronico`, `contraseña`, `permiso1`, `user_id`) VALUES
-(15, 'Jose', 'Orlando', '', '', '', '', '', 'Usuario', 15);
+(15, 'Jose', 'Orlando', '', '', '', '', '', 'Usuario', 15),
+(17, 'Orlando', 'Primera', '', '', '', '', '', 'Usuario', 17);
 
 --
 -- Índices para tablas volcadas
@@ -397,19 +461,19 @@ ALTER TABLE `administrador`
 -- AUTO_INCREMENT de la tabla `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT de la tabla `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 
 --
 -- AUTO_INCREMENT de la tabla `pending_orders`
 --
 ALTER TABLE `pending_orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
@@ -421,13 +485,13 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Restricciones para tablas volcadas

@@ -5,6 +5,9 @@ const mercadopago = require('../Services/mercadopagoConfig');
 // 🧠 Simulación: en el futuro debes guardar el pendingOrder en la BD y consultarlo por preferenceId
 const PendingOrderModel = require('../Models/PendingOrderModel');
 
+
+
+
 const OrderController = {
    createOrder: async (req, res) => {
     try {
@@ -18,7 +21,8 @@ const OrderController = {
         }
 
         const userId = req.session.userId;
-        const baseUrl = 'https://3f33-2800-484-df78-8c00-5c2c-817f-e96b-5fd5.ngrok-free.app';
+        const baseUrl = 'https://5aa4-2800-484-df78-8c00-24b3-3404-9008-ed06.ngrok-free.app';
+        const externalReference = `user-${userId}-${Date.now()}`;
 
         const preferencePayload = {
             items: items.map(item => ({
@@ -36,7 +40,7 @@ const OrderController = {
             auto_return: 'approved',
             binary_mode: true,
             notification_url: `${baseUrl}/webhook-mercadopago`,
-            external_reference: userId.toString(),
+           external_reference: externalReference,
             metadata: {
                 user_id: userId
             }
@@ -50,7 +54,7 @@ const OrderController = {
                 console.log('🛒 pendingOrder a guardar:', {
         user_id: userId,
         preference_id: preference.id,
-        external_reference: userId.toString(),
+        external_reference: `user-${userId}-${Date.now()}`,
         total,
         items: JSON.stringify(items)
         });
@@ -58,7 +62,7 @@ const OrderController = {
         await PendingOrderModel.create({
         user_id: userId,
         preference_id: preference.id,
-        external_reference: userId.toString(),  // <--- clave para enlazar desde el webhook
+        external_reference: externalReference,  // <--- clave para enlazar desde el webhook
         total,
         items: JSON.stringify(items),
         created_at: new Date()
@@ -77,64 +81,49 @@ const OrderController = {
     }
 },
 
-    confirmOrder: async (req, res) => {
-        try {
-            const { preferenceId, paymentId } = req.body;
-
-            const pendingOrder = pendingOrders[preferenceId];
-            if (!pendingOrder || req.session.userId !== pendingOrder.userId) {
-                return res.status(400).json({ error: 'Orden no encontrada' });
-            }
-
-            const nuevaOrden = await OrderModel.create({
-                user_id: pendingOrder.userId,
-                amount: pendingOrder.total,
-                status: 'pending',
-                payment_provider: 'mercadopago',
-                payment_id: paymentId,
-                created_at: new Date()
-            });
-
-            await OrderItemModel.bulkCreate(
-                pendingOrder.items.map(item => ({
-                    order_id: nuevaOrden.id,
-                    product_id: item.id,
-                    product_name: item.nombre,
-                    quantity: item.cantidad,
-                    unit_price: item.precio
-                }))
-            );
-
-            delete pendingOrders[preferenceId];
-
-            res.json({ result: true, orderId: nuevaOrden.id });
-
-        } catch (error) {
-            console.error('Error al confirmar orden:', error);
-            res.status(500).json({ error: 'Error al guardar la orden' });
-        }
-    },
+    
 
    crearOrdenDesdeWebhook: async (orderData) => {
   try {
-    const userId = parseInt(orderData.external_reference);
+    console.log('📦 Webhook -> orderData:', orderData);
+    console.log('🔎 preference_id:', orderData.preference_id);
+    console.log('🔎 external_reference:', orderData.external_reference);
+
+    const userId = parseInt(orderData.external_reference.split('-')[1]); 
     const paymentId = orderData.id;
-    const preferenceId = orderData.metadata?.preference_id || null;
-
+    
+    // Buscar la orden pendiente por external_reference
     const pendingOrder = await PendingOrderModel.getByExternalReference(orderData.external_reference);
-
-    if (!pendingOrder) throw new Error('Orden pendiente no encontrada');
+    
+    if (!pendingOrder) {
+      throw new Error(`Orden pendiente no encontrada para external_reference: ${orderData.external_reference}`);
+    }
 
     const items = JSON.parse(pendingOrder.items);
+    
+    // Verificar que el total coincida
+    if (parseFloat(pendingOrder.total) !== parseFloat(orderData.transaction_amount)) {
+      console.warn(`⚠️ Advertencia: El total de la orden pendiente (${pendingOrder.total}) no coincide con el de la transacción (${orderData.transaction_amount})`);
+    }
 
-    const nuevaOrden = await OrderModel.create({
-      user_id: userId,
-      amount: pendingOrder.total,
-      status: 'pending',
-      payment_provider: 'mercadopago',
-      payment_id: paymentId,
-      created_at: new Date()
-    });
+    let estadoOrden;
+
+if (orderData.status === 'approved') {
+  estadoOrden = 'approved';
+} else if (orderData.status === 'in_process' || orderData.status === 'pending') {
+  estadoOrden = 'pending';
+} else {
+  estadoOrden = 'rejected';
+}
+
+const nuevaOrden = await OrderModel.create({
+  user_id: userId,
+  amount: pendingOrder.total,
+  status: estadoOrden,
+  payment_provider: 'mercadopago',
+  payment_id: paymentId,
+  created_at: new Date()
+});
 
     await OrderItemModel.bulkCreate(
       items.map(item => ({
@@ -146,8 +135,9 @@ const OrderController = {
       }))
     );
 
-    if (preferenceId) {
-      await PendingOrderModel.delete(preferenceId);
+    // Eliminar la orden pendiente usando el preference_id si existe
+    if (pendingOrder.preference_id) {
+      await PendingOrderModel.delete(pendingOrder.preference_id);
     }
 
     return nuevaOrden;

@@ -9,6 +9,14 @@ const PendingOrderModel = {
   );
   return result;
 },
+ 
+  deleteByExternalReference: async (externalReference) => {
+  if (!externalReference) throw new Error('Se requiere externalReference');
+  await pool.execute(
+    'DELETE FROM pending_orders WHERE external_reference = ?',
+    [externalReference]
+  );
+},
 
  getByPreferenceId: async (preferenceId) => {
   if (!preferenceId) {

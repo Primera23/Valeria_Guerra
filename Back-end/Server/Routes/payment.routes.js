@@ -1,5 +1,6 @@
 const { Router } = require('express'); 
 const router = Router();
+const {tVendido } = require('../Controllers/payments.controller.js');
 
 const OrderController = require('../Controllers/order.Controller');
 router.post('/crear-orden', OrderController.createOrder);
@@ -13,4 +14,6 @@ router.get('/pago-exitoso', (req, res) => {
 router.get('/pago-pendiente', (req, res) => {
   res.redirect('https://localhost:3000/Productos.html?status=pending');
 });
+
+router.get('/vendido', tVendido);
 module.exports = router;

@@ -35,6 +35,13 @@ const OrderModel = {
             [status, receiptUrl, paymentId]
         );
     },
+    getByPaymentId: async (paymentId) => {
+    const [rows] = await pool.execute(
+      'SELECT * FROM orders WHERE payment_id = ?',
+      [paymentId]
+    );
+    return rows[0];
+  },
 
     findById: async (id) => {
         const [rows] = await pool.execute('SELECT * FROM orders WHERE id = ?', [id]);

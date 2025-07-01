@@ -20,17 +20,20 @@
   </footer>
   <script>
     const token = new URLSearchParams(window.location.search).get('token');
+    console.log(token);
     const mensaje = document.getElementById('mensaje');
     const mensajeB= document.getElementById('mensajeB');
 
     if (!token) {
       mensaje.innerText = 'Token no encontrado.';
     } else {
-      fetch(`/verify-reset-token?token=${token}`)
+      fetch(`/verify-s?token=${token}`)
         .then(res => res.json())
         .then(data => {
           if (data.valid) {
             mensajeB.style.display = 'block';
+            mensajeB.style.color = 'green';
+            mensajeB.innerText = '¡Bienvenido! Tu correo ha sido verificado.';
           } else {
             mensaje.innerText = data.message;
           }
