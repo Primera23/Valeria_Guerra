@@ -55,6 +55,16 @@ const getProducto = async(id_producto)=>{
     const [productos] = await pool.query(`SELECT * FROM producto WHERE id_producto = ?`, [id_producto]);
     return productos;
 }
+const updateProducto = async ({ id, nombre, descripcion, precio, id_categoria2 }) => {
+    const [result] = await pool.query(
+        `UPDATE producto 
+         SET nombre = ?, descripcion = ?, precio = ?, id_categoria2 = ?
+         WHERE id_producto = ?`,
+        [nombre, descripcion, precio, id_categoria2, id]
+    );
+    return result;
+};
+
 
 module.exports = {
     getTallas,
@@ -63,5 +73,6 @@ module.exports = {
     insertColorTalla,
     countUsers,
     getProducto,
-    getProductosDisponibles
+    getProductosDisponibles, 
+    updateProducto
 };

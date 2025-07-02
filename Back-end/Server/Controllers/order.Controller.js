@@ -21,7 +21,7 @@ const OrderController = {
         }
 
         const userId = req.session.userId;
-        const baseUrl = 'https://5aa4-2800-484-df78-8c00-24b3-3404-9008-ed06.ngrok-free.app';
+        const baseUrl = 'https://d279-179-1-218-202.ngrok-free.app';
         const externalReference = `user-${userId}-${Date.now()}`;
 
         const preferencePayload = {

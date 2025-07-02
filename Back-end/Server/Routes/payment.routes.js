@@ -1,6 +1,7 @@
 const { Router } = require('express'); 
 const router = Router();
-const {tVendido } = require('../Controllers/payments.controller.js');
+const OrderItemModel = require('../Models/orderItem.model');
+const {tVendido, ventasC } = require('../Controllers/payments.controller.js');
 
 const OrderController = require('../Controllers/order.Controller');
 router.post('/crear-orden', OrderController.createOrder);
@@ -16,4 +17,5 @@ router.get('/pago-pendiente', (req, res) => {
 });
 
 router.get('/vendido', tVendido);
+router.get('/ventas', ventasC );
 module.exports = router;

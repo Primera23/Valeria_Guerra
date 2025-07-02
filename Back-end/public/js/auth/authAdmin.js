@@ -107,11 +107,31 @@ static redirectToIndex() {
         .then(response => response.json())
         .then(usuarios => {if (usuarios.success){
             document.getElementById('countUsers').textContent = 
-                `${usuarios.totalUsuarios}`;
+                `${usuarios.totalUsuarios} `;
         }}
 
         )
-        .catch(error => console.log(error));
+        .catch(error => console.log(error))
+
+        fetch('http://localhost:8080/orders/cuentas')
+    .then(response => response.json())
+    .then(ventas => {
+        console.log("📦 Datos de ventas recibidos:", ventas); // 👈 Mira aquí qué llega realmente
+
+        if (ventas.success) {
+            document.getElementById('countVentas').textContent = `${ventas.totalVentas}`;
+        }
+    })
+    .catch(error => console.log("❌ Error al obtener ventas:", error));
+
+    fetch('/vendido')
+    .then(response => response.json())
+    .then(productos => {if (productos.success){
+            document.getElementById('totalVentas').textContent = 
+                `$${productos.totalVendido} `;
+        }} )
+    .catch(error => console.log(error));
+
     }
 
     static async handleAdminLogout() {

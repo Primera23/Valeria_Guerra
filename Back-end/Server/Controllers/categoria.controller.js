@@ -32,6 +32,8 @@ const obtenerCategoria = async (req, res) => {
 const actualizarCategorias = async (req, res) => {
     const { categoria } = req.params;
     const { descripcion1, nuevoNombre } = req.body;
+console.log(categoria, descripcion1, nuevoNombre);
+
 
     if (!nuevoNombre || !descripcion1) {
         return res.status(400).json({ success: false, message: 'Todos los campos son obligatorios' });
@@ -44,7 +46,7 @@ const actualizarCategorias = async (req, res) => {
     
 
     try {
-        const result = await patchCategorias(categoria,descripcion1,nuevoNombre);
+        const result = await patchCategorias(categoria, nuevoNombre, descripcion1);
 
         if (result.affectedRows === 0) {
             return res.status(404).json({ success: false, message: 'Categoría no encontrada' });

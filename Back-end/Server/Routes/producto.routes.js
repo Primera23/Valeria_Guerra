@@ -5,7 +5,9 @@ const {
     obtenerTallas,
     contarUsuarios,
     obtenerProducto,
+    actualizarProducto,
     obtenerProductosDisponibles
+    
     // deleteCategorias,
     // getCategorias,
     // patchCategorias
@@ -33,6 +35,8 @@ router.get("/productos",obtenerProductos);
 router.get("/usuarios",contarUsuarios);
 router.get("/productos/:id_producto",obtenerProducto)
 router.get("/productos-disponible", obtenerProductosDisponibles);
+router.put('/productos/:id', actualizarProducto);
+
 router.patch('/producto/visibilidad/:id_producto', async (req, res) => {
     const dbModule = require('../db');
     const pool = dbModule.pool;
@@ -46,5 +50,6 @@ router.patch('/producto/visibilidad/:id_producto', async (req, res) => {
         res.status(500).json({ success: false, message: 'Error al actualizar visibilidad' });
     }
 });
+
 
 module.exports = router;

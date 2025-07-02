@@ -37,112 +37,149 @@
   .magni {
     color: #0000009a;
   }
-  .article {
-    width: 100%; /* Ancho del contenedor padre */
-    padding: 50px 0; /* Espaciado opcional */
-    display: flex;
-    justify-content: center; /* Centra la caja horizontalmente */
-    align-items: center; /* Centra la caja verticalmente */
-    background-color: #f8f9fa; /* Fondo opcional para el artículo */
-  }
-  
-  .article .box {
-    width: 80%; /* Ajusta el tamaño de la caja */
-    max-width: 600px; /* Tamaño máximo */
-    height: auto; /* Ajusta la altura al contenido */
-    background-image: url("/ImagenesProyecto/image00002.jpeg"); /* Imagen de fondo */
-    background-size: cover; /* La imagen cubre el fondo del div */
-    background-position: center; /* Centra la imagen */
-    background-repeat: no-repeat; /* Evita que la imagen se repita */
-    padding: 20px; /* Espaciado interno */
-    text-align: center; /* Centra el texto */
-    border-radius: 10px; /* Bordes redondeados opcionales */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra opcional */
+/* Sección principal */
+.article {
+  width: 100%;
+  padding: 60px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f2f5;
+}
+
+.article .box {
+  width: 100%;
+  max-width: 800px;
+  background-image: url("../ImagenesProyecto/image00002.jpeg");
+  background-size: cover;
+  background-position: center;
+  border-radius: 16px;
+  padding: 60px 40px;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+.article .box h1 {
+  color: #fff;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Sección de dos cajas */
+.two-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin: 60px 20px;
+}
+
+.box-img {
+  width: 100%;
+  max-width: 500px;
+  height: 360px; /* Más alto para que el texto grande no se desborde */
+  border-radius: 16px;
+  padding: 40px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.box-img::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top right, rgba(0, 0, 0, 0.6), transparent);
+  border-radius: 16px;
+  z-index: 0;
+}
+
+.box-img h1,
+.box-img p,
+.box-img a {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  margin: 0 0 12px 0;
+}
+
+/* ✅ TÍTULOS GRANDES como “Síguenos” y “Regístrate” */
+.box-img h1 {
+  font-size: 4rem; /* ajustable: puedes subirlo hasta 6rem si cabe */
+  font-weight: 900;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+/* ✅ TEXTO DESCRIPTIVO GRANDE como “A la moda” */
+.box-img p {
+  font-size: 2rem;
+  font-weight: 600;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+  opacity: 1;
+}
+
+.box-img a {
+  background-color: #d39e2d;
+  color: white;
+  display: inline-block;
+  padding: 14px 28px;
+  margin-top: 16px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  border-left: 4px solid #00000050;
+  transition: all 0.3s ease;
+}
+
+.box-img a:hover {
+  background-color: #b28224;
+  transform: scale(1.05);
+}
+
+/* Imagen de fondo personalizada */
+.box-img1 {
+  background-image: url("../ImagenesProyecto/image00002.jpeg");
+}
+
+.box-img2 {
+  background-image: url("../ImagenesProyecto/home.jpeg");
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .article .box h1 {
+    font-size: 2rem;
   }
 
-  .article .box h1 {
-    color: white;
-    padding: 42px 40px;
-  }
-  
-  .article .box p {
-    color: white;
-    font-size: 15px;
-    line-height: 2;
-    padding-left: 42px;
-  }
-  
-  
   .two-box {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 50px;
+    flex-direction: column;
+    align-items: center;
   }
-  
-  .two-box .box-img1 {
-    width: 520px;
-    height: 238px;
-    background-image: linear-gradient(to left, transparent, black),
-      url("/ImagenesProyecto/image00002.jpeg");
-    background-size: cover;
+
+  .box-img {
+    max-width: 90%;
+    height: auto;
+    padding: 30px;
   }
-  
-  .two-box .box-img1 h1 {
-    color: white;
-    padding-left: 44px;
-    padding-top: 50px;
+
+  .box-img h1 {
+    font-size: 2.5rem;
   }
-  
-  .two-box .box-img1 p {
-    color: white;
-    padding-left: 44px;
+
+  .box-img p {
+    font-size: 1.4rem;
   }
-  
-  .two-box .box-img1 a {
-    background-color: #d39e2d;
-    color: white;
-    display: inline-block;
-    margin-left: 44px;
-    margin-top: 20px;
-    padding: 14px 24px;
-    border-left: 3px solid #04040459;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  .two-box .box-img2 {
-    width: 520px;
-    height: 238px;
-    background-image: linear-gradient(to left, transparent, black),
-      url("/ImagenesProyecto/home.jpeg");
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-  
-  .two-box .box-img2 h1 {
-    color: white;
-    padding-left: 44px;
-    padding-top: 50px;
-  }
-  
-  .two-box .box-img2 p {
-    color: white;
-    padding-left: 44px;
-  }
-  
-  .two-box .box-img2 a {
-    background-color: #d39e2d;
-    color: white;
-    display: inline-block;
-    margin-left: 44px;
-    margin-top: 20px;
-    padding: 14px 24px;
-    border-left: 3px solid #04040459;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
+}
   /* telwin  */
         /* Header principal */
         .telwin-header {
@@ -258,7 +295,9 @@
     font-size: 28px;
     color: #333;
   }
-/*Desde aca comienza las card de productos*/
+ 
+
+  
 .food {
     display: flex;
     justify-content: center;
@@ -268,24 +307,32 @@
   }
   
   .product-container {
-    display: flex;
-    flex-wrap: wrap; /* Permite que los productos pasen a la siguiente línea */
-    justify-content: space-between; /* Espacio entre productos en una fila */
-    gap: 20px; /* Espacio entre productos */
-    margin: 20px;
-  }
-  .recipe {
-    width: 380px; /* Aumenté el tamaño horizontalmente */
-    height: 400px; /* Reduje la altura para hacerla más horizontal */
-    border-radius: 18px;
-    border: 3px solid #159f8f;
-    overflow: hidden;
-    background-color: #fff;
-    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
-    margin: 20px;
-  }
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1440px;
+  margin: 30px auto;
+  justify-items: center;
+}
+ 
+/* Tarjeta de producto */
+.recipe {
+  width: 100%;
+  max-width: 350px;
+  min-width: 250px;
+  height: 400px;
+  border-radius: 18px;
+  border: 3px solid #159f8f;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0;
+}
   
   .recipe:hover {
     transform: scale(1.03);
@@ -384,6 +431,61 @@
       grid-template-columns: 1fr; /* 1 columna en pantallas muy pequeñas */
     }
   }
+  
+  
+  
+  .buy-btn, .details-btn {
+    padding: 10px 20px;
+    border: none;
+    background-color: #159f8f;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .buy-btn:hover, .details-btn:hover {
+    background-color: #128c76;
+  }
+  
+  /* Asegura que los productos estén centrados cuando haya menos de 3 en la fila */
+  .product-container {
+    justify-content: flex-start; /* Alineación predeterminada */
+  }
+  
+  .product-container .recipe:nth-child(3n+1) {
+    margin-left: 0; /* Para asegurar que el primer producto de cada fila no tenga margen extra */
+  }
+  
+  .product-container .recipe:nth-child(3n+2),
+  .product-container .recipe:nth-child(3n+3) {
+    margin-left: 10px;
+  }
+  
+  /* Centrar cuando haya solo 1 o 2 productos en la fila */
+  .product-container:has(.recipe:nth-child(3n+1):nth-last-child(1),
+      .recipe:nth-child(3n+2):nth-last-child(2),
+      .recipe:nth-child(3n+3):nth-last-child(3)) {
+      justify-content: center;
+  }
+  
+  /* Ajuste para pantallas más pequeñas */
+  @media (max-width: 1024px) {
+    .recipe {
+      width: calc(50% - 20px); /* Dos productos por fila */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .recipe {
+      width: 100%; /* Un producto por fila */
+    }
+    .product-container {
+      justify-content: center; /* Centra los productos cuando hay solo uno en una fila */
+    }
+  }
+  
   
   
   
@@ -942,67 +1044,85 @@ section{
           
       }
   }
-  
-  .about .row{
-      display: flex;
-      align-items: center;
-      background-color:  #0f6b60;
-      flex-wrap: wrap;
-  }
-  
-  .about .row .img{
-      flex: 1 1 45rem;
-  }
-  
-  .about .row .img img{
-      width: 100%;}
-  
-  .about .row .content{
-      flex: 1 1 45rem;
-      padding: 2rem;
-  }
-  
-  .about .row .content h3{
-      font-size: 3rem;
-      color: #ffffff;
-  }
-  
-  .about .row .content p{
-      font-size: 1.6rem;
-      color: #ffffff;
-      padding: 1rem 0;
-      line-height: 1.8;
-  }
-  
-  .box-container{
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-  }
-  
-  
-  
-  
-  .content a{
-      margin: 1rem;
-      display: inline-block;
-      padding: .9rem 3rem;
-      font-size: 25px;
-      color: #ffffff;
-      background: #0f6b60;
-      cursor: pointer;
-      text-align: center;
-  }
-  
-  .content a:hover{
-      letter-spacing: .2rem;
-      background-color: #0f6b60;
-      color: white;
-  
-  }
-  
-  
-  
+.about .row {
+    display: flex;
+    align-items: center;
+    background-color: #0f6b60;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 2rem;
+    border-radius: 1rem;
+}
+
+.about .row .img {
+    flex: 1 1 40rem; /* Mayor prioridad a la imagen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about .row .img img {
+    width: 100%;
+    max-width: 600px; /* Imagen grande y balanceada */
+    height: auto;
+    border-radius: 1rem;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.about .row .sobre.nosotros {
+    flex: 1 1 45rem;
+    padding: 2rem;
+    color: #ffffff;
+}
+
+.about .row .sobre.nosotros h3 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.about .row .sobre.nosotros p {
+    font-size: 2rem;
+    line-height: 1.8;
+}
+
+/* Botón grande dentro del texto */
+.sobre.nosotros a {
+    margin: 2rem 0;
+    display: inline-block;
+    padding: 1.5rem 5rem;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ffffff;
+    background: #128376;
+    border-radius: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.05rem;
+}
+
+.sobre.nosotros a:hover {
+    background-color: #0f6b60;
+    transform: scale(1.05);
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .about .row {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about .row .img img {
+        max-width: 90%;
+    }
+
+    .about .row .sobre.nosotros {
+        padding: 1rem;
+    }
+}
+
   
   
   .modalmask {
@@ -1591,16 +1711,17 @@ footer {
 .modal-info {
   flex: 1;
 }
-
 .modal-info h2 {
   margin-top: 0;
   color: #333;
+  font-size: 3.8rem; /* Aumenta el tamaño del nombre */
 }
 
 .description {
   color: #666;
   line-height: 1.6;
   margin: 20px 0;
+  font-size: 2rem; /* Aumenta el tamaño del color */
 }
 
 .btn-add-to-cart {
@@ -1662,3 +1783,4 @@ footer {
   transform: scale(0.97);
   background-color: #0e6e63;
 }
+

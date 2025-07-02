@@ -12,7 +12,7 @@ const MySQLStore = require('express-mysql-session')(session);
 const app = express();
 
 const corsOptions = {
-  origin: ["https://localhost:3000", "https://localhost:3001","https://5aa4-2800-484-df78-8c00-24b3-3404-9008-ed06.ngrok-free.app"], // Reemplaza con el puerto de tu frontend (React/Vite)
+  origin: ["https://localhost:3000", "https://localhost:3001","https://d279-179-1-218-202.ngrok-free.app"], // Reemplaza con el puerto de tu frontend (React/Vite)
   credentials: true, // Si usas cookies/tokens de autenticación
   allowedHeaders: [
     'Content-Type', 

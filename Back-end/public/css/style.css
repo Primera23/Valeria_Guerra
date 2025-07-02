@@ -1,14 +1,9 @@
 :root {
-    --primary-color: #f3932d; /* Blanco */
-    --secondary-color: #cf1b1b; /* Gris oscuro para textos principales */
-    --accent-color: #159f8f; /* Verde suave */
-    --background-color: #e7e7e7; /* Gris suave para el fondo */
-    --surface-color: #ffffff; /* Naranja suave, menos saturado */
-    --text-primary: #159f8f; /* Gris oscuro para los textos */
-    --text-secondary: #f3932d;; /* Gris claro para los textos secundarios */
-    --success-color: #ffffff; /* Verde para el éxito */
-    --warning-color: #ffffff; /* Naranja para advertencias */
-    --danger-color: #e4cdcb; /* Rojo para errores */
+   --background-color: #f9fafb;  /* Un blanco ligeramente grisáceo */
+--surface-color: #ffffff;     /* Se mantiene limpio para tarjetas */
+--accent-color: #159f8f;      /* Verde suave y moderno */
+--text-primary: #1f2937;      /* Gris muy oscuro, no negro */
+--text-secondary: #6b7280;   
 }
 * {
     margin: 0;
@@ -100,14 +95,14 @@ body {
 .more-links{
     font-size: 20px;
     font-weight: bold;
-    color: #e07c1e;
+    color: #6b7280; 
     width: 100%;
     border-radius:5px;
     padding-top: 15px;
     padding-bottom: 15px;
 }
 .more-links:hover{
-    background-color: #e07c1e;
+    background-color: #38b2ac;
     color: white;
 }
  .space{
@@ -164,7 +159,7 @@ body {
   }
 
   .edit-button {
-    background-color: #159f8f;
+    background-color: #38b2ac;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -184,7 +179,7 @@ body {
   input { padding: 8px; margin-top: 4px; border-radius: 4px; border: 1px solid #ccc; }
   /* Botón de editar */
 .edit-button {
-    background-color: #f3932d;
+    background-color: #38b2ac;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -194,7 +189,7 @@ body {
   }
   
   .edit-button:hover {
-    background-color: #e07c1e;
+    background-color: #6b7280; 
   }
   
   /* Ventana emergente */
@@ -234,7 +229,7 @@ body {
   
   button {
     margin-top: 20px;
-    background-color: #159f8f;
+    background-color: #38b2ac; /* Verde vibrante */
     color: white;
     border: none;
     padding: 10px 20px;
@@ -243,7 +238,7 @@ body {
   }
   
   button:hover {
-    background-color: #128573;
+    background-color: #38b2ac;
   }
   
   /* Botón guardar bonito */
@@ -259,7 +254,7 @@ body {
   }
   
   .save-button:hover {
-    background-color: #45a049;
+    background-color: #38b2ac
   }
   
   .close-button {
@@ -511,61 +506,122 @@ th {
 .form-group input[type="checkbox"] {
     margin-right: 10px;
 }
+/* Estilos para botones */
+    .btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
 
-.btn-primary {
-    background-color: var(--primary-color);
-    color: var(--text-primary);
+    .btn i {
+      margin-right: 6px;
+    }
+
+    .btn-danger {
+      background-color: #e53e3e;
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background-color: #c53030;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(229, 62, 62, 0.3);
+    }
+
+    .btn-warning {
+      background-color:#38b2ac; 
+      color: white;
+    }
+
+    .btn-warning:hover {
+      background-color: #38b2ac;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(237, 137, 54, 0.3);
+    }
+
+    .btn-primary {
+      background-color: var(--accent-color);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #38b2ac;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(21, 159, 143, 0.3);
+    }
+
+    /* Estilos para tablas */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #38b2ac;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    th {
+      background-color: #f7fafc;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    tr:hover {
+      background-color: #f8f9fa;
+    }
+    
+  /* Estilos mejorados para los botones de visibilidad */
+  .btn-success {
+    background-color: #38b2ac; /* Verde vibrante */
+    color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(72, 187, 120, 0.4);
     transition: all 0.3s ease;
-}
-
-.btn-primary:hover {
-    background-color: var(--text-primary);
-    box-shadow: 0 0 15px var(--secondary-color);
-}
-
-.dropdown-menu {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background-color: var(--surface-color);
-    border-radius: 5px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    padding: 10px 0;
-    min-width: 150px;
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
+  }
+  
+  .btn-secondary {
+    background-color: #E53E3E; /* Rojo vibrante */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(229, 62, 62, 0.4);
     transition: all 0.3s ease;
-}
+  }
+  
+  .btn-success:hover {
+    background-color: #38A169;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(72, 187, 120, 0.6);
+  }
+  
+  .btn-secondary:hover {
+    background-color: #C53030;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(229, 62, 62, 0.6);
+  }
+ 
 
-.dropdown-menu.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.dropdown-menu a {
-    display: block;
-    padding: 10px 20px;
-    color: var(--text-primary);
-    text-decoration: none;
-    transition: background-color 0.2s ease;
-}
-
-.dropdown-menu a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-.dropdown-menu i {
-    margin-right: 10px;
-    width: 20px;
-    text-align: center;
-}
 
 #notificationContainer {
     position: fixed;
@@ -713,7 +769,7 @@ th {
 
 .close {
     font-size: 12px;
-    color: #f3932d;
+    color: #38b2ac;
     line-height: 25px;
     position: absolute;
     right: 5px;
@@ -726,7 +782,7 @@ th {
 }
  
 .close:hover {
-    color:#ffba71;
+    color:#38b2ac
 }
 
 .container{
@@ -737,7 +793,7 @@ th {
 }
 
 span{
-    color: #e07c1e;
+    color: #38b2ac
 }
 
 
@@ -757,40 +813,54 @@ span{
 }
 
 .modalbox {
-    
-    
     border-radius: 8px;
     width: 80%;
     max-width: 500px;
-    
-    /* Posicionamiento fijo para centrado absoluto */
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    
-    /* Aseguramos que esté por encima de otros elementos */
     z-index: 10000;
-    
-    /* Control de tamaño y scroll */
     max-height: 90vh;
     overflow-y: auto;
+    background-color: white; /* Fondo blanco para formularios */
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
-.fondo
-
 .close {
+    font-size: 12px;
+    color: #6b7280; 
+    line-height: 25px;
     position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 20px;
+    top: -2px;
+    right: 5px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 3px;
     cursor: pointer;
-    color: white; /* Para que sea visible en fondo negro */
-    z-index: 1; /* Para que esté sobre otros elementos */
+    z-index: 1;
+}
+
+.close:hover {
+    color:#6b7280; 
 }
 
 .modal-content {
-    max-height: calc(80vh - 40px); /* Resta el padding */
+    max-height: calc(80vh - 40px);
     overflow-y: auto;
-    color: white; /* Texto visible en fondo negro */
+    color: black; /* Texto negro para mejor lectura */
 }
+
+.container {
+    margin-top: 10px;
+    background-color: black;
+    width: 100%;
+    height: 100%;
+}
+
+span {
+    color: #38b2ac
+}
+

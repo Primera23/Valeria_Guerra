@@ -12,11 +12,13 @@ const getCategoria = async(categoria) => {
     return rows;
 };
 
-const patchCategorias = async (descripcion1,nuevoNombre,categoria) =>{
-
-    const [result] = await pool.query('UPDATE categoria SET categoria = ?, descripcion = ? WHERE categoria = ?', [nuevoNombre, descripcion1, categoria]);
+const patchCategorias = async (categoriaActual, nuevoNombre, nuevaDescripcion) => {
+    const [result] = await pool.query(
+        'UPDATE categoria SET categoria = ?, descripcion = ? WHERE categoria = ?',
+        [nuevoNombre, nuevaDescripcion, categoriaActual]
+    );
     return result;
-}
+};
 
 const deleteCategorias = async(categoria)=>{
     const [result] = await pool.query('DELETE FROM categoria WHERE categoria = ?',[categoria]);

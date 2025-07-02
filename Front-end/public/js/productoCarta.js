@@ -115,7 +115,7 @@ function mostrarProductos(productos) {
                 <img src="${API_BASE_URL}/uploads/${producto.url_imagen || 'default.jpg'}" alt="${producto.nombre}">
                 <div class="top-icons">
                     <span class="icon cart" data-id="${producto.id_producto}" data-nombre="${producto.nombre}" data-precio="${producto.precio}" data-imagen="${producto.url_imagen || 'default.jpg'}">&#128722;</span>
-                    <span class="icon heart">&#10084;</span>
+                     
                 </div>
             </div>
             <div class="info">

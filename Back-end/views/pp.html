@@ -5,47 +5,69 @@
     <title>Dashboard - Valeria Guerra</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-   
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="css/output.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    
-    <div id="notificationContainer"></div>
-    <div class="dashboard">
-        <div class="hamburger" onclick="toggleSidebar()">
-            <div class="_layer -top"></div>
-            <div class="_layer -mid"></div>
-            <div class="_layer -bottom"></div>
-        </div>
-        <nav class="sidebar menuppal">
-            <div class="sidebar-header">
-                <img src="ImagenesProyecto/image00003.jpeg" alt="Logo" class="logo">
-                <a href="index.html"><h1>Valeria Guerra</h1></a>
-                
-            </div>
 
-            <div class="stat-card glow mb-6">
-                <h2>Hola, <span id="sidebar-nombre"></span></h2>
-            </div>
-            
+    <body class="bg-gray-100">
+  <div id="notificationContainer" class="fixed top-4 right-4 z-50"></div>
 
-            <ul class="nav-links">
-                <li class="active" data-page="dashboard"><a href="#dashboard"><i class="fas fa-home"></i>Inicio</a></li>
-                <!--<li data-page="analytics"><a href="#analytics"><i class="fas fa-chart-line"></i>Analíticas</a></li>
-                <li data-page="sales"><a href="#sales"><i class="fas fa-shopping-cart"></i>Ventas</a></li>
-                <li data-page="customers"><a href="#customers"><i class="fas fa-users"></i>Clientes</a></li> -->
-                <li data-page="categoria"><a href="#categoria"><i class="fa fa-tags"></i>Categoria</a></li>
-                <li data-page="productos"><a href="#productos"><i class="fa fa-cart-plus"></i>Productos</a></li>
-                <li data-page="Ajustes"><a href="#Ajustes"><i class="fas fa-cog"></i>Ajustes</a></li>
-                <li data-page="asistentes"><a href="#asistentes"><i class="fa-solid fa-user"></i>Asistentes</a></li>
-                <li data-page="cerrar"><a href="#logout"><i class="fa-solid fa-door-open"></i>Cerrar Sesión</a></li>
-                
-                <!-- <li data-page="inventory"><a href="#inventory"><i class="fas fa-box"></i>Inventario</a></li>
-                <li data-page="settings"><a href="#settings"><i class="fas fa-cog"></i>Ajustes</a></li> -->
-            </ul>
-        </nav>
+  <div class="dashboard flex">
+    <!-- Sidebar Fijo (siempre visible) -->
+    <nav class="sidebar menuppal w-64 bg-white shadow-lg">
+      <div class="sidebar-header p-5 flex items-center space-x-3 border-b">
+        <img src="ImagenesProyecto/image00003.jpeg" alt="Logo" class="logo w-12 h-12 object-cover rounded-full">
+        <a href="" class="text-xl font-bold text-gray-800 hover:text-orange-500 transition-colors">Valeria Guerra</a>
+      </div>
+
+      <div class="stat-card glow bg-orange-100 text-orange-900 rounded-lg mx-5 my-6 p-4 shadow-md">
+        <h2 class="text-lg font-semibold">Hola, <span id="sidebar-nombre" class="font-bold">Valeria</span></h2>
+      </div>
+      
+      <ul class="nav-links px-5 space-y-2 h-[calc(100vh-220px)] overflow-y-auto">
+        <li class="active bg-orange-200 rounded-md" data-page="dashboard">
+          <a href="#dashboard" class="flex items-center p-3 gap-3 text-gray-800 hover:text-orange-600">
+            <i class="fas fa-home w-5 text-center"></i>
+            <span>Inicio</span>
+          </a>
+        </li>
+        <li class="hover:bg-orange-100 rounded-md transition-colors" data-page="categoria">
+          <a href="#categoria" class="flex items-center p-3 gap-3 text-gray-800 hover:text-orange-600">
+            <i class="fa fa-tags w-5 text-center"></i>
+            <span>Categoria</span>
+          </a>
+        </li>
+        <li class="hover:bg-orange-100 rounded-md transition-colors" data-page="productos">
+          <a href="#productos" class="flex items-center p-3 gap-3 text-gray-800 hover:text-orange-600">
+            <i class="fa fa-cart-plus w-5 text-center"></i>
+            <span>Productos</span>
+          </a>
+        </li>
+        <!-- <li class="hover:bg-orange-100 rounded-md transition-colors" data-page="Ajustes">
+          <a href="#Ajustes" class="flex items-center p-3 gap-3 text-gray-800 hover:text-orange-600">
+            <i class="fas fa-cog w-5 text-center"></i>
+            <span>Ajustes</span>
+          </a>
+        </li> -->
+        <!-- <li class="hover:bg-orange-100 rounded-md transition-colors" data-page="asistentes">
+          <a href="#asistentes" class="flex items-center p-3 gap-3 text-gray-800 hover:text-orange-600">
+            <i class="fa-solid fa-user w-5 text-center"></i>
+            <span>Pendientes</span>
+          </a>
+        </li> -->
+        <li class="hover:bg-red-100 rounded-md transition-colors" data-page="cerrar">
+          <a href="#logout" class="flex items-center p-3 gap-3 text-red-600 hover:text-red-800">
+            <i class="fa-solid fa-door-open w-5 text-center"></i>
+            <span>Cerrar Sesión</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+ 
+
         
         
         <main class="main-content">
@@ -78,17 +100,17 @@
                         <i class="fas fa-shopping-bag space"></i>
                         <div class="stat-info">
                             <h3>Total de Ventas</h3>
-                            <p></p>
+                            <p id="countVentas">hola</p>
                         </div>
                     </div>
                     <div class="stat-card glow">
                         <i class="fas fa-chart-line space"></i>
                         <div class="stat-info">
                             <h3>Ingresos</h3>
-                            <p>$67,895</p>
+                            <p id="totalVentas"></p>
                         </div>
                     </div>
-                    <div class="stat-card glow">
+                    <!-- <div class="stat-card glow">
                         <i class="fas fa-percent space"></i>
                         <div class="stat-info">
                             <h3>Crecimiento</h3>
@@ -135,7 +157,7 @@
                             </thead>
                             <tbody id="topProductsBody"></tbody>
                         </table>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div id="analytics" class="page-content">
@@ -271,25 +293,26 @@
                     </table>
                 </div>
                 
-                <div id="actualizarCategoria" class="modalmask" style="display: none;">
+              <div id="actualizarCategoria" class="modalmask" style="display: none;">
                     <div class="modalbox">
                         <a href="#close" title="Close" class="close">X</a>
                         <div class="modal-content">
                             <div id="aja"></div>
                             <form id="categoriaForm"> <!-- Cambiado el ID del formulario -->
                                 <div class="form-floating mb-2">
+                                     <label for="categoria1">Categoria Actual</label>
                                     <input type="text" class="form-control" id="categoria1" name="categoria1" disabled>
-                                    <label for="categoria1">Categoria Actual</label>
                                 </div>
                             
                                 <div class="form-floating mb-2">
+                                 <label for="descripcion1">Descripcion</label>
                                     <input type="text" class="form-control" id="descripcion1" name="descripcion1">
-                                    <label for="descripcion1">Descripcion</label>
                                 </div>
                             
                                 <div class="form-floating mb-2">
-                                    <input type="text" class="form-control" id="nuevoNombre" name="nuevoNombre">
                                     <label for="nuevoNombre">Nuevo Nombre</label>
+                                    <input type="text" class="form-control" id="nuevoNombre" name="nuevoNombre">
+                                  
                                 </div>
                             
                                 <button type="submit" class="btn btn-primary">Actualizar</button>
@@ -298,6 +321,45 @@
                     </div>
                 </div>
             </div>
+
+            <div id="actualizarProducto" class="modalmask" style="display: none;">
+    <div class="modalbox">
+        <a href="#close" title="Close" class="close" onclick="cerrarModalProducto()">X</a>
+        <div class="modal-content">
+            <div id="mensajeProducto"></div>
+            <form id="productoForm">
+                <div class="form-floating mb-2">
+                    <label for="nombreProducto">Nombre del Producto</label>
+                    <input type="text" class="form-control" id="nombreProducto" name="nombreProducto">
+                    
+                </div>
+
+                <div class="form-floating mb-2">
+                    <label for="descripcionProducto">Descripción</label>
+                    <input type="text" class="form-control" id="descripcionProducto" name="descripcionProducto">
+                    
+                </div>
+
+                <div class="form-floating mb-2">
+                    <label for="precioProducto">Precio</label>
+                    <input type="number" class="form-control" id="precioProducto" name="precioProducto">
+                    
+                </div>
+
+                <div class="form-floating mb-2">
+                    <label for="categoriaProducto">Categoría</label>
+                    <select class="form-select" id="categoriaProducto" name="categoriaProducto">
+                        <!-- Las categorías se cargan dinámicamente -->
+                    </select>
+                    
+                </div>
+
+                <div id="botonProducto" class="mt-2"></div>
+            </form>
+        </div>
+    </div>
+</div>
+
             <div id="productos" class="page-content">
                 <h2>Gestión de Productos</h2>
                 <div class="charts-container">

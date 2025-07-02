@@ -5,42 +5,52 @@
     <title>Dashboard - Valeria Guerra</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-   
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    
-    <div id="notificationContainer"></div>
-    <div class="dashboard">
-        <div class="hamburger" onclick="toggleSidebar()">
-            <div class="_layer -top"></div>
-            <div class="_layer -mid"></div>
-            <div class="_layer -bottom"></div>
-        </div>
-        <nav class="sidebar menuppal">
-            <div class="sidebar-header">
-                <img src="ImagenesProyecto/image00003.jpeg" alt="Logo" class="logo">
-                <a href="index.html"><h2>Valeria Guerra</h2></a>
-                
-            </div>
-            <h3>Hola, <span id="sidebar-nombre">Usuario</span></h3>
+ <body class="bg-gray-100 font-[Poppins]">
+  <div id="notificationContainer"></div>
 
-            <ul class="nav-links">
-                <li class="active" data-page="dashboard"><a href="#dashboard"><i class="fas fa-home"></i>Inicio</a></li>
-                <!--<li data-page="analytics"><a href="#analytics"><i class="fas fa-chart-line"></i>Analíticas</a></li>
-                <li data-page="sales"><a href="#sales"><i class="fas fa-shopping-cart"></i>Ventas</a></li>
-                <li data-page="customers"><a href="#customers"><i class="fas fa-users"></i>Clientes</a></li> -->
-                <li data-page="categoria"><a href="#categoria"><i class="fa fa-tags"></i>Direcciones</a></li>
-                <li data-page="productos"><a href="#productos"><i class="fa fa-cart-plus"></i>pedidos</a></li>
-                <li data-page="informacion"><a href="#informacion">ℹ️ INFORMACIÓN</a></li>
-                <li data-page="autenticacion"><a href="#autenticacion">🔒 AUTENTICACIÓN</a></li>
-                <li data-page="cerrar"><a href="#">🚪 CERRAR SESIÓN</a></li>
-                
-                <!-- <li data-page="inventory"><a href="#inventory"><i class="fas fa-box"></i>Inventario</a></li>
-                <li data-page="settings"><a href="#settings"><i class="fas fa-cog"></i>Ajustes</a></li> -->
-            </ul>
-        </nav>
+  <!-- Contenedor Principal Responsive -->
+  <div class="flex flex-col md:flex-row min-h-screen">
+
+    <!-- Sidebar -->
+    <nav id="sidebar" class="w-full md:w-64 bg-white shadow-md p-5 flex flex-col md:h-screen md:sticky top-0">
+      <!-- Encabezado del logo -->
+      <div class="flex items-center mb-6 space-x-3 border-b pb-4">
+        <img src="ImagenesProyecto/image00003.jpeg" alt="Logo" class="w-12 h-12 object-cover rounded-full" />
+        <a href="index.html" class="text-xl font-bold text-gray-800 hover:text-[#f3932d] transition-colors">
+          Valeria Guerra
+        </a>
+      </div>
+
+      <!-- Saludo -->
+      <div class="stat-card glow bg-orange-100 text-orange-900 rounded-lg my-6 p-4 shadow-md">
+        <h2 class="text-lg font-semibold">Hola, <span id="sidebar-nombre" class="font-bold">Usuario</span></h2>
+      </div>
+
+      <!-- Navegación -->
+      <ul class="nav-links space-y-2 text-gray-700 flex-1 overflow-y-auto">
+
+        <!-- Inicio -->
+            <li class="hover:bg-orange-200 rounded-md transition-colors" data-page="dashboard">
+            <a href="#dashboard" class="flex items-center p-3 gap-3 text-gray-800 hover:text-orange-600">
+                <i class="fas fa-home w-5 text-center text-[#f3932d]"></i>
+                <span>Inicio</span>
+            </a>
+            </li>
+
+        <!-- Cerrar sesión -->
+        <li class="hover:bg-red-100 rounded-md transition-colors" data-page="cerrar">
+          <a href="#logout" class="flex items-center p-3 gap-3 text-red-600 hover:text-red-800">
+            <i class="fa-solid fa-door-open w-5 text-center"></i>
+            <span>Cerrar Sesión</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    
         <main class="main-content">
             <header>
                  
@@ -52,12 +62,12 @@
                     <p><strong>NOMBRE:</strong> <span id="nombre">-</span></p>
                     <p><strong>APELLIDO:</strong> <span id="apellido">-</span></p>
                     <p><strong>EMAIL:</strong> <span id="email">-</span></p>
-                    <p><strong>DOCUMENTO:</strong> <span id="documento">-</span></p>
-                    <p><strong>GÉNERO:</strong> <span id="genero">-</span></p>
-                    <p><strong>FECHA DE NACIMIENTO:</strong> <span id="fecha">-</span></p>
+                    
+           
+                
                     <p><strong>TELÉFONO PERSONAL:</strong> <span id="telefono">-</span></p>
                   </div>
-                  <button class="edit-button" onclick="openModal()">✎ Editar</button>
+                   
                 </div>
               </div>
             
@@ -69,9 +79,8 @@
                   <label>Nombre: <input type="text" id="editNombre"></label>
                   <label>Apellido: <input type="text" id="editApellido"></label>
                   <label>Email: <input type="email" id="editEmail"></label>
-                  <label>Documento: <input type="text" id="editDocumento"></label>
-                  <label>Género: <input type="text" id="editGenero"></label>
-                  <label>Fecha de Nacimiento: <input type="date" id="editFecha"></label>
+               
+            
                   <label>Teléfono Personal: <input type="tel" id="editTelefono"></label>
                   <button onclick="saveChanges()">Guardar</button>
                 </div>
@@ -149,7 +158,7 @@
                     </div>
                 </div> -->
             </div>
-            <div id="analytics" class="page-content">
+            <!-- <div id="analytics" class="page-content">
                 <h1>Analíticas</h1>
                 <div class="charts-container">
                     <div class="chart-card glow">
@@ -453,7 +462,7 @@
                 </div>
             </div>
         </main>
-    </div>
+    </div> -->
     <script  src="js/auth/authcli.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     

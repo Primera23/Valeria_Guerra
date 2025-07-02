@@ -163,6 +163,39 @@ const contarUsuarios = async (req, res) => {
         });
     }
 };
+const actualizarProducto = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { nombre, descripcion, precio, id_categoria2 } = req.body;
+
+        if (!nombre || !descripcion || !precio || !id_categoria2) {
+            return res.status(400).json({ success: false, message: 'Faltan campos obligatorios' });
+        }
+
+        // Aquí llamas a tu modelo (debes tener una función tipo updateProducto)
+        const resultado = await require('../Models/producto.model.js').updateProducto({
+            id,
+            nombre,
+            descripcion,
+            precio,
+            id_categoria2: id_categoria2
+        });
+
+        if (resultado.affectedRows === 0) {
+            return res.status(404).json({ success: false, message: 'Producto no encontrado' });
+        }
+
+        res.json({ success: true, message: 'Producto actualizado correctamente' });
+
+    } catch (error) {
+        console.error('Error al actualizar producto:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error al actualizar producto',
+            error: error.message
+        });
+    }
+};
 
 
 // Exportamos como CommonJS
@@ -172,5 +205,6 @@ module.exports = {
     obtenerTallas,
     contarUsuarios,
     obtenerProducto,
-    obtenerProductosDisponibles
+    obtenerProductosDisponibles, 
+    actualizarProducto
 }
