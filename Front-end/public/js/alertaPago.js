@@ -1,5 +1,3 @@
-// archivo: alertaPago.js
-
 window.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
   const error = params.get('error');
@@ -15,7 +13,13 @@ window.addEventListener('DOMContentLoaded', () => {
     Swal.fire({
       icon: 'success',
       title: '¡Pago exitoso!',
-      text: '✅ ¡Gracias por tu compra!, nos pondremos en contacto contigo pronto.'
+      text: '✅ ¡Gracias por tu compra!, nos pondremos en contacto contigo pronto.',
+      timer: 3000,
+      timerProgressBar: true,
+      willClose: () => {
+        // Redirigir al dashboard con el hash #pedido
+        window.location.href = 'https://localhost:3001/dashboard-cli.html#pedido';
+      }
     });
   } else if (status === 'pending') {
     Swal.fire({
@@ -25,4 +29,5 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
 

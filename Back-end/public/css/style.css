@@ -1,7 +1,7 @@
 :root {
    --background-color: #f9fafb;  /* Un blanco ligeramente grisáceo */
 --surface-color: #ffffff;     /* Se mantiene limpio para tarjetas */
---accent-color: #159f8f;      /* Verde suave y moderno */
+    /* Verde suave y moderno */
 --text-primary: #1f2937;      /* Gris muy oscuro, no negro */
 --text-secondary: #6b7280;   
 }
@@ -561,7 +561,7 @@ th {
     table {
       width: 100%;
       border-collapse: collapse;
-      background-color: #38b2ac;
+      
       border-radius: 8px;
       overflow: hidden;
     }
@@ -573,14 +573,12 @@ th {
     }
 
     th {
-      background-color: #f7fafc;
+      background-color: #ffffff;
       font-weight: 600;
       color: var(--text-primary);
     }
 
-    tr:hover {
-      background-color: #f8f9fa;
-    }
+    
     
   /* Estilos mejorados para los botones de visibilidad */
   .btn-success {

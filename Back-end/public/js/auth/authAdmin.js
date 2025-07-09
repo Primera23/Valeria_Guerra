@@ -128,7 +128,7 @@ static redirectToIndex() {
     .then(response => response.json())
     .then(productos => {if (productos.success){
             document.getElementById('totalVentas').textContent = 
-                `$${productos.totalVendido} `;
+                `${Number(productos.totalVendido).toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}`;
         }} )
     .catch(error => console.log(error));
 

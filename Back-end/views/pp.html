@@ -45,6 +45,7 @@
             <span>Productos</span>
           </a>
         </li>
+        
         <!-- <li class="hover:bg-orange-100 rounded-md transition-colors" data-page="Ajustes">
           <a href="#Ajustes" class="flex items-center p-3 gap-3 text-gray-800 hover:text-orange-600">
             <i class="fas fa-cog w-5 text-center"></i>
@@ -57,6 +58,12 @@
             <span>Pendientes</span>
           </a>
         </li> -->
+        <li class="hover:bg-red-100 rounded-md transition-colors" data-page="pedido">
+          <a href=#pedido" class="flex items-center p-3 gap-3 text-gray-800 hover:text-orange-600">
+            <i class="fa-solid fa-truck w-5 text-center"></i>
+            <span>Pedidos</span>
+          </a>
+        </li>
         <li class="hover:bg-red-100 rounded-md transition-colors" data-page="cerrar">
           <a href="#logout" class="flex items-center p-3 gap-3 text-red-600 hover:text-red-800">
             <i class="fa-solid fa-door-open w-5 text-center"></i>
@@ -110,114 +117,11 @@
                             <p id="totalVentas"></p>
                         </div>
                     </div>
-                    <!-- <div class="stat-card glow">
-                        <i class="fas fa-percent space"></i>
-                        <div class="stat-info">
-                            <h3>Crecimiento</h3>
-                            <p>+24.5%</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="charts-container">
-                    <div class="chart-card glow">
-                        <h3>Analíticas de Ventas</h3>
-                        <div id="salesChart"></div>
-                    </div>
-                    <div class="chart-card glow">
-                        <h3>Crecimiento de Usuarios</h3>
-                        <div id="userGrowthChart"></div>
-                    </div>
-                </div>
-                <div class="data-tables">
-                    <div class="table-card glow">
-                        <h3>Órdenes Recientes</h3>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>ID de Orden</th>
-                                    <th>Cliente</th>
-                                    <th>Producto</th>
-                                    <th>Monto</th>
-                                    <th>Estado</th>
-                                </tr>
-                            </thead>
-                            <tbody id="recentOrdersBody"></tbody>
-                        </table>
-                    </div>
-                    <div class="table-card glow">
-                        <h3>Productos Más Vendidos</h3>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Producto</th>
-                                    <th>Precio</th>
-                                    <th>Vendidos</th>
-                                    <th>Ingresos</th>
-                                </tr>
-                            </thead>
-                            <tbody id="topProductsBody"></tbody>
-                        </table>
-                    </div> -->
+                    
                 </div>
             </div>
-            <div id="analytics" class="page-content">
-                <h1>Analíticas</h1>
-                <div class="charts-container">
-                    <div class="chart-card glow">
-                        <h3>Fuentes de Tráfico</h3>
-                        <div id="trafficSourcesChart"></div>
-                    </div>
-                    <div class="chart-card glow">
-                        <h3>Tasas de Conversión</h3>
-                        <div id="conversionRatesChart"></div>
-                    </div>
-                </div>
-                <div class="data-tables">
-                    <div class="table-card glow">
-                        <h3>Páginas Más Efectivas</h3>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Página</th>
-                                    <th>Visitas</th>
-                                    <th>Visitantes Únicos</th>
-                                    <th>Tiempo Promedio en Página</th>
-                                </tr>
-                            </thead>
-                            <tbody id="topPagesBody"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div id="sales" class="page-content">
-                <h1>Gestión de Ventas</h1>
-                <div class="charts-container">
-                    <div class="chart-card glow">
-                        <h3>Ventas Mensuales</h3>
-                        <div id="monthlySalesChart"></div>
-                    </div>
-                    <div class="chart-card glow">
-                        <h3>Ventas por Categoría</h3>
-                        <div id="salesByCategoryChart"></div>
-                    </div>
-                </div>
-                <div class="data-tables">
-                    <div class="table-card glow">
-                        <h3>Desempeño de Representantes de Ventas</h3>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Total de Ventas</th>
-                                    <th>Negocios Cerrados</th>
-                                    <th>Puntuación de Desempeño</th>
-                                </tr>
-                            </thead>
-                            <tbody id="salesRepBody"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+            
+           
             
             <div id="categoria" class="page-content">
                 <h2>Gestión de Categorias</h2>
@@ -244,26 +148,7 @@
                             </div>   
                     
                 </div>
-                <!-- <div class="data-tables">
-                    <div class="table-card glow">
-                        <h3>Categorias registradas hasta el momento</h3>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Categoria</th>
-                                    <th scope="col">Descripcion</th>
-                                    <th scope="col"><i class="fa fa-trash"></i></th>
-                                    <th scope="col"><i class="fa fa-pencil"></i></th>
-                                </tr>
-                            </thead>
-                            <tbody id="data">
-                                
-                            </tbody>
-
-                        </table>
-                    </div>
-                </div> -->
+                
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -359,6 +244,8 @@
         </div>
     </div>
 </div>
+
+        
 
             <div id="productos" class="page-content">
                 <h2>Gestión de Productos</h2>
@@ -544,61 +431,47 @@
                     </div>
                 </div>
             </div>
-            <div id="Ajustes" class="page-content">
-                <h1>Ajustes</h1>
-                <div class="settings-container">
-                    <div class="settings-card glow">
-                        <h3>Ajustes de Cuenta</h3>
-                        <form id="accountSettingsForm">
-                            <div class="form-group">
-                                <label for="username">Nombre de Usuario</label>
-                                <input type="text" id="username" name="username" value="">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Correo Electrónico</label>
-                                <input type="email" id="email" name="email" value="">
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Nueva Contraseña</label>
-                                <input type="password" id="password" name="password">
-                            </div>
-                            <button type="submit" class="btn-primary">Guardar Cambios</button>
-                        </form>
-            </div>
-                    <div class="settings-card glow">
-                        <h3>Preferencias de Notificación</h3>
-                        <form id="notificationSettingsForm">
-                            <div class="form-group">
-                                <label>
-                                    <input type="checkbox" name="emailNotifications" checked>
-                                    Notificaciones por Correo Electrónico
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label>
-                                    <input type="checkbox" name="smsNotifications">
-                                    Notificaciones por SMS
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label>
-                                    <input type="checkbox" name="pushNotifications" checked>
-                                    Notificaciones Push
-                                </label>
-                            </div>
-                            <button type="submit" class="btn-primary">Guardar Preferencias</button>
-                        </form>
+            <div id="pedido" class="page-content">
+                <h2>Gestión de Pedidos Realizados</h2>
+                
+                <div class="data-tables">
+                    <div class="table-card glow">
+                        <h3>Pedidos Realizados hasta el momento</h3>
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">#</th>
+                                <th scope="col" class="px-6 py-3">Fecha</th>
+                                <th scope="col" class="px-6 py-3">Productos</th>
+                               
+                                <th scope="col" class="px-6 py-3">Estado</th>
+                                <th scope="col" class="px-6 py-3">Informacion Total</th>
+                            </tr>
+                            </thead>
+                            <tbody id="pedidoTableBody">
+                                <!-- Aquí se llenarán los pedidos -->
+                                
+                
+                            </tbody>
+  
+
+                        </table>
                     </div>
+        </div>
+                    
                 </div>
             </div>
         </main>
     </div>
+
+    
    
     <script src="js/dashboard.js"></script>
     
     <script type="module" src="js/Categoria/crud.categoria.js"></script>
     <script type="module" src="js/Producto/crud.producto.js"></script>
     <script type="module" src="js/auth/authAdmin.js"></script>
+    <script type="module" src="js/pedidos.js"></script>
     <script src="js/flowbite.min.js"></script>
 </body>
 </html>

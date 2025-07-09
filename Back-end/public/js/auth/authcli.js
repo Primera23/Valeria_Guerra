@@ -38,7 +38,8 @@ class AuthManager {
 
     static updateUI(user) {
         // Actualizar sidebar
-        const sidebarName = document.querySelector('.sidebar h3 span');
+        const sidebarName = document.getElementById('sidebar-nombre');
+
         if (sidebarName) sidebarName.textContent = user.nombre || 'Usuario';
         
         // Actualizar perfil

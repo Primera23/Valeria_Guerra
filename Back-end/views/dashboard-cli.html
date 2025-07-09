@@ -35,9 +35,17 @@
 
         <!-- Inicio -->
             <li class="hover:bg-orange-200 rounded-md transition-colors" data-page="dashboard">
-            <a href="#dashboard" class="flex items-center p-3 gap-3 text-gray-800 hover:text-orange-600">
+            <a href="#dashboard" class="flex items-center p-3 gap-3 text-gray-800 hover:text-orange-600"></a>
+                
                 <i class="fas fa-home w-5 text-center text-[#f3932d]"></i>
                 <span>Inicio</span>
+            </a>
+            </li>
+            <li class="hover:bg-orange-200 rounded-md transition-colors" data-page="pedido">
+            <a href="#pedido" class="flex items-center p-3 gap-3 text-gray-800 hover:text-orange-600"></a>
+                
+                <i class="fa-solid fa-truck w-5 text-center text-[#f3932d]"></i>
+                <span>Pedido</span>
             </a>
             </li>
 
@@ -65,7 +73,7 @@
                     
            
                 
-                    <p><strong>TELÉFONO PERSONAL:</strong> <span id="telefono">-</span></p>
+                    
                   </div>
                    
                 </div>
@@ -85,384 +93,37 @@
                   <button onclick="saveChanges()">Guardar</button>
                 </div>
               </div>
-                <!-- <h1>Resumen del Tablero</h1>
-                <div class="stats-grid">
-                    <div class="stat-card glow">
-                        <i class="fas fa-users"></i>
-                        <div class="stat-info">
-                            <h3>Total de Usuarios</h3>
-                            <p>15,687</p>
-                        </div>
-                    </div>
-                    <div class="stat-card glow">
-                        <i class="fas fa-shopping-bag"></i>
-                        <div class="stat-info">
-                            <h3>Total de Ventas</h3>
-                            <p>$124,563</p>
-                        </div>
-                    </div>
-                    <div class="stat-card glow">
-                        <i class="fas fa-chart-line"></i>
-                        <div class="stat-info">
-                            <h3>Ingresos</h3>
-                            <p>$67,895</p>
-                        </div>
-                    </div>
-                    <div class="stat-card glow">
-                        <i class="fas fa-percent"></i>
-                        <div class="stat-info">
-                            <h3>Crecimiento</h3>
-                            <p>+24.5%</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="charts-container">
-                    <div class="chart-card glow">
-                        <h3>Analíticas de Ventas</h3>
-                        <div id="salesChart"></div>
-                    </div>
-                    <div class="chart-card glow">
-                        <h3>Crecimiento de Usuarios</h3>
-                        <div id="userGrowthChart"></div>
-                    </div>
-                </div>
-                <div class="data-tables">
-                    <div class="table-card glow">
-                        <h3>Órdenes Recientes</h3>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>ID de Orden</th>
-                                    <th>Cliente</th>
-                                    <th>Producto</th>
-                                    <th>Monto</th>
-                                    <th>Estado</th>
-                                </tr>
-                            </thead>
-                            <tbody id="recentOrdersBody"></tbody>
-                        </table>
-                    </div>
-                    <div class="table-card glow">
-                        <h3>Productos Más Vendidos</h3>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Producto</th>
-                                    <th>Precio</th>
-                                    <th>Vendidos</th>
-                                    <th>Ingresos</th>
-                                </tr>
-                            </thead>
-                            <tbody id="topProductsBody"></tbody>
-                        </table>
-                    </div>
-                </div> -->
-            </div>
-            <!-- <div id="analytics" class="page-content">
-                <h1>Analíticas</h1>
-                <div class="charts-container">
-                    <div class="chart-card glow">
-                        <h3>Fuentes de Tráfico</h3>
-                        <div id="trafficSourcesChart"></div>
-                    </div>
-                    <div class="chart-card glow">
-                        <h3>Tasas de Conversión</h3>
-                        <div id="conversionRatesChart"></div>
-                    </div>
-                </div>
-                <div class="data-tables">
-                    <div class="table-card glow">
-                        <h3>Páginas Más Efectivas</h3>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Página</th>
-                                    <th>Visitas</th>
-                                    <th>Visitantes Únicos</th>
-                                    <th>Tiempo Promedio en Página</th>
-                                </tr>
-                            </thead>
-                            <tbody id="topPagesBody"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div id="sales" class="page-content">
-                <h1>Gestión de Ventas</h1>
-                <div class="charts-container">
-                    <div class="chart-card glow">
-                        <h3>Ventas Mensuales</h3>
-                        <div id="monthlySalesChart"></div>
-                    </div>
-                    <div class="chart-card glow">
-                        <h3>Ventas por Categoría</h3>
-                        <div id="salesByCategoryChart"></div>
-                    </div>
-                </div>
-                <div class="data-tables">
-                    <div class="table-card glow">
-                        <h3>Desempeño de Representantes de Ventas</h3>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Total de Ventas</th>
-                                    <th>Negocios Cerrados</th>
-                                    <th>Puntuación de Desempeño</th>
-                                </tr>
-                            </thead>
-                            <tbody id="salesRepBody"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="categoria" class="page-content">
-                <h2>Gestión de Categorias</h2>
-                <div class="charts-container">
-        
-                            <div class="chart-card">
-                                <h3>Registro de Categoria</h3>
-                                <form id="formularioCate" method="post" action="/categoria">
-                                    <div id="alertContainer"></div>
-                                    <div class="form-floating mb-2">
-                                       <input type="text" class="form-control" id="categoria" name="categoria">
-                                       <label for="categoria">Categoria</label>
-                            </div>
                 
-                                    <div class="form-floating mb-2">
-                                       <input type="text" class="form-control"  id="descripcion" name="descripcion">
-                                       <label for="descripcion">Descripcion</label>
-                                    </div>
-                                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                        <button class="btn btn-primary me-md-2">Enviar</button>
-                                      </div>
-                                    
-                                </form>
-                            </div>   
-                    
-                </div>
+            
+            <div id="pedido" class="page-content">
+                <h2>Gestión de Pedidos Realizados</h2>
+                
                 <div class="data-tables">
                     <div class="table-card glow">
-                        <h3>Categorias registradas hasta el momento</h3>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Categoria</th>
-                                    <th scope="col">Descripcion</th>
-                                    <th scope="col"><i class="fa fa-trash"></i></th>
-                                    <th scope="col"><i class="fa fa-pencil"></i></th>
-                                </tr>
+                        <h3>Pedidos Realizados hasta el momento</h3>
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                           <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">#</th>
+                                <th scope="col" class="px-6 py-3">Fecha</th>
+                                <th scope="col" class="px-6 py-3">Productos</th>
+                               
+                                <th scope="col" class="px-6 py-3">Estado</th>
+                                <th scope="col" class="px-6 py-3">Total Pagado</th>
+                            </tr>
                             </thead>
-                            <tbody id="data">
+                            <tbody id="pedidoTableBody">
+                                <!-- Aquí se llenarán los pedidos -->
                                 
+                
                             </tbody>
+  
 
                         </table>
                     </div>
                 </div>
                 
-<div id="actualizarCategoria" class="modalmask" style="display: none;">
-    <a href="#close" title="Close" class="close">X</a>
-    <div class="container">
-        <div id="aja"></div>
-        <form id="container">
-            <div class="form-floating mb-2">
-                <input type="text" class="form-control" id="categoria1" name="categoria1" disabled>
-                <label for="categoria">Categoria Actual</label>
-            </div>
-        
-            <div class="form-floating mb-2">
-                <input type="text" class="form-control" id="descripcion1" name="descripcion1">
-                <label for="descripcion1">Descripcion</label>
-            </div>
-        
-            <div class="form-floating mb-2">
-                <input type="text" class="form-control" id="nuevoNombre" name="nuevoNombre">
-                <label for="nuevoNombre">Nuevo Nombre</label>
-            </div>
-        
-            <div id="boton"></div>  
-        </form>
-    </div>
-</div>
 
-                
-            </div>
-            <div id="productos" class="page-content">
-                <h2>Gestión de Productos</h2>
-                <div class="charts-container">
-        
-                    <div class="chart-card">
-                        <h3>Registro de Productos</h3>
-                        <form id="formularioPro" method="post" action="/producto">
-                            <div id="alertContainer"></div>
-                            <div class="input-group mb-3">
-                                <label class="input-group-text" for="categoria2">Categoria</label>
-                                <select class="form-select" name="categoria2" id="categoria2">
-                                  <option selected>Selecciona</option>
-                                  
-                                </select>
-                              </div>
-        
-                            <div class="form-floating mb-2">
-                                <input type="text" class="form-control" id="producto" name="producto">
-                                <label for="categoria">Producto</label>
-                             </div>
-
-                             <div class="input-group mb-3">
-                                <span class="input-group-text">$</span>
-                                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
-                              </div>
-
-                            <div class="form-floating mb-2">
-                               <input type="text" class="form-control"  id="descripcion2" name="descripcion2">
-                               <label for="descripcion2">Descripcion</label>
-                            </div>
-                            <div class="form-floating mb-2">
-                                <input type="file" class="form-control"  id="Imagen" name="Imagen">
-                                <label for="Imagen">Imagen del Producto</label>
-                             </div>
-                            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                <button class="btn btn-primary me-md-2">Enviar</button>
-                              </div>
-                            
-                        </form>
-                    </div>   
-            
-        </div>
-        <div class="data-tables">
-            <div class="table-card glow">
-                <h3>Productos registradas hasta el momento</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Categoria</th>
-                            <th scope="col">Producto</th>
-                            <th scope="col">Descripcion</th>
-                            <th scope="col">Imagen</th>
-                            <th scope="col"><i class="fa fa-usd" ></i></th>
-                            <th scope="col"><i class="fa fa-trash"></i></th>
-                            <th scope="col"><i class="fa fa-pencil"></i></th>
-                        </tr>
-                    </thead>
-                    <tbody id="data">
-                        
-                    </tbody>
-
-                </table>
-            </div>
-        </div>
-            </div>
-            <div id="customers" class="page-content">
-                <h2>Gestión de Clientes</h2>
-                <div class="charts-container">
-                    <div class="chart-card glow">
-                        <h3>Adquisición de Clientes</h3>
-                        <div id="customerAcquisitionChart"></div>
-                    </div>
-                    <div class="chart-card glow">
-                        <h3>Satisfacción del Cliente</h3>
-                        <div id="customerSatisfactionChart"></div>
-                    </div>
-                </div>
-                <div class="data-tables">
-                    <div class="table-card glow">
-                        <h3>Mejores Clientes</h3>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Cliente</th>
-                                    <th>Total Gastado</th>
-                                    <th>Órdenes</th>
-                                    <th>Última Fecha de Orden</th>
-                                </tr>
-                            </thead>
-                            <tbody id="topCustomersBody"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div id="inventory" class="page-content">
-                <h1>Gestión de Inventario</h1>
-                <div class="charts-container">
-                    <div class="chart-card glow">
-                        <h3>Niveles de Stock</h3>
-                        <div id="stockLevelsChart"></div>
-                    </div>
-                    <div class="chart-card glow">
-                        <h3>Rotación de Productos</h3>
-                        <div id="productTurnoverChart"></div>
-                    </div>
-                </div>
-                <div class="data-tables">
-                    <div class="table-card glow">
-                        <h3>Alerta de Bajo Stock</h3>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Producto</th>
-                                    <th>Stock Actual</th>
-                                    <th>Nivel de Reorden</th>
-                                    <th>Proveedor</th>
-                                </tr>
-                            </thead>
-                            <tbody id="lowStockBody"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div id="settings" class="page-content">
-                <h1>Ajustes</h1>
-                <div class="settings-container">
-                    <div class="settings-card glow">
-                        <h3>Ajustes de Cuenta</h3>
-                        <form id="accountSettingsForm">
-                            <div class="form-group">
-                                <label for="username">Nombre de Usuario</label>
-                                <input type="text" id="username" name="username" value="juamperez">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Correo Electrónico</label>
-                                <input type="email" id="email" name="email" value="juan@example.com">
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Nueva Contraseña</label>
-                                <input type="password" id="password" name="password">
-                            </div>
-                            <button type="submit" class="btn-primary">Guardar Cambios</button>
-                        </form>
-                    </div>
-                    <div class="settings-card glow">
-                        <h3>Preferencias de Notificación</h3>
-                        <form id="notificationSettingsForm">
-                            <div class="form-group">
-                                <label>
-                                    <input type="checkbox" name="emailNotifications" checked>
-                                    Notificaciones por Correo Electrónico
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label>
-                                    <input type="checkbox" name="smsNotifications">
-                                    Notificaciones por SMS
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label>
-                                    <input type="checkbox" name="pushNotifications" checked>
-                                    Notificaciones Push
-                                </label>
-                            </div>
-                            <button type="submit" class="btn-primary">Guardar Preferencias</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div> -->
     <script  src="js/auth/authcli.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     
@@ -471,4 +132,79 @@
     <script type="module" src="js/dashboard.js"></script>
     
 </body>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  fetch('/mis-pedidos') // Asegúrate que esta ruta exista
+    .then(response => response.json())
+    .then(data => {
+      const pedidosAgrupados = {};
+
+      data.forEach(pedido => {
+        if (!pedidosAgrupados[pedido.order_id]) {
+          pedidosAgrupados[pedido.order_id] = {
+            productos: [],
+            status: pedido.status,
+            amount: pedido.amount,
+            created_at: pedido.created_at
+          };
+        }
+
+        pedidosAgrupados[pedido.order_id].productos.push(
+          `${pedido.product_name} (x${pedido.quantity})`
+        );
+      });
+
+      const tbody = document.getElementById('pedidoTableBody');
+      tbody.innerHTML = '';
+
+      let index = 1;
+      for (const [orderId, info] of Object.entries(pedidosAgrupados)) {
+        const fila = document.createElement('tr');
+
+        const productosTexto = info.productos.join(', ');
+
+        // Formatear el estado
+        let estadoTexto = 'Pendiente';
+        if (info.status === 'approved') estadoTexto = 'Por entregar';
+        else if (info.status === 'rejected') estadoTexto = 'Rechazado';
+
+        // Formatear la cantidad con símbolo de pesos
+       const totalFormateado = Number(info.amount).toLocaleString('es-CO', {
+        style: 'currency',
+        currency: 'COP',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+        });
+        fila.innerHTML = `
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        ${index++}
+            </th>
+          <td class="px-6 py-4">${new Date(info.created_at).toLocaleString('es-CO', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true
+            })}</td>
+          <td class="px-6 py-4">${productosTexto}</td>
+          
+          <td class="px-6 py-4">${estadoTexto}</td>
+          <td class="px-6 py-4"><strong>${totalFormateado}</strong></td>
+          
+        </tr>
+        `;
+
+        tbody.appendChild(fila);
+      }
+    })
+    .catch(error => {
+      console.error('Error al obtener los pedidos:', error);
+    });
+});
+
+
+
+</script>
 </html>

@@ -100,10 +100,19 @@ function mostrarProductos(productos) {
     if (!container) return console.error('No se encontró el contenedor con id "food"');
 
     if (productos.length === 0) {
-        container.innerHTML = '<p class="no-products">No se encontraron productos en esta categoría</p>';
-        return;
-    }
+    container.innerHTML = '<p class="no-products"></p>';
 
+    // Alerta moderna con SweetAlert2
+    Swal.fire({
+        title: 'Sin productos',
+        text: 'No se encontraron productos en esta categoría.',
+        icon: 'info',
+        confirmButtonText: 'Entendido',
+        confirmButtonColor: '#f97316' // color naranja
+    });
+
+    return;
+}
     container.innerHTML = productos.map(producto => {
         if (!producto.id_producto || !producto.nombre) {
             console.warn('Producto con datos incompletos:', producto);
@@ -120,7 +129,8 @@ function mostrarProductos(productos) {
             </div>
             <div class="info">
                 <p class="product-name">${producto.nombre}</p>
-                <p class="price">$${producto.precio || '0.00'}</p>
+                <p class="price">${Number(producto.precio || 0).toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</p>
+
             </div>
         </div>`;
     }).join('');
@@ -184,7 +194,8 @@ function abrirModalProducto(idProducto) {
             modalImg.src = `${API_BASE_URL}/uploads/${producto.url_imagen || 'default.jpg'}`;
             modalImg.alt = producto.nombre || 'Producto';
             modalNombre.textContent = producto.nombre || 'Nombre no disponible';
-            modalPrecio.textContent = `$${producto.precio || '0.00'}`;
+            modalPrecio.textContent = Number(producto.precio || 0).toLocaleString('es-CO', { style: 'currency', currency: 'COP' })
+
             modalDesc.textContent = producto.descripcion || 'Descripción no disponible';
 
             btnAddToCart.setAttribute('data-id', producto.id_producto);
@@ -239,7 +250,8 @@ function actualizarCarrito() {
           <img src="${API_BASE_URL}/uploads/${item.imagen || 'default.jpg'}" alt="${item.nombre}" style="width:40px;height:40px;object-fit:cover;margin-right:10px;">
           <div style="flex:1;">
             <div>${item.nombre} x${item.cantidad}</div>
-            <div>$${(item.precio * item.cantidad).toFixed(2)}</div>
+            <div>${(item.precio * item.cantidad).toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</div>
+
           </div>
            <button class="btn-remove-item" data-id="${item.id}" style="background:none;border:none;cursor:pointer;font-size:20px;margin-left:10px;" title="Eliminar">
             🗑️
@@ -257,7 +269,8 @@ function actualizarCarrito() {
     });
 
     const total = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
-    totalContainer.innerText = total.toFixed(2);
+   totalContainer.innerText = total.toLocaleString('es-CO', { style: 'currency', currency: 'COP' });
+
 }
 
 // Función para eliminar producto del carrito

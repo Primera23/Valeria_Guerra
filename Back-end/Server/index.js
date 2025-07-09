@@ -12,7 +12,7 @@ const MySQLStore = require('express-mysql-session')(session);
 const app = express();
 
 const corsOptions = {
-  origin: ["https://localhost:3000", "https://localhost:3001","https://d279-179-1-218-202.ngrok-free.app"], // Reemplaza con el puerto de tu frontend (React/Vite)
+  origin: ["https://localhost:3000", "https://localhost:3001","https://39f0f1d781b1.ngrok-free.app"], // Reemplaza con el puerto de tu frontend (React/Vite)
   credentials: true, // Si usas cookies/tokens de autenticación
   allowedHeaders: [
     'Content-Type', 
@@ -75,7 +75,8 @@ const categoriaRoutes = require('./Routes/categoria.routes.js');
 const productoRoutes = require('./Routes/producto.routes.js');
 const authRoutes = require('./Routes/auth.routes.js');
 const paymentRoutes = require('./Routes/payment.routes.js')
-const webhookRoutes = require('./Routes/webhook.routes.js');  // Asegúrate de importar las rutas del webhook
+const webhookRoutes = require('./Routes/webhook.routes.js');
+const pedidoRoutes = require('./Routes/pedidos.routes')  // Asegúrate de importar las rutas del webhook
 
 // Rutas de tu aplicación
 
@@ -83,7 +84,8 @@ app.use(categoriaRoutes);
 app.use(productoRoutes);
 app.use(authRoutes);
 app.use(paymentRoutes);
-app.use(webhookRoutes);  // Asegúrate de usar las rutas del webhook
+app.use(webhookRoutes); 
+app.use(pedidoRoutes) // Asegúrate de usar las rutas del webhook
 
 app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 app.use(express.static(path.join(__dirname, '..', 'public')));
